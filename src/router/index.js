@@ -1,15 +1,28 @@
 import { createWebHistory, createRouter } from 'vue-router'
-import Home from '@/views/HomeView.vue'
-import NotFound from '@/views/NotFound.vue'
+
+import Dashboard from '@/views/app/Dashboard.vue'
+import NotFound from '@/views/general/NotFound.vue'
 import Login from '@/views/auth/Login.vue'
 import Signup from '@/views/auth/Signup.vue'
+import Bio from '@/views/app/Bio.vue'
+import Job from '@/views/app/Job.vue'
+import EmploymentHistory from '@/views/app/EmploymentHistory.vue'
+import Certifications from '@/views/app/Certifications.vue'
+import Confirmation from '@/views/app/Confirmation.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
-    meta: { title: 'Home' },
+    name: 'Dashboard',
+    component: Dashboard,
+    meta: { title: 'Dashboard' },
+    children: [
+      { path: '/bio', component: Bio },
+      { path: '/job', component: Job },
+      { path: '/employment-history', component: EmploymentHistory },
+      { path: '/certifications', component: Certifications },
+      { path: '/confirmation', component: Confirmation },
+    ],
   },
   {
     path: '/login',
