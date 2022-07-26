@@ -15,6 +15,9 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
 body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
@@ -24,5 +27,6 @@ button {
 }
 a {
   text-decoration: none;
+  color: #000;
 }
 </style>

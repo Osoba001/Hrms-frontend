@@ -19,7 +19,7 @@ main.auth-wrapper {
   background-color: #eee;
   display: grid;
   place-items: center;
-  font-family: 'Mulish', sans-serif;
+  font-family: 'Lato', sans-serif;
   padding-inline: 1.5rem;
 }
 .form-container {
@@ -34,7 +34,7 @@ main.auth-wrapper {
   overflow: hidden;
 }
 .form-container button {
-  font-family: 'Mulish', sans-serif;
+  font-family: 'Lato', sans-serif;
   cursor: pointer;
 }
 .form-container.reverse {
