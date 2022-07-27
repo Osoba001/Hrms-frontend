@@ -9,6 +9,7 @@ import Job from '@/views/app/Job.vue'
 import EmploymentHistory from '@/views/app/EmploymentHistory.vue'
 import Certifications from '@/views/app/Certifications.vue'
 import Confirmation from '@/views/app/Confirmation.vue'
+import Admin from '@/views/auth/Admin.vue'
 
 const routes = [
   {
@@ -35,6 +36,12 @@ const routes = [
     name: 'Signup',
     component: Signup,
     meta: { title: 'Signup' },
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin,
+    meta: { title: 'Admin' },
   },
   {
     path: '/:catchAll(.*)',

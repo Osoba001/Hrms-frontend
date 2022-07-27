@@ -8,6 +8,8 @@
       <header>
         <div class="project-title">
           <h2>CCL Human Resource Management System</h2>
+
+          <button class="create-staff-btn">Create staff</button>
         </div>
 
         <DashboardTopTabNavigator />
@@ -68,14 +70,29 @@ header > div {
   background: #fff;
 }
 
-header.project-title {
+header .project-title {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1.5rem;
 }
 
-header .project-title h2 {
+.project-title .create-staff-btn {
+  padding: 0.7em 1em;
+  background-color: rgb(0, 94, 255);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+}
+.create-staff-btn:hover {
+  background-color: rgba(0, 94, 255, 0.85);
+
+}
+
+.project-title h2 {
   font-size: 1.2rem;
-  padding: 0.5rem 1.5rem;
 }
 
 main {
