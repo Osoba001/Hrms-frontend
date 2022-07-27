@@ -75,7 +75,7 @@ main.auth-wrapper {
   background-position: center;
 }
 
-.form-container input {
+.form-container .inputs-container input {
   width: 100%;
   padding: 0.7em 1em;
   font-size: 0.875rem;
@@ -161,6 +161,22 @@ p.signin-options-title {
 .alt-sign-in a {
   color: #046586;
   text-decoration: underline;
+}
+
+.active-directory h2 {
+  font-size: 1rem;
+}
+
+.active-directory label {
+  margin-left: 0.5rem;
+}
+
+.radio-btn-container {
+  margin-top: 0.7rem;
+}
+
+.flex-space {
+  flex: 0.7;
 }
 
 @media (max-width: 550px) {
