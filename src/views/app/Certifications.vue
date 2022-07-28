@@ -1,5 +1,7 @@
 <template>
-  <h1>Certifications</h1>
+  <div class="tab-container">
+    <h1>Certifications</h1>
+  </div>
 </template>
 
 <script>

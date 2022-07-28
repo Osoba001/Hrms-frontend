@@ -1,5 +1,7 @@
 <template>
-  <h1>Employment History</h1>
+  <div class="tab-container">
+    <h1>Employment History</h1>
+  </div>
 </template>
 
 <script>

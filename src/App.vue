@@ -19,14 +19,25 @@ export default {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
 }
 body {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Lato', Avenir, Helvetica, Arial, sans-serif;
 }
 button {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Lato', Avenir, Helvetica, Arial, sans-serif;
   border: 0;
 }
 a {
   text-decoration: none;
   color: #000;
+}
+*::-webkit-scrollbar {
+  width: 12px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(160, 160, 160);
+  border-radius: 8px;
+  border: 2px solid #eee;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(124, 124, 124);
 }
 </style>

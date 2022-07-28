@@ -9,7 +9,14 @@
         <div class="project-title">
           <h2>CCL Human Resource Management System</h2>
 
-          <button class="create-staff-btn">Create staff</button>
+          <div class="logo">
+            <img src="@/assets/images/cyphercrescent-logo.svg" />
+          </div>
+
+          <button class="create-staff-btn">
+            <span class="material-symbols-rounded"> add </span>
+            Create staff
+          </button>
         </div>
 
         <DashboardTopTabNavigator />
@@ -33,6 +40,8 @@ export default {
   created() {
     // const user = localStorage.getItem('access-token')
     // if (!user) this.$router.push('/login')
+
+    this.$router.push('/bio')
   },
 }
 </script>
@@ -43,19 +52,20 @@ export default {
   height: 100vh;
   font-family: 'Lato', sans-serif;
   background-color: #eee;
-  gap: 3px;
+  gap: 0.5rem;
 }
 
 .right {
+  position: relative;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .sidebar {
-  flex: 0.3;
   max-width: 270px;
-  min-width: 200px;
+  width: 20%;
+  min-width: 220px;
 }
 
 header {
@@ -66,38 +76,69 @@ header {
 }
 
 header > div {
-  padding-inline: 3px;
+  padding: 3px;
   background: #fff;
 }
 
 header .project-title {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0.5rem 1.5rem;
 }
 
 .project-title .create-staff-btn {
-  padding: 0.7em 1em;
-  background-color: rgb(0, 94, 255);
+  padding: 0.5em 1em;
+  background-color: #2b9de9;
   color: #fff;
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 250ms ease;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 .create-staff-btn:hover {
-  background-color: rgba(0, 94, 255, 0.85);
+  background-color: #255eb4;
+}
 
+.logo img {
+  display: none;
+  object-fit: contain;
+  width: 150px;
 }
 
 .project-title h2 {
   font-size: 1.2rem;
+  color: #192041;
 }
 
 main {
   flex: 1;
   display: flex;
-  padding: 1rem;
+  overflow-y: scroll;
+}
+
+main > div.tab-container {
+  position: relative;
+  margin-top: 55px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .project-title h2 {
+    display: none;
+  }
+  /* .logo-container {
+    flex: 1;
+    display: block;
+  } */
+  .logo img {
+    display: block;
+  }
 }
 </style>
