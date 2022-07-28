@@ -46,12 +46,19 @@
         <span>Personal info</span>
       </div>
     </div>
+
+    <div class="logo-container">
+      <CypherCrescentLogo />
+    </div>
   </aside>
 </template>
 
 <script>
+import CypherCrescentLogo from './icons/CypherCrescentLogo.vue'
+
 export default {
   name: 'Sidebar',
+  components: { CypherCrescentLogo },
 }
 </script>
 
@@ -64,7 +71,8 @@ aside {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  background-color: #fff;
+  background-color: #192041;
+  color: #e4e8f1;
 }
 
 header {
@@ -72,7 +80,7 @@ header {
   display: flex;
   padding-inline: 1.5rem;
   height: 80px;
-  border-bottom: 3px solid #eee;
+  border-bottom: 1px solid #5164be;
 }
 
 header .user-info {
@@ -96,14 +104,16 @@ header .user-info .user-img img {
 
 header .user-info h2 {
   font-size: 1rem;
+  color: #f5f5f5;
 }
 
 header .user-info p {
   font-size: 0.875rem;
-  color: rgb(119, 119, 119);
+  color: rgba(255, 255, 255, 0.705);
 }
 
 .items {
+  padding-top: 1rem;
   flex: 1;
   cursor: pointer;
 }
@@ -113,14 +123,20 @@ header .user-info p {
   gap: 1rem;
   align-items: center;
   padding: 1rem 1.7rem;
+  margin-block: 0.5rem;
+  transition: background-color 500ms ease;
 }
 
 .item:hover {
-  background-color: #eee;
+  background-color: #28398d;
 }
 
 .item .icon {
   width: 25px;
   height: 25px;
+}
+
+.logo-container {
+  padding: 1.5rem;
 }
 </style>

@@ -1,28 +1,28 @@
 <template>
-  <div class="tabs">
+  <div class="tab-container">
     <ul>
       <router-link to="/bio">
-        <li>
+        <li :class="{ active: $route.path === '/bio' }">
           <a>Bio details</a>
         </li>
       </router-link>
       <router-link to="/job">
-        <li>
+        <li :class="{ active: $route.path === '/job' }">
           <a>Job details</a>
         </li>
       </router-link>
       <router-link to="/employment-history">
-        <li>
+        <li :class="{ active: $route.path === '/employment-history' }">
           <a>Employment History</a>
         </li>
       </router-link>
       <router-link to="/certifications">
-        <li>
+        <li :class="{ active: $route.path === '/certifications' }">
           <a>Certifications</a>
         </li>
       </router-link>
       <router-link to="/confirmation">
-        <li>
+        <li :class="{ active: $route.path === '/confirmation' }">
           <a>Confirmation</a>
         </li>
       </router-link>
@@ -37,23 +37,41 @@ export default {
 </script>
 
 <style scoped>
-.tabs ul {
+ul::-webkit-scrollbar {
+  display: none;
+}
+.tab-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50px;
+  border-top: 3px solid #eee;
+  z-index: 2;
+  border-bottom-left-radius: 0.5rem;
+}
+ul {
   display: flex;
   list-style: none;
-  height: 100%;
-  padding-block: 3px;
   gap: 1.5rem;
+  overflow-x: scroll;
 }
-.tabs li {
-  flex: 1;
-  display: grid;
-  place-items: center;
-  text-align: center;
+li {
   cursor: pointer;
   white-space: nowrap;
   padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  transition: all 300ms ease;
 }
-.tabs li:hover {
-  background: #eee;
+li.active {
+  background: #192041;
+}
+li.active a {
+  color: #fff;
+}
+li:hover {
+  background: #192041;
+}
+li:hover a {
+  color: #fff;
 }
 </style>

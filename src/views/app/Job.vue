@@ -1,5 +1,7 @@
 <template>
-  <h1>Job details</h1>
+  <div class="tab-container">
+    <h1>Job details</h1>
+  </div>
 </template>
 
 <script>

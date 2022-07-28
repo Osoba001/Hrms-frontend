@@ -82,6 +82,7 @@ main.auth-wrapper {
   margin-bottom: 0.7rem;
   border: 1px solid #cad6e4;
   border-radius: 5px;
+  font-family: 'Lato', Helvetica, sans-serif;
 }
 
 .buttons-container {
