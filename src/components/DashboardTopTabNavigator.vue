@@ -46,24 +46,27 @@ ul::-webkit-scrollbar {
   right: 0;
   top: 50px;
   border-top: 3px solid #eee;
-  z-index: 2;
+  z-index: 1;
   border-bottom-left-radius: 0.5rem;
 }
 ul {
   display: flex;
   list-style: none;
-  gap: 1.5rem;
-  overflow-x: scroll;
+  gap: 1rem;
+  overflow-x: auto;
 }
 li {
   cursor: pointer;
   white-space: nowrap;
   padding: 0.7rem 1.5rem;
   border-radius: 6px;
-  transition: all 300ms ease;
+  transition: background-color 500ms ease;
 }
 li.active {
   background: #192041;
+}
+li a {
+  transition: color 500ms ease;
 }
 li.active a {
   color: #fff;

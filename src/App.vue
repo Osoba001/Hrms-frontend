@@ -15,6 +15,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
+
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
 }

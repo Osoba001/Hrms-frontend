@@ -15,36 +15,91 @@
       </div>
     </header>
     <div class="items">
-      <div class="item">
-        <div class="icon">
-          <span class="material-symbols-outlined"> dashboard </span>
+      <router-link to="/bio">
+        <div class="item">
+          <span
+            class="active-bar"
+            :class="{
+              active:
+                $route.path === '/' ||
+                $route.path === '/bio' ||
+                $route.path === '/job' ||
+                $route.path === '/employment-history' ||
+                $route.path === '/certifications' ||
+                $route.path === '/confirmation',
+            }"
+          />
+          <div class="icon">
+            <span class="material-symbols-outlined"> dashboard </span>
+          </div>
+          <span>Dashboard</span>
         </div>
-        <span>Dashboard</span>
-      </div>
-      <div class="item">
-        <div class="icon">
-          <span class="material-symbols-outlined"> sticky_note_2 </span>
+      </router-link>
+
+      <router-link to="/employees" v-if="accountType === 'admin'">
+        <div class="item">
+          <span
+            class="active-bar"
+            :class="{ active: $route.path === '/employees' }"
+          />
+          <div class="icon">
+            <span class="material-symbols-outlined"> badge </span>
+          </div>
+          <span>Employees</span>
         </div>
-        <span>Projects</span>
-      </div>
-      <div class="item">
-        <div class="icon">
-          <span class="material-symbols-outlined"> apartment </span>
+      </router-link>
+
+      <router-link to="/projects">
+        <div class="item">
+          <span
+            class="active-bar"
+            :class="{ active: $route.path === '/projects' }"
+          />
+          <div class="icon">
+            <span class="material-symbols-outlined"> sticky_note_2 </span>
+          </div>
+          <span>Projects</span>
         </div>
-        <span>Department</span>
-      </div>
-      <div class="item">
-        <div class="icon">
-          <span class="material-symbols-outlined"> handshake </span>
+      </router-link>
+
+      <router-link to="/department">
+        <div class="item">
+          <span
+            class="active-bar"
+            :class="{ active: $route.path === '/department' }"
+          />
+          <div class="icon">
+            <span class="material-symbols-outlined"> apartment </span>
+          </div>
+          <span>Department</span>
         </div>
-        <span>Leave</span>
-      </div>
-      <div class="item">
-        <div class="icon">
-          <span class="material-symbols-outlined"> account_circle </span>
+      </router-link>
+
+      <router-link to="/leave">
+        <div class="item">
+          <span
+            class="active-bar"
+            :class="{ active: $route.path === '/leave' }"
+          />
+          <div class="icon">
+            <span class="material-symbols-outlined"> handshake </span>
+          </div>
+          <span>Leave</span>
         </div>
-        <span>Personal info</span>
-      </div>
+      </router-link>
+
+      <router-link to="/profile">
+        <div class="item">
+          <span
+            class="active-bar"
+            :class="{ active: $route.path === '/profile' }"
+          />
+          <div class="icon">
+            <span class="material-symbols-outlined"> account_circle </span>
+          </div>
+          <span>Personal info</span>
+        </div>
+      </router-link>
     </div>
 
     <div class="logo-container">
@@ -59,6 +114,11 @@ import CypherCrescentLogo from './icons/CypherCrescentLogo.vue'
 export default {
   name: 'Sidebar',
   components: { CypherCrescentLogo },
+  data() {
+    return {
+      accountType: 'admin',
+    }
+  },
 }
 </script>
 
@@ -119,12 +179,28 @@ header .user-info p {
 }
 
 .items .item {
+  position: relative;
   display: flex;
   gap: 1rem;
   align-items: center;
   padding: 1rem 1.7rem;
-  margin-block: 0.5rem;
+  margin-bottom: 0.5rem;
   transition: background-color 500ms ease;
+  color: #e4e8f1;
+}
+
+.item .active-bar {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #ca1310;
+  width: 4px;
+}
+
+.item .active-bar.active {
+  display: block;
 }
 
 .item:hover {
