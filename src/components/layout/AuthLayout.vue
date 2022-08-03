@@ -47,7 +47,6 @@ main.auth-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* overflow-y: scroll; */
 }
 
 .form-container h1 {
