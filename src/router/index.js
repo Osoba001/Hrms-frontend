@@ -21,7 +21,7 @@ const routes = [
     path: '/',
     name: 'Dashboard',
     component: Dashboard,
-    meta: { title: 'Dashboard' },
+    meta: { title: 'CypherCrescent Portal' },
     children: [
       { path: '/bio', component: Bio },
       { path: '/job', component: Job },

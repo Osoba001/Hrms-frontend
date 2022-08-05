@@ -1,56 +1,53 @@
 <template>
-<div class="job-container tab-container">
-  <section>
-        <h2>Department </h2>
-        <div class="personal-details">
-          <div class="inputs-container">
-            <div class="input">
-              <label for="contract-type">Department</label>
-              <select name="department" id="department">
-                <option value="petroleum-consulting">
-                  Petroleum consulting
-                </option>
-                <option value="petroleum-consulting">
-                  Petroleum consulting
-                </option>
-              </select>
-            </div>
-            
+  <div class="department-container">
+    <section>
+      <h2>Department</h2>
+      <div class="personal-details">
+        <div class="inputs-container">
+          <div class="input">
+            <label for="contract-type">Department</label>
+            <select name="department" id="department">
+              <option value="petroleum-consulting">Petroleum consulting</option>
+              <option value="petroleum-consulting">Petroleum consulting</option>
+            </select>
+          </div>
 
-            <div class="input">
-              <label for="previous-job-role">Job role</label>
-              <select name="previous-job-role" id="previous-job-role">
-                <option value="petroleum-engineer">Petroleum engineer</option>
-                <option value="petroleum-engineer">Petroleum engineer</option>
-              </select>
-            </div>
+          <div class="input">
+            <label for="previous-job-role">Job role</label>
+            <select name="previous-job-role" id="previous-job-role">
+              <option value="petroleum-engineer">Petroleum engineer</option>
+              <option value="petroleum-engineer">Petroleum engineer</option>
+            </select>
+          </div>
 
-            <div class="input">
-              <label for="">Reasons in the department</label>
-              <textarea
-                name="reason-for-change"
-                id="reason-for-change"
-                cols="30"
-                rows="10"
-              ></textarea>
-            </div>
+          <div class="input">
+            <label for="">Reasons in the department</label>
+            <textarea
+              name="reason-for-change"
+              id="reason-for-change"
+              cols="30"
+              rows="10"
+            ></textarea>
           </div>
         </div>
-      </section>
       </div>
+    </section>
+  </div>
 </template>
 
 <script>
 export default {}
 </script>
 <style scoped>
-.job-container {
-  width: 100%;
+.department-container {
+  margin-top: 0.3rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  min-height: 350px;
+  overflow-y: auto;
+  flex: 1;
 }
 section {
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
   margin-bottom: 1rem;
 }
 section h2 {
@@ -118,6 +115,3 @@ section > div {
   }
 }
 </style>
-
-
-

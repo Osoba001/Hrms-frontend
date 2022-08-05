@@ -34,5 +34,6 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 3;
+  padding-inline: 1rem;
 }
 </style>
