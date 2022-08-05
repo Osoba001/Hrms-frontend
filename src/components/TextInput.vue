@@ -4,13 +4,15 @@
     :type="type || 'text'"
     :v-model="data"
     :placeholder="placeholder || ''"
+    :min="min"
+    :max="max"
   />
 </template>
 
 <script>
 export default {
   name: 'TextInput',
-  props: ['type', 'placeholder', 'label', 'data'],
+  props: ['type', 'placeholder', 'label', 'data', 'min', 'max'],
 }
 </script>
 

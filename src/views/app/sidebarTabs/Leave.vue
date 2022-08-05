@@ -1,102 +1,93 @@
 <template>
-<div class="job-container tab-container">
-  <section>
-        <h2>Leave Application </h2>
-        <div class="personal-details">
-          <div class="inputs-container">
-            <div class="input">
-              <label for="contract-type">Leave Type</label>
-              <select name="department" id="department">
-                <option value="petroleum-consulting">
-                 Annual Leave
-                </option>
-                <option value="petroleum-consulting">
-                  Sick leave
-                </option>
-              </select>
-            </div>
+  <div class="leave-container">
+    <section class="statistics">
+      <h1>Statistics</h1>
+    </section>
 
-            <div class="inputs-container">
-            <div class="input">
-              <TextInput label="Start Date" type="date" />
-            </div>
+    <section class="leave-application">
+      <h2>Leave Application</h2>
+      <div class="personal-details">
+        <div class="inputs-container">
+          <div class="input">
+            <label for="contract-type">Leave Type</label>
+            <select name="department" id="department">
+              <option value="annual-leave">Annual Leave</option>
+              <option value="sick-leave">Sick leave</option>
+              <option value="casual-leave">Casual leave</option>
+              <option value="examination-leave">Examination leave</option>
+              <option value="compassionate-leave">Compassionate leave</option>
+              <option value="paternity-leave">Paternity leave</option>
+            </select>
           </div>
-            
 
-            <div class="input">
-              <label for="previous-job-role">No of Days</label>
-              <select name="previous-job-role" id="previous-job-role">
-                <option value="petroleum-engineer">10</option>
-                <option value="petroleum-engineer">9</option>
-                <option value="petroleum-engineer">8</option>
-                <option value="petroleum-engineer">7</option>
-                <option value="petroleum-engineer">6</option>
-                <option value="petroleum-engineer">5</option>
-                <option value="petroleum-engineer">4</option>
-                <option value="petroleum-engineer">3</option>
-                <option value="petroleum-engineer">2</option>
-                <option value="petroleum-engineer">1</option>
-              </select>
-            </div>
-
-            <div class="inputs-container">
-            <div class="input">
-              <TextInput label="End Date" type="date" />
-            </div>
+          <div class="input">
+            <label for="contract-type">Select range of days</label>
+            <Datepicker v-model="date" range></Datepicker>
           </div>
-            <div class="input">
-              <label for="">Messsage (Optimal)</label>
-              <textarea
-                name="reason-for-change"
-                id="reason-for-change"
-                cols="30"
-                rows="10"
-              ></textarea>
-            </div>
+
+          <div class="input">
+            <label for="">Messsage (Optional)</label>
+            <textarea
+              name="reason-for-change"
+              id="reason-for-change"
+              cols="30"
+              rows="10"
+            ></textarea>
           </div>
         </div>
-      </section>
-      
       </div>
-      
-   
+    </section>
+  </div>
 </template>
 
 <script>
-import TextInput from '@/components/TextInput.vue'
+import Datepicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
   name: 'Leave',
-  components: { TextInput },
+  components: { Datepicker },
+  data() {
+    return {
+      date: null,
+    }
+  },
 }
 </script>
 <style scoped>
-.job-container {
-  width: 100%;
+.leave-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+  flex: 1;
 }
-section {
-  background-color: #fff;
+
+section.statistics {
   padding: 1.5rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
+  min-height: 150px;
+  background-color: #fff;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
+
+section.leave-application {
+  margin-top: 0.3rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  flex: 1;
+  overflow-y: auto;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
 section h2 {
   margin-bottom: 1.5rem;
   font-size: 1.2rem;
   color: #ca1310;
 }
-section h4 {
-  font-weight: 400;
-  margin-bottom: 0.7rem;
-  font-size: 0.875rem;
-}
-form {
-  display: flex;
-  flex-direction: column;
-}
+
 section > div {
   display: flex;
-  gap: 2rem;
 }
 .inputs-container {
   flex: 0.5;
@@ -123,18 +114,6 @@ section > div {
   font-family: 'Lato', Helvetica, sans-serif;
 }
 
-.job-container .radio-btns {
-  display: flex;
-  gap: 2rem;
-}
-
-.job-container .radio-btn-container {
-  margin-top: 0;
-}
-.job-container .radio-btn-container label {
-  margin-left: 0.5rem;
-}
-
 @media (max-width: 850px) {
   section > div {
     flex-direction: column;
@@ -145,6 +124,3 @@ section > div {
   }
 }
 </style>
-
-
-

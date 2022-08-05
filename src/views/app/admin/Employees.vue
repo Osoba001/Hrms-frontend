@@ -161,6 +161,7 @@ export default {
 
 <style scoped>
 .employees-container {
+  margin-top: 0.3rem;
   padding: 1.5rem;
   background-color: #fff;
   min-height: 350px;
