@@ -1,7 +1,7 @@
 <template>
   <div class="bio-container tab-container">
     <form>
-      <section>
+      <section class="personal-details">
         <h2>Personal details</h2>
 
         <div class="personal-details">
@@ -102,17 +102,18 @@
         </div>
       </section>
 
-      <button class="next-btn">Next</button>
+      <DashboardBottomButtonsNav nextRoute="/job" />
     </form>
   </div>
 </template>
 
 <script>
 import TextInput from '@/components/TextInput.vue'
+import DashboardBottomButtonsNav from '@/components/DashboardBottomButtonsNav.vue'
 
 export default {
   name: 'Bio',
-  components: { TextInput },
+  components: { TextInput, DashboardBottomButtonsNav },
 }
 </script>
 
@@ -124,12 +125,9 @@ section {
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 0.5rem;
-  margin-bottom: 1rem;
 }
-section h2 {
-  margin-bottom: 1.5rem;
-  font-size: 1.2rem;
-  color: #ca1310;
+section.personal-details {
+  margin-bottom: 1rem;
 }
 form {
   display: flex;

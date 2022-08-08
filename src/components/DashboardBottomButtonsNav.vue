@@ -1,7 +1,11 @@
 <template>
   <div class="buttons-container">
-    <button @click="$router.push(backRoute)" class="nav-btn">Back</button>
-    <button @click="$router.push(nextRoute)" class="nav-btn">Next</button>
+    <button @click="$router.push(backRoute)" v-if="backRoute" class="nav-btn">
+      Back
+    </button>
+    <button @click="$router.push(nextRoute)" v-if="nextRoute" class="nav-btn">
+      Next
+    </button>
   </div>
 </template>
 
@@ -17,8 +21,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  padding-inline: 1rem;
   gap: 1rem;
+  padding: 1.5rem;
 }
 
 .nav-btn {
@@ -29,7 +33,6 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 250ms ease;
-  margin-bottom: 1.5rem;
 }
 .nav-btn:hover {
   background-color: #255eb4;

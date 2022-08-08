@@ -172,7 +172,6 @@ section {
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 0.5rem;
-  margin-bottom: 1rem;
 }
 section h2 {
   margin-bottom: 1.5rem;

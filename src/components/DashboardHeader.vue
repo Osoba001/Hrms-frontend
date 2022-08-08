@@ -138,6 +138,9 @@ header .project-title {
 }
 
 /* Modal */
+.modal-inner {
+  flex: 1;
+}
 .modal-inner h3 {
   text-align: center;
   margin-bottom: 1rem;

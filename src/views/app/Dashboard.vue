@@ -79,7 +79,6 @@ main {
 
 main > div.tab-container {
   position: relative;
-  margin-top: 55px;
 }
 
 @media (max-width: 780px) {
