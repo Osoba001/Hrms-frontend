@@ -219,6 +219,9 @@ button.role-edit-btn {
 .modal-title {
   text-align: center;
 }
+.edit-modal {
+  flex: 1;
+}
 .edit-modal label {
   display: block;
   margin-top: 1rem;

@@ -25,6 +25,7 @@ export default {
   margin: 100px auto;
   background: white;
   border-radius: 6px;
+  display: flex;
 }
 
 .backdrop {

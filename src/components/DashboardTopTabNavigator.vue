@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 ul::-webkit-scrollbar {
   display: none;
 }
@@ -44,37 +44,42 @@ ul::-webkit-scrollbar {
   position: absolute;
   left: 0;
   right: 0;
-  top: 50px;
+  /* top: 50px; */
   border-top: 3px solid #eee;
   z-index: 1;
   border-bottom-left-radius: 0.5rem;
 }
-ul {
+.tab-container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  color: #ca1310;
+}
+.tab-container ul {
   display: flex;
   list-style: none;
   gap: 1rem;
   overflow-x: auto;
 }
-li {
+.tab-container li {
   cursor: pointer;
   white-space: nowrap;
   padding: 0.7rem 1.5rem;
   border-radius: 6px;
   transition: background-color 500ms ease;
 }
-li.active {
+.tab-container li.active {
   background: #192041;
 }
-li a {
+.tab-container li a {
   transition: color 500ms ease;
 }
-li.active a {
+.tab-container li.active a {
   color: #fff;
 }
-li:hover {
+.tab-container li:hover {
   background: #192041;
 }
-li:hover a {
+.tab-container li:hover a {
   color: #fff;
 }
 </style>
