@@ -1,7 +1,7 @@
 <template>
   <div class="certifications-container tab-container">
     <section class="add-certificate">
-      <h2>Upload supporting document</h2>
+      <h2 class="section-title">Upload supporting document</h2>
 
       <div class="upload-container">
         <h4>First degree cetificate</h4>
@@ -51,7 +51,7 @@
     </section>
 
     <section class="skills-container">
-      <h2>Skills</h2>
+      <h2 class="section-title">Skills</h2>
 
       <div class="skills-wrapper">
         <span v-for="skill in skills" :key="skill" class="skill">
@@ -73,7 +73,7 @@
     <teleport to=".modals" v-if="showModal">
       <ModalBackdrop @close="toggleModal">
         <form class="add-skill-modal" @submit.prevent="handleSubmit">
-          <h2>Add skill</h2>
+          <h2 class="section-title">Add skill</h2>
           <div class="modal-input">
             <TextInput label="Skill" placeholder="E.g, React Native" />
           </div>
@@ -216,12 +216,6 @@ section.skills-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.add-skill-modal h2 {
-  margin-bottom: 1.5rem;
-  font-size: 1.2rem;
-  color: #ca1310;
 }
 
 .add-skill-modal .modal-input {

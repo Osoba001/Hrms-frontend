@@ -2,7 +2,7 @@
   <div class="job-container tab-container">
     <form @submit.prevent="">
       <section>
-        <h2>Work details</h2>
+        <h2 class="section-title">Work details</h2>
 
         <div>
           <div class="inputs-container">
@@ -110,7 +110,7 @@
       </section>
 
       <section>
-        <h2>Previous role</h2>
+        <h2 class="section-title">Previous role</h2>
         <div class="personal-details">
           <div class="inputs-container">
             <div class="input">
@@ -172,11 +172,6 @@ section {
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 0.5rem;
-}
-section h2 {
-  margin-bottom: 1.5rem;
-  font-size: 1.2rem;
-  color: #ca1310;
 }
 section h4 {
   font-weight: 400;

@@ -2,7 +2,7 @@
   <div class="bio-container tab-container">
     <form>
       <section class="personal-details">
-        <h2>Personal details</h2>
+        <h2 class="section-title">Personal details</h2>
 
         <div class="personal-details">
           <div class="inputs-container">
@@ -58,7 +58,7 @@
       </section>
 
       <section>
-        <h2>Next of Kin details</h2>
+        <h2 class="section-title">Next of Kin details</h2>
 
         <div class="personal-details">
           <div class="inputs-container">
