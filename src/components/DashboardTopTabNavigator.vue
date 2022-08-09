@@ -49,9 +49,9 @@ ul::-webkit-scrollbar {
   z-index: 1;
   border-bottom-left-radius: 0.5rem;
 }
-.tab-container h2 {
+.section-title {
   margin-bottom: 1.5rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #ca1310;
 }
 .tab-container ul {

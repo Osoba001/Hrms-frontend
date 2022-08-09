@@ -23,7 +23,7 @@
 
     <section>
       <header>
-        <h2>Previous employment history</h2>
+        <h2 class="section-title">Previous employment history</h2>
         <button class="add-experience-btn" @click="toggleModal">
           <span class="material-symbols-rounded"> add </span>
           Add experience
@@ -120,6 +120,9 @@ section {
   padding: 1.5rem;
   border-radius: 0.5rem;
   overflow-y: auto;
+}
+section h2 {
+  margin: 0;
 }
 
 header {
