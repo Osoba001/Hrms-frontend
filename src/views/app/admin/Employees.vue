@@ -3,20 +3,49 @@
     <h2>List of Employees</h2>
 
     <div class="employees">
-      <div
+      <article
         class="employee"
         v-for="employee in employees"
-        :key="employee.id"
-        :class="{ bgWhite: employee.id % 2 === 0 }"
+        v-bind:key="employee.id"
       >
-        <p class="name">{{ employee.name }}</p>
-        <p class="role">{{ employee.role }}</p>
-        <div class="btn-container">
-          <button @click="toggleModal(employee.id)" class="role-edit-btn">
-            <span class="material-symbols-outlined"> edit </span>
-          </button>
+        <header class="employee-status-wrapper">
+          <div class="status">
+            <span>Active</span>
+          </div>
+          <span class="material-symbols-outlined more-icon"> more_horiz </span>
+        </header>
+
+        <div class="employee-info-top">
+          <div class="img-container">
+            <img :src="employee.image" alt="user" />
+          </div>
+          <h3 class="name">{{ employee.name }}</h3>
+          <p class="role">{{ employee.role }}</p>
         </div>
-      </div>
+
+        <div class="employee-info-bottom">
+          <div class="bottom-info">
+            <div>
+              <h4>Department</h4>
+              <p>{{ employee.department }}</p>
+            </div>
+            <div>
+              <h4>Date Hired</h4>
+              <p>Aug 5, 2022</p>
+            </div>
+          </div>
+          <div class="contact-info">
+            <div class="contact">
+              <span class="material-symbols-outlined"> mail </span>
+              <p>{{ employee.email }}</p>
+            </div>
+            <div class="contact">
+              <span class="material-symbols-outlined"> call </span>
+              <p>+234-803-389-8620</p>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
 
     <teleport to=".modals" v-if="showModal">
@@ -70,76 +99,81 @@ export default {
           id: 1,
           name: 'Emeka Duruzor',
           role: 'General Manager',
+          department: 'Development',
+          image: 'https://randomuser.me/api/portraits/thumb/women/8.jpg',
+          email: 'emeka.duruzor@ccl.com.ng',
         },
         {
           id: 2,
           name: 'Ani Udoh',
           role: 'Director',
+          department: 'Design',
+          image: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
+          email: 'ani.udoh@ccl.com.ng',
         },
         {
           id: 3,
           name: 'Nehemiah Igben',
           role: 'Staff',
+          department: 'Development',
+          image: 'https://randomuser.me/api/portraits/thumb/men/71.jpg',
+          email: 'nehemiah.igben@ccl.com.ng',
         },
         {
           id: 4,
           name: 'Isaac Aku',
           role: 'Corper',
+          department: 'Design',
+          image: 'https://randomuser.me/api/portraits/thumb/men/5.jpg',
+          email: 'isaac.aku@ccl.com.ng',
         },
         {
           id: 5,
           name: 'Aseb D',
           role: 'Intern',
+          department: 'Development',
+          image: 'https://randomuser.me/api/portraits/thumb/women/52.jpg',
+          email: 'aseb.d@ccl.com.ng',
         },
         {
           id: 6,
           name: 'Emeka Duruzor',
           role: 'General Manager',
+          department: 'Design',
+          image: 'https://randomuser.me/api/portraits/thumb/men/35.jpg',
+          email: 'emeka.duruzor@ccl.com.ng',
         },
         {
           id: 7,
           name: 'Ani Udoh',
           role: 'Director',
+          department: 'Development',
+          image: 'https://randomuser.me/api/portraits/thumb/men/23.jpg',
+          email: 'emeka.duruzor@ccl.com.ng',
         },
         {
           id: 8,
           name: 'Nehemiah Igben',
           role: 'Staff',
+          department: 'Design',
+          image: 'https://randomuser.me/api/portraits/thumb/women/78.jpg',
+          email: 'nehemiah.igben@ccl.com.ng',
         },
         {
           id: 9,
           name: 'Isaac Aku',
           role: 'Corper',
+          department: 'Development',
+          image: 'https://randomuser.me/api/portraits/thumb/men/36.jpg',
+          email: 'emeka.duruzor@ccl.com.ng',
         },
         {
           id: 10,
           name: 'Aseb D',
           role: 'Intern',
-        },
-        {
-          id: 11,
-          name: 'Emeka Duruzor',
-          role: 'General Manager',
-        },
-        {
-          id: 12,
-          name: 'Ani Udoh',
-          role: 'Director',
-        },
-        {
-          id: 13,
-          name: 'Nehemiah Igben',
-          role: 'Staff',
-        },
-        {
-          id: 14,
-          name: 'Isaac Aku',
-          role: 'Corper',
-        },
-        {
-          id: 15,
-          name: 'Aseb D',
-          role: 'Intern',
+          department: 'Design',
+          image: 'https://randomuser.me/api/portraits/thumb/women/18.jpg',
+          email: 'aseb.d@ccl.com.ng',
         },
       ],
       employeeToBeEdited: null,
@@ -163,7 +197,6 @@ export default {
 .employees-container {
   margin-top: 0.3rem;
   padding: 1.5rem;
-  background-color: #fff;
   min-height: 350px;
   overflow-y: auto;
   flex: 1;
@@ -174,29 +207,126 @@ h2 {
   color: #ca1310;
 }
 .employees {
-  outline: 2px solid #ddd;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
 }
 .employee {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #fff;
+  padding: 0.7rem;
+  min-height: 200px;
+  border-radius: 6px;
+  box-shadow: 4px 4px 5px 4px rgba(182, 182, 182, 0.219);
+}
+
+.employee-status-wrapper {
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 0.5rem;
+}
+
+.employee .status {
+  cursor: default;
+  background-color: rgba(74, 201, 154, 0.1);
+  border-radius: 4px;
+  padding: 3px 7px;
+  border: 1.5px solid #0acb4b;
+  color: #0bbd58;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.employee-status-wrapper span.more-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.employee .img-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   background-color: #eee;
-  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
-.employee.bgWhite {
-  background-color: transparent;
+.img-container img {
+  width: 100%;
+  height: 100%;
 }
-.employee > * {
-  flex: 1;
+.employee-info-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.name {
-  margin-left: 0.5rem;
+.employee-info-top .name {
+  font-size: 1.0875rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+.employee-info-top .role {
+  font-size: 0.875rem;
   font-weight: 600;
+  color: #00000080;
 }
-.role {
-  text-align: center;
+.employee-info-bottom {
+  background-color: rgba(238, 238, 238, 0.747);
+  flex: 1;
+  border-radius: 6px;
+  padding: 0.7rem;
 }
+
+.bottom-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 0.7rem;
+}
+
+.bottom-info > {
+  flex: 0.5;
+}
+
+.bottom-info h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #00000080;
+}
+
+.bottom-info p {
+  margin-top: 3px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1c1c1c;
+}
+
+.contact-info .contact {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+}
+
+.contact + .contact {
+  margin-top: 3px;
+}
+
+.contact-info .contact span {
+  font-size: 1.3rem;
+}
+
+.contact-info .contact p {
+  line-height: 1.3rem;
+}
+
 .btn-container {
   display: flex;
 }
