@@ -60,7 +60,7 @@ export default {
       employees: [
         {
           id: 1,
-          name: 'Emeka Duruzor',
+          name: 'John Doe',
           role: 'General Manager',
           department: 'Development',
           image: 'https://randomuser.me/api/portraits/thumb/women/8.jpg',
@@ -68,7 +68,7 @@ export default {
         },
         {
           id: 2,
-          name: 'Ani Udoh',
+          name: 'Antoine Griezmann',
           role: 'Director',
           department: 'Design',
           image: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
@@ -76,7 +76,7 @@ export default {
         },
         {
           id: 3,
-          name: 'Nehemiah Igben',
+          name: 'John Michael',
           role: 'Staff',
           department: 'Development',
           image: 'https://randomuser.me/api/portraits/thumb/men/71.jpg',
@@ -92,7 +92,7 @@ export default {
         },
         {
           id: 5,
-          name: 'Aseb D',
+          name: 'Gabriel John',
           role: 'Intern',
           department: 'Development',
           image: 'https://randomuser.me/api/portraits/thumb/women/52.jpg',
@@ -100,7 +100,7 @@ export default {
         },
         {
           id: 6,
-          name: 'Emeka Duruzor',
+          name: 'Sunday Mike',
           role: 'General Manager',
           department: 'Design',
           image: 'https://randomuser.me/api/portraits/thumb/men/35.jpg',
@@ -108,7 +108,7 @@ export default {
         },
         {
           id: 7,
-          name: 'Ani Udoh',
+          name: 'Victor Chinedu',
           role: 'Director',
           department: 'Development',
           image: 'https://randomuser.me/api/portraits/thumb/men/23.jpg',
@@ -116,7 +116,7 @@ export default {
         },
         {
           id: 8,
-          name: 'Nehemiah Igben',
+          name: 'Innocent Samuel',
           role: 'Staff',
           department: 'Design',
           image: 'https://randomuser.me/api/portraits/thumb/women/78.jpg',
@@ -124,7 +124,7 @@ export default {
         },
         {
           id: 9,
-          name: 'Isaac Aku',
+          name: 'Paul Emmanuel',
           role: 'Corper',
           department: 'Development',
           image: 'https://randomuser.me/api/portraits/thumb/men/36.jpg',
@@ -132,7 +132,7 @@ export default {
         },
         {
           id: 10,
-          name: 'Aseb D',
+          name: 'Marvelous Jack',
           role: 'Intern',
           department: 'Design',
           image: 'https://randomuser.me/api/portraits/thumb/women/18.jpg',
@@ -236,5 +236,11 @@ button.role-edit-btn {
 }
 .edit-modal button span {
   font-size: 1.1rem;
+}
+
+@media (max-width: 450px) {
+  .employees-container {
+    padding: 1rem;
+  }
 }
 </style>

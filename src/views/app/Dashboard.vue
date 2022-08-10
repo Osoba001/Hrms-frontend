@@ -75,10 +75,13 @@ main {
   flex: 1;
   display: flex;
   overflow-y: auto;
+  border-radius: 0.5rem;
+  background-color: #eee;
 }
 
 main > div.tab-container {
   position: relative;
+  top: 50px;
 }
 
 @media (max-width: 780px) {
