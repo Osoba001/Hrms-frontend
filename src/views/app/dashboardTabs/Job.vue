@@ -1,7 +1,7 @@
 <template>
   <div class="job-container tab-container">
     <form @submit.prevent="">
-      <section>
+      <section class="work-details">
         <h2 class="section-title">Work details</h2>
 
         <div>
@@ -172,6 +172,9 @@ section {
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 0.5rem;
+}
+section.work-details {
+  margin-bottom: 1rem;
 }
 section h4 {
   font-weight: 400;

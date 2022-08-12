@@ -1,26 +1,5 @@
 <template>
-  <div class="employment-history-container tab-container">
-    <!-- <section class="previous-experience">
-      <h2>Previous work experience</h2>
-
-      <h4>Do you have any previous work experience</h4>
-      <div class="radio-btns">
-        <div class="radio-btn-container">
-          <input type="radio" id="yes" name="first-degree" value="yes" />
-          <label for="yes">Yes</label>
-        </div>
-        <div class="radio-btn-container">
-          <input type="radio" id="no" name="first-degree" value="no" />
-          <label for="no">No</label>
-        </div>
-      </div>
-
-      <button class="add-experience-btn" @click="toggleModal">
-        <span class="material-symbols-rounded"> add </span>
-        Add experience
-      </button>
-    </section> -->
-
+  <div class="tab-container employment-history-container">
     <section>
       <header>
         <h2 class="section-title">Previous employment history</h2>
@@ -35,7 +14,9 @@
         v-bind:key="employment.id"
         class="previous-employment"
       >
-        <div class="organisation-logo"></div>
+        <div class="organisation-logo">
+          <img :src="employment.logo" alt="organisation-logo" />
+        </div>
         <div class="ëmployment-details">
           <h3>{{ employment.role }}</h3>
           <p class="organisation-name">{{ employment.organisation }}</p>
@@ -53,11 +34,23 @@
     <teleport to=".modals" v-if="showModal">
       <ModalBackdrop @close="toggleModal">
         <form class="add-experience-modal" @submit.prevent="handleSubmit">
-          <h2>Add experience</h2>
+          <h2 class="section-title">Add experience</h2>
           <div class="modal-input">
-            <TextInput label="Experience" placeholder="..." />
+            <TextInput
+              label="Organisation"
+              placeholder="E.g, CypherCrescent Ltd."
+            />
           </div>
-          <button class="add-experience-btn">Add</button>
+          <div class="modal-input">
+            <TextInput label="Role" placeholder="È.g, Director" />
+          </div>
+          <div class="modal-input">
+            <TextInput
+              label="Location"
+              placeholder="E.g, Port Harcourt, Rivers, Nigeria"
+            />
+          </div>
+          <button class="add-experience-btn modal-add-btn">Add</button>
         </form>
       </ModalBackdrop>
     </teleport>
@@ -81,6 +74,7 @@ export default {
           organisation: 'Shell Petroleum Development Company',
           duration: 'Jul 2022 - Present · 2mos',
           location: 'Port Harcourt, Rivers, Nigeria',
+          logo: 'https://img.favpng.com/13/24/3/royal-dutch-shell-logo-petroleum-shell-oil-company-png-favpng-uxtfbiEHNvpwRBQ042W5XASMA.jpg',
         },
         {
           id: 2,
@@ -88,6 +82,7 @@ export default {
           organisation: 'CypherCrescent Limited',
           duration: 'Jul 2021 - Present · 2mos',
           location: 'Port Harcourt, Rivers, Nigeria',
+          logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoohJtjombSWhBmoTYmWl_sibtCWmgPorDfw&usqp=CAU',
         },
         {
           id: 3,
@@ -95,6 +90,7 @@ export default {
           organisation: 'Schlumberger',
           duration: 'Jul 2022 - Present · 2mos',
           location: 'Port Harcourt, Rivers, Nigeria',
+          logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrOqZsDzJMEmyrnSNBzrXKUaNrQTXuXAGjFbAyDhBzLw&s',
         },
       ],
     }
@@ -119,7 +115,6 @@ section {
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 0.5rem;
-  overflow-y: auto;
 }
 section h2 {
   margin: 0;
@@ -128,6 +123,9 @@ section h2 {
 header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 h4 {
@@ -159,7 +157,6 @@ h4 {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  margin-left: auto;
 }
 
 .add-skill-btn:hover {
@@ -170,17 +167,16 @@ h4 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 1.5rem;
+  justify-content: center;
 }
 
-.add-experience-modal h2 {
-  margin-bottom: 1.5rem;
-  font-size: 1.2rem;
-  color: #ca1310;
+.add-experience-modal .section-title {
+  margin-bottom: 0;
 }
 
-.add-experience-modal .modal-input {
-  margin-top: -4rem;
+.modal-add-btn {
+  padding-inline: 2em;
 }
 
 article.previous-employment {
@@ -199,6 +195,13 @@ article.previous-employment {
   height: 50px;
   background: #eee;
   border-radius: 6px;
+  overflow: hiddden;
+}
+
+.organisation-logo img {
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
 }
 
 .previous-employment h3 {

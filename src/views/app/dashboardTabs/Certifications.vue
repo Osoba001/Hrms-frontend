@@ -5,48 +5,26 @@
 
       <div class="upload-container">
         <h4>First degree cetificate</h4>
-        <div class="radio-btns">
-          <div class="radio-btn-container">
-            <input type="radio" id="yes" name="first-degree" value="yes" />
-            <label for="yes">Yes</label>
-          </div>
-          <div class="radio-btn-container">
-            <input type="radio" id="no" name="first-degree" value="no" />
-            <label for="no">No</label>
-          </div>
-
-          <input
-            type="file"
-            name="first-degree-certificate"
-            id="first-degree-certificate"
-            hidden
-          />
-          <label class="upload-btn" for="first-degree-certificate"
+        <input
+          type="file"
+          name="first-degree-certificate"
+          id="first-degree-certificate"
+          accept="image/*"
+        />
+        <!-- <label class="upload-btn" for="first-degree-certificate"
             >Upload</label
-          >
-        </div>
+          > -->
       </div>
 
       <div class="upload-container">
         <h4>Other cetificates</h4>
-        <div class="radio-btns">
-          <div class="radio-btn-container">
-            <input type="radio" id="yes" name="first-degree" value="yes" />
-            <label for="yes">Yes</label>
-          </div>
-          <div class="radio-btn-container">
-            <input type="radio" id="no" name="first-degree" value="no" />
-            <label for="no">No</label>
-          </div>
-
-          <input
-            type="file"
-            name="other-certificate"
-            id="other-certificate"
-            hidden
-          />
-          <label class="upload-btn" for="other-certificate">Upload</label>
-        </div>
+        <input
+          type="file"
+          name="other-certificate"
+          id="other-certificate"
+          accept="image/*"
+        />
+        <!-- <label class="upload-btn" for="other-certificate">Upload</label> -->
       </div>
     </section>
 
@@ -77,7 +55,15 @@
           <div class="modal-input">
             <TextInput label="Skill" placeholder="E.g, React Native" />
           </div>
-          <button class="add-skill-btn">Add</button>
+          <div class="modal-input">
+            <label for="proficiency">Proficiency</label>
+            <select name="proficiency" id="proficiency" class="proficiency">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+          <button class="add-skill-btn modal-add-btn">Add</button>
         </form>
       </ModalBackdrop>
     </teleport>
@@ -144,27 +130,14 @@ section.add-certificate {
   margin-bottom: 0.5rem;
 }
 
-.radio-btns {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.radio-btn-container {
-  margin-top: 0;
-}
-.radio-btn-container label {
-  margin-left: 0.5rem;
-}
-
-.upload-btn {
+/* .upload-btn {
   padding: 0.2em 1em;
   border-radius: 2px;
   cursor: pointer;
   background: #eee;
   font-size: 0.875rem;
   border: 1px solid rgb(133, 133, 133);
-}
+} */
 
 section.skills-container {
   min-height: 250px;
@@ -215,10 +188,26 @@ section.skills-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
-.add-skill-modal .modal-input {
-  margin-top: -4rem;
+.add-skill-modal .modal-input label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.add-skill-modal .modal-input select {
+  width: 100%;
+  padding: 0.7em 1em;
+  font-size: 0.875rem;
+  margin-bottom: 0.7rem;
+  border: 1px solid #cad6e4;
+  border-radius: 5px;
+}
+
+.add-skill-modal .modal-add-btn {
+  margin-left: 0;
 }
 </style>

@@ -101,9 +101,8 @@
           </div>
         </div>
       </section>
-
-      <DashboardBottomButtonsNav nextRoute="/job" />
     </form>
+    <DashboardBottomButtonsNav nextRoute="/job" />
   </div>
 </template>
 
@@ -120,6 +119,10 @@ export default {
 <style scoped>
 .bio-container {
   width: 100%;
+  flex: 1;
+  background: red;
+  display: flex;
+  flex-direction: column;
 }
 section {
   background-color: #fff;
@@ -130,8 +133,7 @@ section.personal-details {
   margin-bottom: 1rem;
 }
 form {
-  display: flex;
-  flex-direction: column;
+  background-color: #eee;
 }
 section > div {
   display: flex;

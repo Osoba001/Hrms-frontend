@@ -10,7 +10,8 @@
         </div>
         <div class="user-detail">
           <h2>John Michael</h2>
-          <p>Admin</p>
+          <p v-if="accountType === 'admin'">Admin</p>
+          <p v-else>Staff</p>
         </div>
       </div>
     </header>
@@ -49,7 +50,7 @@
         </div>
       </router-link>
 
-      <router-link to="/projects">
+      <router-link to="/projects" v-if="accountType !== 'admin'">
         <div class="item">
           <span
             class="active-bar"
@@ -62,7 +63,7 @@
         </div>
       </router-link>
 
-      <router-link to="/department">
+      <router-link to="/department" v-if="accountType === 'admin'">
         <div class="item">
           <span
             class="active-bar"
@@ -75,7 +76,7 @@
         </div>
       </router-link>
 
-      <router-link to="/leave">
+      <router-link to="/leave" v-if="accountType !== 'admin'">
         <div class="item">
           <span
             class="active-bar"
@@ -88,7 +89,7 @@
         </div>
       </router-link>
 
-      <router-link to="/profile">
+      <router-link to="/profile" v-if="accountType !== 'admin'">
         <div class="item">
           <span
             class="active-bar"

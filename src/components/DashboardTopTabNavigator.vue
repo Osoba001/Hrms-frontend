@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-container">
+  <div class="tabs-container">
     <ul>
       <router-link to="/bio">
         <li :class="{ active: $route.path === '/bio' }">
@@ -37,49 +37,53 @@ export default {
 </script>
 
 <style>
-ul::-webkit-scrollbar {
+.tabs-container::-webkit-scrollbar {
   display: none;
 }
-.tab-container {
+.tabs-container {
   position: absolute;
   left: 0;
   right: 0;
-  /* top: 50px; */
-  border-top: 3px solid #eee;
+  top: 55px;
+  overflow-x: auto;
   z-index: 1;
+  margin-bottom: 5px;
   border-bottom-left-radius: 0.5rem;
+  width: 100%;
+  background-color: #fff;
+  padding-block: 3px;
+  border-bottom: 3px solid #eee;
 }
 .section-title {
   margin-bottom: 1.5rem;
   font-size: 1.4rem;
   color: #ca1310;
 }
-.tab-container ul {
+.tabs-container ul {
   display: flex;
   list-style: none;
   gap: 1rem;
-  overflow-x: auto;
 }
-.tab-container li {
+.tabs-container li {
   cursor: pointer;
   white-space: nowrap;
   padding: 0.7rem 1.5rem;
   border-radius: 6px;
   transition: background-color 500ms ease;
 }
-.tab-container li.active {
+.tabs-container li.active {
   background: #192041;
 }
-.tab-container li a {
+.tabs-container li a {
   transition: color 500ms ease;
 }
-.tab-container li.active a {
+.tabs-container li.active a {
   color: #fff;
 }
-.tab-container li:hover {
+.tabs-container li:hover {
   background: #192041;
 }
-.tab-container li:hover a {
+.tabs-container li:hover a {
   color: #fff;
 }
 </style>
