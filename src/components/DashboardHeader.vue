@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="project-title">
+    <div class="project-title" v-if="$route.path !== '/dashboard'">
       <h2>CCL Human Resource Management System</h2>
 
       <div class="logo">
@@ -54,19 +54,6 @@
           </select>
         </div>
 
-        <!-- <div class="active-directory">
-          <h2>Use active directory</h2>
-
-          <div class="radio-btn-container">
-            <input type="radio" id="yes" name="active_directory" value="yes" />
-            <label for="yes">Yes</label><br />
-          </div>
-          <div class="radio-btn-container">
-            <input type="radio" id="no" name="active_directory" value="no" />
-            <label for="no">No</label><br />
-          </div>
-        </div> -->
-
         <button class="configure-button">Configure</button>
       </div>
     </ModalBackdrop>
@@ -77,14 +64,16 @@
 import DashboardTopTabNavigator from '@/components/DashboardTopTabNavigator.vue'
 import TextInput from '@/components/TextInput.vue'
 import ModalBackdrop from '@/components/ModalBackdrop.vue'
+import { account_type, user_info_updated } from '@/data'
 
 export default {
   name: 'DashboardHeader',
   components: { DashboardTopTabNavigator, TextInput, ModalBackdrop },
   data() {
     return {
-      accountType: 'admin',
+      accountType: account_type,
       showModal: false,
+      userInfoUpdated: user_info_updated,
     }
   },
   methods: {
@@ -97,7 +86,11 @@ export default {
         '/certifications',
         '/confirmation',
       ]
-      return routesToDisplayTab.includes(path)
+      return (
+        this.accountType !== 'admin' &&
+        !this.userInfoUpdated &&
+        routesToDisplayTab.includes(path)
+      )
     },
     toggleModal() {
       this.showModal = !this.showModal

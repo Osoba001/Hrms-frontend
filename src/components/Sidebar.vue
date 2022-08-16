@@ -16,7 +16,7 @@
       </div>
     </header>
     <div class="items">
-      <router-link to="/bio">
+      <router-link to="/dashboard">
         <div class="item">
           <span
             class="active-bar"
@@ -27,7 +27,8 @@
                 $route.path === '/job' ||
                 $route.path === '/employment-history' ||
                 $route.path === '/certifications' ||
-                $route.path === '/confirmation',
+                $route.path === '/confirmation' ||
+                $route.path === '/dashboard',
             }"
           />
           <div class="icon">
@@ -72,7 +73,7 @@
           <div class="icon">
             <span class="material-symbols-outlined"> apartment </span>
           </div>
-          <span>Department</span>
+          <span>Departments</span>
         </div>
       </router-link>
 
@@ -110,6 +111,7 @@
 </template>
 
 <script>
+import { account_type } from '@/data'
 import CypherCrescentLogo from './icons/CypherCrescentLogo.vue'
 
 export default {
@@ -117,7 +119,7 @@ export default {
   components: { CypherCrescentLogo },
   data() {
     return {
-      accountType: 'admin',
+      accountType: account_type,
     }
   },
 }
