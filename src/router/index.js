@@ -9,12 +9,15 @@ import Job from '@/views/app/dashboardTabs/Job.vue'
 import EmploymentHistory from '@/views/app/dashboardTabs/EmploymentHistory.vue'
 import Certifications from '@/views/app/dashboardTabs/Certifications.vue'
 import Confirmation from '@/views/app/dashboardTabs/Confirmation.vue'
-import Admin from '@/views/auth/Admin.vue'
 import Employees from '@/views/app/admin/Employees.vue'
 import Department from '@/views/app/sidebarTabs/Department'
 import Leave from '@/views/app/sidebarTabs/Leave'
 import PersonalInfo from '@/views/app/sidebarTabs/PersonalInfo'
 import Projects from '@/views/app/sidebarTabs/Projects'
+import StaffDashboardStats from '@/views/app/StaffDashboardStats.vue'
+import AdminDashboardStats from '@/views/app/admin/AdminDashboardStats.vue'
+
+import { account_type, user_info_updated } from '@/data'
 
 const routes = [
   {
@@ -23,11 +26,46 @@ const routes = [
     component: Dashboard,
     meta: { title: 'CypherCrescent Portal' },
     children: [
-      { path: '/bio', component: Bio },
-      { path: '/job', component: Job },
-      { path: '/employment-history', component: EmploymentHistory },
-      { path: '/certifications', component: Certifications },
-      { path: '/confirmation', component: Confirmation },
+      {
+        path: '/bio',
+        component: Bio,
+        beforeEnter: (to, from, next) => {
+          account_type !== 'admin' && !user_info_updated ? next() : next('/')
+        },
+      },
+      {
+        path: '/job',
+        component: Job,
+        beforeEnter: (to, from, next) => {
+          account_type !== 'admin' && !user_info_updated ? next() : next('/')
+        },
+      },
+      {
+        path: '/employment-history',
+        component: EmploymentHistory,
+        beforeEnter: (to, from, next) => {
+          account_type !== 'admin' && !user_info_updated ? next() : next('/')
+        },
+      },
+      {
+        path: '/certifications',
+        component: Certifications,
+        beforeEnter: (to, from, next) => {
+          account_type !== 'admin' && !user_info_updated ? next() : next('/')
+        },
+      },
+      {
+        path: '/confirmation',
+        component: Confirmation,
+        beforeEnter: (to, from, next) => {
+          account_type !== 'admin' && !user_info_updated ? next() : next('/')
+        },
+      },
+      {
+        path: '/dashboard',
+        component:
+          account_type === 'admin' ? AdminDashboardStats : StaffDashboardStats,
+      },
       { path: '/employees', component: Employees },
       { path: '/projects', component: Projects },
       { path: '/leave', component: Leave },
@@ -46,12 +84,6 @@ const routes = [
     name: 'Signup',
     component: Signup,
     meta: { title: 'Signup' },
-  },
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: Admin,
-    meta: { title: 'Admin' },
   },
   {
     path: '/:catchAll(.*)',

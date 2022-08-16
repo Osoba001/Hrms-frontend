@@ -17,9 +17,15 @@
 <script>
 import Sidebar from '@/components/Sidebar.vue'
 import DashboardHeader from '@/components/DashboardHeader.vue'
+import { account_type } from '@/data'
 
 export default {
   name: 'Dashboard',
+  data() {
+    return {
+      accountType: account_type,
+    }
+  },
   components: {
     Sidebar,
     DashboardHeader,
@@ -45,6 +51,10 @@ export default {
     // const user = localStorage.getItem('access-token')
     // if (!user) this.$router.push('/login')
     // this.$router.push('/bio')
+
+    if (this.accountType === 'admin') {
+      this.$router.push('/dashboard')
+    }
   },
 }
 </script>

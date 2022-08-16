@@ -120,7 +120,6 @@ export default {
 .bio-container {
   width: 100%;
   flex: 1;
-  background: red;
   display: flex;
   flex-direction: column;
 }
