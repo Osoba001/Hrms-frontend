@@ -7,6 +7,8 @@ import Chart from 'primevue/chart'
 import Datepicker from '@vuepic/vue-datepicker'
 import ProgressBar from 'primevue/progressbar'
 import '@vuepic/vue-datepicker/dist/main.css'
+import 'primevue/resources/themes/lara-light-blue/theme.css'
+import 'primevue/resources/primevue.min.css'
 
 const app = createApp(App)
 

@@ -69,15 +69,24 @@
       </article>
 
       <article class="chart-container">
-        <Chart type="doughnut" :data="chartData" :options="lightOptions" />
+        <Chart type="pie" :data="chartData" :options="lightOptions" />
       </article>
 
-      <article>
-        <h4 class="title">Leave</h4>
+      <article class="leave-card-container">
+        <h4 class="title">Available leave days</h4>
 
-        <div class="leave-item">
-          <p>Casual leave</p>
-          <ProgressBar value="59" />
+        <div class="leave-item" v-for="leave in leaveData" :key="leave.id">
+          <div class="leave-item-top">
+            <p>{{ leave.type }} leave</p>
+            <p class="days-info">
+              {{ leave.availableDays }} of {{ leave.totalDays }} day(s)
+            </p>
+          </div>
+          <ProgressBar
+            :value="(leave.availableDays / leave.totalDays) * 100"
+            :showValue="false"
+            style="height: 10px; border-radius: 4px"
+          />
         </div>
       </article>
     </section>
@@ -139,6 +148,13 @@ export default {
           },
         },
       },
+      leaveData: [
+        { id: 6, type: 'Annual', availableDays: 17, totalDays: 24 },
+        { id: 1, type: 'Casual', availableDays: 2, totalDays: 5 },
+        { id: 2, type: 'Compassionate', availableDays: 5, totalDays: 5 },
+        { id: 3, type: 'Examination', availableDays: 4, totalDays: 5 },
+        { id: 4, type: 'Sick', availableDays: 3, totalDays: 5 },
+      ],
     }
   },
 }
@@ -150,7 +166,8 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-right: 0.5rem;
+  padding: 0.5rem 0.5rem 1rem;
+  overflow-y: auto;
 }
 section {
   margin-top: 0.5rem;
@@ -205,8 +222,6 @@ article.personal-info {
 }
 
 /* Projects card */
-article.projects {
-}
 article .title {
   margin-bottom: 0.5rem;
 }
@@ -253,5 +268,30 @@ article .title {
 /* Chart card */
 article.chart-container {
   padding: 1rem;
+}
+
+/* Leave card */
+.leave-item p {
+  font-size: 0.875rem;
+}
+
+.leave-card-container h4 {
+  margin-bottom: 1rem;
+}
+
+.leave-item + .leave-item {
+  margin-top: 0.7rem;
+}
+
+.leave-item .leave-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.leave-item .days-info {
+  color: rgb(181, 181, 181);
+  font-size: 0.75rem;
 }
 </style>
