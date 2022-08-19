@@ -5,11 +5,11 @@
         <Chart type="doughnut" :data="rolesData" :options="lightOptions" />
       </article>
       <article class="chart-container">
-        <Chart type="pie" :data="locationData" :options="lightOptions" />
+        <Chart type="pie" :data="ageData" :options="lightOptions" />
       </article>
 
       <article class="chart-container">
-        <Chart type="doughnut" :data="worktypeData" :options="lightOptions" />
+        <Chart type="doughnut" :data="locationData" :options="lightOptions" />
       </article>
 
       <article class="chart-container">
@@ -21,7 +21,7 @@
       </article>
 
       <article class="chart-container">
-        <Chart type="pie" :data="ageData" :options="lightOptions" />
+        <Chart type="pie" :data="worktypeData" :options="lightOptions" />
       </article>
 
       <!-- <article class="chart-container line-chart">
@@ -99,13 +99,13 @@ export default {
           {
             data: [9, 17, 22, 20, 31, 27, 3],
             backgroundColor: [
-              'coral',
               '#36A2EB',
               '#FFCE56',
               '#FF6384',
               'violet',
               '#FFCE56',
               '#FF6384',
+              'coral',
             ],
             hoverBackgroundColor: ['#64B5F6', '#81C784', '#FFB74D'],
           },
@@ -116,8 +116,8 @@ export default {
         datasets: [
           {
             data: [80, 15, 10, 7],
-            backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726', 'coral'],
-            hoverBackgroundColor: ['#64B5F6', '#81C784', '#FFB74D'],
+            backgroundColor: ['#0854cc', '#09b579', '#FFA726', 'coral'],
+            hoverBackgroundColor: ['#0854cc', '#09b579', '#FFA726', 'coral'],
           },
         ],
       },
@@ -126,7 +126,7 @@ export default {
         datasets: [
           {
             data: [53, 45, 39],
-            backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
+            backgroundColor: ['#0854cc', '#09b579', '#FFA726'],
             hoverBackgroundColor: ['#64B5F6', '#81C784', '#FFB74D'],
           },
         ],
@@ -187,42 +187,6 @@ export default {
             },
           },
         },
-      },
-      lineStylesData: {
-        labels: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-        ],
-        datasets: [
-          {
-            label: 'First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            tension: 0.4,
-            borderColor: '#42A5F5',
-          },
-          {
-            label: 'Second Dataset',
-            data: [28, 48, 40, 19, 86, 27, 90],
-            fill: false,
-            borderDash: [5, 5],
-            tension: 0.4,
-            borderColor: '#66BB6A',
-          },
-          {
-            label: 'Third Dataset',
-            data: [12, 51, 62, 33, 21, 62, 45],
-            fill: true,
-            borderColor: '#FFA726',
-            tension: 0.4,
-            backgroundColor: 'rgba(255,167,38,0.2)',
-          },
-        ],
       },
     }
   },

@@ -1,10 +1,12 @@
 <template>
-  <article class="employee">
+  <article class="employee p-ripple" @click="toggleModal" v-ripple>
     <header class="employee-status-wrapper">
       <div class="status">
         <span>Active</span>
       </div>
-      <span class="material-symbols-outlined more-icon"> more_horiz </span>
+      <div class="icon-container p-ripple" @click="handleClick" v-ripple>
+        <span class="material-symbols-outlined icon"> more_horiz </span>
+      </div>
     </header>
 
     <div class="employee-info-top">
@@ -31,19 +33,32 @@
           <span class="material-symbols-outlined"> mail </span>
           <p>{{ employee.email }}</p>
         </div>
-        <!-- <div class="contact">
-          <span class="material-symbols-outlined"> call </span>
-          <p>+234-803-389-8620</p>
-        </div> -->
       </div>
     </div>
   </article>
+
+  <teleport to=".modals" v-if="showModal">
+    <EmployeeModalInfo :toggleModal="toggleModal" />
+  </teleport>
 </template>
 
 <script>
+import EmployeeModalInfo from './EmployeeModalInfo.vue'
+
 export default {
   name: 'EmployeeCard',
   props: ['employee'],
+  data() {
+    return {
+      showModal: false,
+    }
+  },
+  methods: {
+    toggleModal() {
+      this.showModal = !this.showModal
+    },
+  },
+  components: { EmployeeModalInfo },
 }
 </script>
 
@@ -56,12 +71,18 @@ export default {
   padding: 0.7rem;
   min-height: 200px;
   border-radius: 6px;
-  box-shadow: 4px 4px 5px 4px rgba(182, 182, 182, 0.219);
+  box-shadow: 2px 2px 5px 2px rgba(182, 182, 182, 0.219);
+  transition: box-shadow 250ms ease;
+  cursor: pointer;
+}
+
+.employee:hover {
+  background-color: rgba(255, 255, 255, 0.793);
+  box-shadow: 4px 4px 5px 4px rgba(135, 135, 135, 0.282);
 }
 
 .employee-status-wrapper {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   gap: 0.5rem;
 }
@@ -75,10 +96,25 @@ export default {
   color: #0bbd58;
   font-size: 0.75rem;
   font-weight: 700;
+  margin-right: auto;
 }
 
-.employee-status-wrapper span.more-icon {
-  font-size: 1.2rem;
+.employee .icon-container {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(229, 229, 229, 0.566);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: background-color 300ms ease;
+}
+
+.employee .icon-container:hover {
+  background-color: rgb(229, 229, 229);
+}
+
+.employee-status-wrapper span.icon {
+  font-size: 1.1rem;
   cursor: pointer;
 }
 
@@ -124,10 +160,6 @@ export default {
   justify-content: space-between;
   margin-bottom: 2rem;
   gap: 0.7rem;
-}
-
-.bottom-info > {
-  flex: 0.5;
 }
 
 .bottom-info h4 {

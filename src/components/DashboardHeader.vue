@@ -7,6 +7,7 @@
         <img src="@/assets/images/cyphercrescent-logo.png" />
       </div>
 
+      <!-- For Admin to add employees -->
       <form
         @submit.prevent=""
         class="add-staff-container"
@@ -24,11 +25,20 @@
           id="active-directory"
         />
 
-        <button @click="toggleModal" class="create-staff-btn">
+        <button @click="toggleModal">
           <span class="material-symbols-rounded"> add </span>
           Add staff
         </button>
       </form>
+
+      <!-- For manager to view leave information of team members under the manager -->
+      <button
+        @click="$router.push('/leave/team-members')"
+        v-if="accountType === 'manager' && $route.path === '/leave'"
+        class="team-info-btn"
+      >
+        View Team Info
+      </button>
     </div>
     <DashboardTopTabNavigator v-if="displayTab(this.$route.path)" />
   </header>
@@ -87,7 +97,7 @@ export default {
         '/confirmation',
       ]
       return (
-        this.accountType !== 'admin' &&
+        (this.accountType === 'admin' || this.accountType === 'manager') &&
         !this.userInfoUpdated &&
         routesToDisplayTab.includes(path)
       )
@@ -119,7 +129,7 @@ header .project-title {
   height: 54px;
 }
 
-.project-title .create-staff-btn,
+.project-title button,
 .active-directory-btn {
   padding: 0.5em 1em;
   background-color: #2b9de9;
@@ -133,6 +143,9 @@ header .project-title {
   justify-content: center;
   align-items: center;
   gap: 5px;
+}
+.project-title .team-info-btn {
+  margin-left: auto;
 }
 .add-staff-container {
   margin-left: auto;
