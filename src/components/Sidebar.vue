@@ -11,13 +11,15 @@
         <div class="user-detail">
           <h2>John Michael</h2>
           <p v-if="accountType === 'admin'">Admin</p>
-          <p v-else>Staff</p>
+          <p v-if="accountType === 'manager'">Manager</p>
+          <p v-if="accountType === 'staff'">Staff</p>
+          <p v-if="accountType === 'HR'">Human Resource</p>
         </div>
       </div>
     </header>
     <div class="items">
       <router-link to="/dashboard">
-        <div class="item">
+        <div class="item" v-if="accountType !== 'admin'">
           <span
             class="active-bar"
             :class="{
@@ -38,8 +40,11 @@
         </div>
       </router-link>
 
-      <router-link to="/employees" v-if="accountType === 'admin'">
-        <div class="item">
+      <router-link to="/employees">
+        <div
+          class="item"
+          v-if="accountType === 'admin' || accountType === 'HR'"
+        >
           <span
             class="active-bar"
             :class="{ active: $route.path === '/employees' }"
@@ -51,8 +56,11 @@
         </div>
       </router-link>
 
-      <router-link to="/projects" v-if="accountType !== 'admin'">
-        <div class="item">
+      <router-link to="/projects">
+        <div
+          class="item"
+          v-if="accountType === 'staff' || accountType === 'manager'"
+        >
           <span
             class="active-bar"
             :class="{ active: $route.path === '/projects' }"
@@ -64,8 +72,8 @@
         </div>
       </router-link>
 
-      <router-link to="/department" v-if="accountType === 'admin'">
-        <div class="item">
+      <router-link to="/department">
+        <div class="item" v-if="accountType === 'admin'">
           <span
             class="active-bar"
             :class="{ active: $route.path === '/department' }"
@@ -77,29 +85,23 @@
         </div>
       </router-link>
 
-      <router-link to="/leave" v-if="accountType !== 'admin'">
-        <div class="item">
+      <router-link to="/leave">
+        <div
+          class="item"
+          v-if="accountType === 'staff' || accountType === 'manager'"
+        >
           <span
             class="active-bar"
-            :class="{ active: $route.path === '/leave' }"
+            :class="{
+              active:
+                $route.path === '/leave' ||
+                $route.path === '/leave/team-members',
+            }"
           />
           <div class="icon">
             <span class="material-symbols-outlined"> handshake </span>
           </div>
           <span>Leave</span>
-        </div>
-      </router-link>
-
-      <router-link to="/profile" v-if="accountType !== 'admin'">
-        <div class="item">
-          <span
-            class="active-bar"
-            :class="{ active: $route.path === '/profile' }"
-          />
-          <div class="icon">
-            <span class="material-symbols-outlined"> account_circle </span>
-          </div>
-          <span>Personal info</span>
         </div>
       </router-link>
     </div>
@@ -178,7 +180,6 @@ header .user-info p {
 .items {
   padding-top: 1rem;
   flex: 1;
-  cursor: pointer;
 }
 
 .items .item {

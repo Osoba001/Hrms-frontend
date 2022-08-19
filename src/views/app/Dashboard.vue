@@ -51,10 +51,11 @@ export default {
     // const user = localStorage.getItem('access-token')
     // if (!user) this.$router.push('/login')
     // this.$router.push('/bio')
-
-    if (this.accountType === 'admin') {
-      this.$router.push('/dashboard')
-    }
+    // if (this.accountType === 'admin') {
+    //   this.$router.push('/employees')
+    // } else {
+    //   this.$router.push('/dashboard')
+    // }
   },
 }
 </script>

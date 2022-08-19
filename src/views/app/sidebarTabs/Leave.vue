@@ -1,7 +1,18 @@
 <template>
   <div class="leave-container">
     <section class="statistics">
-      <h1>Statistics</h1>
+      <div class="stat-container">
+        <h1 class="stat">4</h1>
+        <p class="label">Annual Leave</p>
+      </div>
+      <div class="stat-container">
+        <h1 class="stat">2</h1>
+        <p class="label">Sick Leave</p>
+      </div>
+      <div class="stat-container">
+        <h1 class="stat">1</h1>
+        <p class="label">Casual Leave</p>
+      </div>
     </section>
 
     <section class="leave-application">
@@ -26,7 +37,7 @@
           </div>
 
           <div class="input">
-            <label for="">Messsage (Optional)</label>
+            <label for="">Message (Optional)</label>
             <textarea
               name="reason-for-change"
               id="reason-for-change"
@@ -63,11 +74,23 @@ export default {
 }
 
 section.statistics {
-  padding: 1.5rem;
-  min-height: 150px;
+  padding: 2rem 1.5rem;
   background-color: #fff;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
+
+  display: flex;
+  justify-content: space-around;
+}
+.stat-container {
+  display: flex;
+  align-items: flex-end;
+  color: #ca1310;
+}
+.stat-container h1 {
+  font-size: 4rem;
+  line-height: 3.3rem;
+  margin-right: 0.5rem;
 }
 
 section.leave-application {
@@ -75,7 +98,6 @@ section.leave-application {
   padding: 1.5rem;
   background-color: #fff;
   flex: 1;
-  overflow-y: auto;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 }

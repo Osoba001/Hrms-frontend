@@ -1,12 +1,14 @@
 <template>
   <article
-    class="project"
+    class="project p-ripple"
     :class="{
       ongoing: project.status === 'ongoing',
       cancelled: project.status === 'cancelled',
       'not-started': project.status === 'not started',
       completed: project.status === 'completed',
     }"
+    @click="toggleModal"
+    v-ripple
   >
     <header>
       <div class="project-title">
@@ -63,15 +65,33 @@
       <span>{{ project.status }}</span>
     </div>
   </article>
+
+  <teleport to=".modals" v-if="showModal">
+    <ModalBackdrop @close="toggleModal">
+      <div class="modal-inner"></div>
+    </ModalBackdrop>
+  </teleport>
 </template>
 
 <script>
 import GithubIcon from './icons/GithubIcon.vue'
 import ExternalLinkIcon from './icons/ExternalLinkIcon.vue'
+import ModalBackdrop from './ModalBackdrop.vue'
+
 export default {
   name: 'Project',
   props: ['project', 'variant'],
-  components: { GithubIcon, ExternalLinkIcon },
+  components: { GithubIcon, ExternalLinkIcon, ModalBackdrop },
+  data() {
+    return {
+      showModal: false,
+    }
+  },
+  methods: {
+    toggleModal() {
+      this.showModal = !this.showModal
+    },
+  },
 }
 </script>
 
@@ -86,6 +106,7 @@ export default {
   min-height: 230px;
   border-radius: 6px;
   box-shadow: 4px 4px 5px 4px rgba(182, 182, 182, 0.219);
+  cursor: pointer;
 }
 
 .project.completed {
