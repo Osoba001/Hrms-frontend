@@ -17,6 +17,7 @@ import PersonalInfo from '@/views/app/sidebarTabs/PersonalInfo'
 import Projects from '@/views/app/sidebarTabs/Projects'
 import StaffDashboardStats from '@/views/app/StaffDashboardStats.vue'
 import HRDashboardStats from '@/views/app/HRDashboardStats.vue'
+import ChangePassword from '@/views/auth/ChangePassword.vue'
 
 import { account_type, user_info_updated } from '@/data'
 
@@ -131,6 +132,12 @@ const routes = [
     name: 'Signup',
     component: Signup,
     meta: { title: 'Signup' },
+  },
+  {
+    path: '/change-password',
+    name: 'ChangePassword',
+    component: ChangePassword,
+    meta: { title: 'Change Password' },
   },
   {
     path: '/:catchAll(.*)',

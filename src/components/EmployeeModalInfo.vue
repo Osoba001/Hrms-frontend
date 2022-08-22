@@ -1,7 +1,7 @@
 <template>
   <ModalBackdrop @close="toggleModal">
     <div class="modal-inner">
-      <button class="edit-btn" @click="handleEdit">Edit</button>
+      <button class="edit-btn" @click="handleEdit">Validate</button>
 
       <div class="modal-top">
         <div class="left">
