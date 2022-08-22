@@ -15,8 +15,7 @@
     "primevue": "^3.16.0",
     "read-excel-file": "^5.4.5",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.13",
-    "xlsx": "^0.18.5"
+    "vue-router": "^4.0.13"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

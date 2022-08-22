@@ -1,14 +1,18 @@
 <template>
   <div class="employees-container">
-    <h2 class="section-title">List of Employees</h2>
+    <h2 class="section-title">
+      {{ !importedEmails.length ? 'List of Employees' : 'Add Employees' }}
+    </h2>
 
-    <section class="employees">
+    <section class="employees" v-if="!importedEmails.length">
       <EmployeeCard
         v-for="employee in employees"
         v-bind:key="employee.id"
         :employee="employee"
       />
     </section>
+
+    <AddMultipleEmployees :data="importedEmails" />
 
     <teleport to=".modals" v-if="showModal">
       <ModalBackdrop @close="toggleModal">
@@ -50,10 +54,12 @@
 import ModalBackdrop from '@/components/ModalBackdrop.vue'
 import TextInput from '@/components/TextInput.vue'
 import EmployeeCard from '@/components/EmployeeCard.vue'
+import { imported_emails } from '@/data'
+import AddMultipleEmployees from '../../../components/AddMultipleEmployees.vue'
 
 export default {
   name: 'Employees',
-  components: { ModalBackdrop, TextInput, EmployeeCard },
+  components: { ModalBackdrop, TextInput, EmployeeCard, AddMultipleEmployees },
   data() {
     return {
       showModal: false,
@@ -140,6 +146,7 @@ export default {
         },
       ],
       employeeToBeEdited: null,
+      importedEmails: imported_emails,
     }
   },
   methods: {
