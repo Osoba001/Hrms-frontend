@@ -31,11 +31,21 @@
             </select>
           </div>
 
-          <div class="input">
-            <label for="contract-type">Select range of days</label>
+          <!-- <div class="input">
+            <label>Select range of days</label>
             <Datepicker v-model="date" range></Datepicker>
+          </div> -->
+          <div class="input">
+            <label for="startDate">Start date</label>
+            <input type="date" name="startDate" id="startDate" />
           </div>
+          <div class="input">
+            <label for="endDate">End date</label>
+            <input type="date" name="endDate" id="endDate" />
+          </div>
+        </div>
 
+        <div class="inputs-container">
           <div class="input">
             <label for="">Message (Optional)</label>
             <textarea
@@ -45,6 +55,8 @@
               rows="10"
             ></textarea>
           </div>
+
+          <button class="apply-btn">Apply</button>
         </div>
       </div>
     </section>
@@ -110,6 +122,7 @@ section h2 {
 
 section > div {
   display: flex;
+  gap: 1.5rem;
 }
 .inputs-container {
   flex: 0.5;
@@ -127,13 +140,32 @@ section > div {
   font-size: 0.875rem;
 }
 .input select,
-.input textarea {
+.input textarea,
+input {
   width: 100%;
   padding: 0.7em 1em;
   font-size: 0.875rem;
   border: 1px solid #cad6e4;
   border-radius: 5px;
   font-family: 'Lato', Helvetica, sans-serif;
+}
+
+.input textarea {
+  height: 220px;
+}
+
+.apply-btn {
+  padding: 0.5em 1em;
+  background-color: #2b9de9;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+}
+.apply-btn:hover {
+  background-color: #255eb4;
 }
 
 @media (max-width: 850px) {

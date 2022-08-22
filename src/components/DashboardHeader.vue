@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="project-title" v-if="$route.path !== '/dashboard'">
+    <div class="project-title">
       <h2>CCL Human Resource Management System</h2>
 
       <div class="logo">
@@ -23,6 +23,7 @@
           type="file"
           name="active-directory"
           id="active-directory"
+          @change="readExcel"
         />
 
         <button @click="toggleModal">
@@ -33,7 +34,7 @@
 
       <!-- For manager to view leave information of team members under the manager -->
       <button
-        @click="$router.push('/leave/team-members')"
+        @click="handleManagerLeave"
         v-if="accountType === 'manager' && $route.path === '/leave'"
         class="team-info-btn"
       >
@@ -75,6 +76,7 @@ import DashboardTopTabNavigator from '@/components/DashboardTopTabNavigator.vue'
 import TextInput from '@/components/TextInput.vue'
 import ModalBackdrop from '@/components/ModalBackdrop.vue'
 import { account_type, user_info_updated } from '@/data'
+import readXlsxFile from 'read-excel-file'
 
 export default {
   name: 'DashboardHeader',
@@ -97,13 +99,27 @@ export default {
         '/confirmation',
       ]
       return (
-        (this.accountType === 'admin' || this.accountType === 'manager') &&
+        (this.accountType === 'staff' || this.accountType === 'manager') &&
         !this.userInfoUpdated &&
         routesToDisplayTab.includes(path)
       )
     },
     toggleModal() {
       this.showModal = !this.showModal
+    },
+    handleManagerLeave() {
+      this.$router.push('/leave/team-members')
+    },
+    readExcel(event) {
+      readXlsxFile(event.target.files[0]).then((rows) => {
+        const emailsArray = []
+        // Pick first column of every row and push to array
+        rows.map((row, index) => {
+          // Remove the first row cause its the header
+          index !== 0 && emailsArray.push(row[0])
+        })
+        console.log(emailsArray)
+      })
     },
   },
 }
