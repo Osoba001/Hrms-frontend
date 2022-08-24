@@ -12,8 +12,8 @@
 
     <div class="personal-projects-container">
       <h2 class="section-title">Personal projects</h2>
-      <button>
-        <span class="material-symbols-rounded" data-v-3fdc887e=""> add </span>
+      <button @click="toggleModal">
+        <span class="material-symbols-rounded"> add </span>
         Add Project
       </button>
     </div>
@@ -26,10 +26,43 @@
       />
     </section>
   </div>
+
+  <!-- <teleport to=".modals" v-if="showModal">
+    <ModalBackdrop @close="toggleModal">
+      <div class="modal-inner"></div>
+    </ModalBackdrop>
+  </teleport> -->
+
+  <teleport to=".modals" v-if="showModal">
+    <ModalBackdrop @close="toggleModal">
+      <form class="add-experience-modal" @submit.prevent="handleSubmit">
+        <h2 class="section-title">Add project</h2>
+        <div class="modal-input">
+          <TextInput
+            label="Github link"
+            placeholder="https://github.com/example-001"
+          />
+        </div>
+        <div class="modal-input">
+          <TextInput
+            label="Live link"
+            placeholder="https://myliveproject.com"
+          />
+        </div>
+        <div class="modal-input">
+          <TextInput label="Description" placeholder="..." />
+        </div>
+        <button class="add-experience-btn modal-add-btn">Add</button>
+      </form>
+    </ModalBackdrop>
+  </teleport>
 </template>
 
 <script>
 import Project from '@/components/Project.vue'
+import ModalBackdrop from '@/components/ModalBackdrop.vue'
+import TextInput from '@/components/TextInput.vue'
+
 export default {
   name: 'Projects',
   data() {
@@ -117,9 +150,15 @@ export default {
           `,
         },
       ],
+      showModal: false,
     }
   },
-  components: { Project },
+  components: { Project, ModalBackdrop, TextInput },
+  methods: {
+    toggleModal() {
+      this.showModal = !this.showModal
+    },
+  },
 }
 </script>
 
@@ -166,5 +205,32 @@ section {
 
 .personal-projects-container button:hover {
   background-color: #255eb4;
+}
+
+.add-experience-modal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.add-experience-modal .section-title {
+  margin-bottom: 0;
+}
+
+.modal-add-btn {
+  padding: 0.7em 1em;
+  background-color: #2b9de9;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding-inline: 2em;
 }
 </style>

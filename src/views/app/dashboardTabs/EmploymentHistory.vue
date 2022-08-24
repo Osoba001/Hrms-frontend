@@ -17,7 +17,7 @@
         <div class="organisation-logo">
           <img :src="employment.logo" alt="organisation-logo" />
         </div>
-        <div class="ëmployment-details">
+        <div class="employment-details">
           <h3>{{ employment.role }}</h3>
           <p class="organisation-name">{{ employment.organisation }}</p>
           <p class="duration">{{ employment.duration }}</p>

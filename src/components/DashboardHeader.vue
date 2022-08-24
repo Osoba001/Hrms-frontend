@@ -19,7 +19,7 @@
         >
         <input
           hidden
-          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+          accept=".xlsx"
           type="file"
           name="active-directory"
           id="active-directory"
@@ -75,20 +75,19 @@
 import DashboardTopTabNavigator from '@/components/DashboardTopTabNavigator.vue'
 import TextInput from '@/components/TextInput.vue'
 import ModalBackdrop from '@/components/ModalBackdrop.vue'
-import { account_type, user_info_updated } from '@/data'
 import readXlsxFile from 'read-excel-file'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   name: 'DashboardHeader',
   components: { DashboardTopTabNavigator, TextInput, ModalBackdrop },
   data() {
     return {
-      accountType: account_type,
       showModal: false,
-      userInfoUpdated: user_info_updated,
     }
   },
   methods: {
+    ...mapMutations('appStore', ['SET_ACTIVE_DIRECTORY']),
     displayTab(path) {
       const routesToDisplayTab = [
         '/',
@@ -118,9 +117,12 @@ export default {
           // Remove the first row cause its the header
           index !== 0 && emailsArray.push(row[0])
         })
-        console.log(emailsArray)
+        this.SET_ACTIVE_DIRECTORY(emailsArray)
       })
     },
+  },
+  computed: {
+    ...mapState('appStore', ['accountType', 'userInfoUpdated']),
   },
 }
 </script>

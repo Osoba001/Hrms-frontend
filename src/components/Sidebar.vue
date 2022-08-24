@@ -113,16 +113,14 @@
 </template>
 
 <script>
-import { account_type } from '@/data'
+import { mapState } from 'vuex'
 import CypherCrescentLogo from './icons/CypherCrescentLogo.vue'
 
 export default {
   name: 'Sidebar',
   components: { CypherCrescentLogo },
-  data() {
-    return {
-      accountType: account_type,
-    }
+  computed: {
+    ...mapState('appStore', ['accountType']),
   },
 }
 </script>

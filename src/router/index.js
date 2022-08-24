@@ -19,7 +19,10 @@ import StaffDashboardStats from '@/views/app/StaffDashboardStats.vue'
 import HRDashboardStats from '@/views/app/HRDashboardStats.vue'
 import ChangePassword from '@/views/auth/ChangePassword.vue'
 
-import { account_type, user_info_updated } from '@/data'
+import store from '@/store'
+
+const accountType = store.state.appStore.accountType
+const userInfoUpdated = store.state.appStore.userInfoUpdated
 
 const routes = [
   {
@@ -32,7 +35,7 @@ const routes = [
         path: '/bio',
         component: Bio,
         beforeEnter: (to, from, next) => {
-          account_type === 'staff' && !user_info_updated
+          accountType === 'staff' && !userInfoUpdated
             ? next()
             : next('/dashboard')
         },
@@ -41,7 +44,7 @@ const routes = [
         path: '/job',
         component: Job,
         beforeEnter: (to, from, next) => {
-          account_type === 'staff' && !user_info_updated
+          accountType === 'staff' && !userInfoUpdated
             ? next()
             : next('/dashboard')
         },
@@ -50,7 +53,7 @@ const routes = [
         path: '/employment-history',
         component: EmploymentHistory,
         beforeEnter: (to, from, next) => {
-          account_type === 'staff' && !user_info_updated
+          accountType === 'staff' && !userInfoUpdated
             ? next()
             : next('/dashboard')
         },
@@ -59,7 +62,7 @@ const routes = [
         path: '/certifications',
         component: Certifications,
         beforeEnter: (to, from, next) => {
-          account_type === 'staff' && !user_info_updated
+          accountType === 'staff' && !userInfoUpdated
             ? next()
             : next('/dashboard')
         },
@@ -68,7 +71,7 @@ const routes = [
         path: '/confirmation',
         component: Confirmation,
         beforeEnter: (to, from, next) => {
-          account_type === 'staff' && !user_info_updated
+          accountType === 'staff' && !userInfoUpdated
             ? next()
             : next('/dashboard')
         },
@@ -76,27 +79,27 @@ const routes = [
       {
         path: '/dashboard',
         component:
-          account_type === 'HR'
+          accountType === 'HR'
             ? HRDashboardStats
-            : account_type === 'staff'
+            : accountType === 'staff'
             ? StaffDashboardStats
             : StaffDashboardStats,
         beforeEnter: (to, from, next) => {
-          account_type === 'admin' ? next('/employees') : next()
+          accountType === 'admin' ? next('/employees') : next()
         },
       },
       {
         path: '/employees',
         component: Employees,
         beforeEnter: (to, from, next) => {
-          account_type === 'admin' || account_type === 'HR' ? next() : next('/')
+          accountType === 'admin' || accountType === 'HR' ? next() : next('/')
         },
       },
       {
         path: '/projects',
         component: Projects,
         beforeEnter: (to, from, next) => {
-          account_type === 'staff' || account_type === 'manager'
+          accountType === 'staff' || accountType === 'manager'
             ? next()
             : next('/')
         },
@@ -105,7 +108,7 @@ const routes = [
         path: '/leave',
         component: Leave,
         beforeEnter: (to, from, next) => {
-          account_type === 'manager' || account_type === 'staff'
+          accountType === 'manager' || accountType === 'staff'
             ? next()
             : next('/dashboard')
         },
@@ -114,7 +117,7 @@ const routes = [
         path: '/leave/team-members',
         component: TeamMembersLeave,
         beforeEnter: (to, from, next) => {
-          account_type === 'manager' ? next() : next('/leave')
+          accountType === 'manager' ? next() : next('/leave')
         },
       },
       { path: '/department', component: Department },

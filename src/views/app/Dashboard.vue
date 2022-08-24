@@ -17,15 +17,10 @@
 <script>
 import Sidebar from '@/components/Sidebar.vue'
 import DashboardHeader from '@/components/DashboardHeader.vue'
-import { account_type } from '@/data'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Dashboard',
-  data() {
-    return {
-      accountType: account_type,
-    }
-  },
   components: {
     Sidebar,
     DashboardHeader,
@@ -45,6 +40,9 @@ export default {
     toggleModal() {
       this.showModal = !this.showModal
     },
+  },
+  computed: {
+    ...mapState('appStore', ['accountType']),
   },
 
   created() {
@@ -88,6 +86,7 @@ main {
   overflow-y: auto;
   border-radius: 0.5rem;
   background-color: #eee;
+  /* padding-inline: 0.5rem; */
 }
 
 main > div.tab-container {
@@ -102,10 +101,6 @@ main > div.tab-container {
   .project-title h2 {
     display: none;
   }
-  /* .logo-container {
-    flex: 1;
-    display: block;
-  } */
   .logo img {
     display: block;
   }

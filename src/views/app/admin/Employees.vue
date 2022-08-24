@@ -4,6 +4,15 @@
       {{ !importedEmails.length ? 'List of Employees' : 'Add Employees' }}
     </h2>
 
+    <div
+      class="cancel-btn p-ripple"
+      v-if="importedEmails.length"
+      v-ripple
+      @click="REMOVE_IMPORTED_EMAILS"
+    >
+      <span class="material-symbols-rounded"> close </span>
+    </div>
+
     <section class="employees" v-if="!importedEmails.length">
       <EmployeeCard
         v-for="employee in employees"
@@ -12,7 +21,7 @@
       />
     </section>
 
-    <AddMultipleEmployees :data="importedEmails" />
+    <AddMultipleEmployees v-if="importedEmails.length" :data="importedEmails" />
 
     <teleport to=".modals" v-if="showModal">
       <ModalBackdrop @close="toggleModal">
@@ -54,8 +63,8 @@
 import ModalBackdrop from '@/components/ModalBackdrop.vue'
 import TextInput from '@/components/TextInput.vue'
 import EmployeeCard from '@/components/EmployeeCard.vue'
-import { imported_emails } from '@/data'
-import AddMultipleEmployees from '../../../components/AddMultipleEmployees.vue'
+import AddMultipleEmployees from '@/components/AddMultipleEmployees.vue'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   name: 'Employees',
@@ -70,7 +79,7 @@ export default {
           role: 'General Manager',
           department: 'Development',
           image: 'https://randomuser.me/api/portraits/thumb/women/8.jpg',
-          email: 'emeka.duruzor@ccl.com.ng',
+          email: 'john.doe@ccl.com.ng',
         },
         {
           id: 2,
@@ -78,7 +87,7 @@ export default {
           role: 'Director',
           department: 'Design',
           image: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
-          email: 'ani.udoh@ccl.com.ng',
+          email: 'antoine.griezmann@ccl.com.ng',
         },
         {
           id: 3,
@@ -86,7 +95,7 @@ export default {
           role: 'Staff',
           department: 'Development',
           image: 'https://randomuser.me/api/portraits/thumb/men/71.jpg',
-          email: 'nehemiah.igben@ccl.com.ng',
+          email: 'john.michael@ccl.com.ng',
         },
         {
           id: 4,
@@ -102,7 +111,7 @@ export default {
           role: 'Intern',
           department: 'Development',
           image: 'https://randomuser.me/api/portraits/thumb/women/52.jpg',
-          email: 'aseb.d@ccl.com.ng',
+          email: 'gabriel.john@ccl.com.ng',
         },
         {
           id: 6,
@@ -110,7 +119,7 @@ export default {
           role: 'General Manager',
           department: 'Design',
           image: 'https://randomuser.me/api/portraits/thumb/men/35.jpg',
-          email: 'emeka.duruzor@ccl.com.ng',
+          email: 'sunday.mike@ccl.com.ng',
         },
         {
           id: 7,
@@ -118,7 +127,7 @@ export default {
           role: 'Director',
           department: 'Development',
           image: 'https://randomuser.me/api/portraits/thumb/men/23.jpg',
-          email: 'emeka.duruzor@ccl.com.ng',
+          email: 'victor.chinedu@ccl.com.ng',
         },
         {
           id: 8,
@@ -126,7 +135,7 @@ export default {
           role: 'Staff',
           department: 'Design',
           image: 'https://randomuser.me/api/portraits/thumb/women/78.jpg',
-          email: 'nehemiah.igben@ccl.com.ng',
+          email: 'innocent.samuel@ccl.com.ng',
         },
         {
           id: 9,
@@ -134,7 +143,7 @@ export default {
           role: 'Corper',
           department: 'Development',
           image: 'https://randomuser.me/api/portraits/thumb/men/36.jpg',
-          email: 'emeka.duruzor@ccl.com.ng',
+          email: 'paul.emmanuel@ccl.com.ng',
         },
         {
           id: 10,
@@ -142,14 +151,14 @@ export default {
           role: 'Intern',
           department: 'Design',
           image: 'https://randomuser.me/api/portraits/thumb/women/18.jpg',
-          email: 'aseb.d@ccl.com.ng',
+          email: 'marvelous.jack@ccl.com.ng',
         },
       ],
       employeeToBeEdited: null,
-      importedEmails: imported_emails,
     }
   },
   methods: {
+    ...mapMutations('appStore', ['REMOVE_IMPORTED_EMAILS']),
     handleSubmit() {},
     toggleModal(employeeId) {
       if (this.showModal === false) {
@@ -160,11 +169,15 @@ export default {
       this.showModal = !this.showModal
     },
   },
+  computed: {
+    ...mapState('appStore', ['accountType', 'importedEmails']),
+  },
 }
 </script>
 
 <style scoped>
 .employees-container {
+  position: relative;
   margin-top: 0.3rem;
   padding: 1.5rem;
   padding-top: 0.5rem;
@@ -173,9 +186,21 @@ export default {
   flex: 1;
 }
 
+.cancel-btn {
+  position: absolute;
+  right: 1.5rem;
+  top: 0.5rem;
+  padding: 0.3em;
+  border-radius: 50%;
+  background-color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
 .employees {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
   gap: 1.5rem;
 }
 
