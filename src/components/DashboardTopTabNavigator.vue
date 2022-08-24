@@ -18,7 +18,7 @@
       </router-link>
       <router-link to="/certifications">
         <li :class="{ active: $route.path === '/certifications' }">
-          <a>Certifications</a>
+          <a>Skills/Certifications</a>
         </li>
       </router-link>
       <router-link to="/confirmation">

@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store'
 
 import PrimeVue from 'primevue/config'
 import Chart from 'primevue/chart'
@@ -13,6 +14,7 @@ import 'primevue/resources/primevue.min.css'
 
 const app = createApp(App)
 
+app.use(store)
 app.use(PrimeVue, { ripple: true })
 app.component('Datepicker', Datepicker)
 app.component('Chart', Chart)

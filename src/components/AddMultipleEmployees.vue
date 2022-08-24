@@ -1,17 +1,17 @@
 <template>
-  <section class="employees">
+  <section class="employees-table">
     <table>
       <tr>
-        <th>Name</th>
+        <th>Email</th>
         <th>Role</th>
       </tr>
       <tr v-for="employee in data" :key="employee">
         <td>{{ employee }}</td>
         <td>
           <select name="role" id="role">
+            <option value="staff">Staff</option>
             <option value="manager">Manager</option>
             <option value="director">Director</option>
-            <option value="staff">Staff</option>
             <option value="intern">Intern</option>
             <option value="corper">Corper</option>
           </select>
@@ -19,6 +19,7 @@
       </tr>
     </table>
   </section>
+  <button class="configure-btn">Configure users</button>
 </template>
 
 <script>
@@ -29,7 +30,7 @@ export default {
 </script>
 
 <style scoped>
-.employees {
+.employees-table {
   background-color: #fff;
 }
 table {
@@ -45,5 +46,26 @@ th {
 
 tr:nth-child(even) {
   background-color: #eee;
+}
+
+button.configure-btn {
+  padding: 0.5em 1em;
+  background-color: #2b9de9;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2rem;
+  margin-left: auto;
+}
+
+button.configure-btn:hover {
+  background-color: #255eb4;
 }
 </style>
