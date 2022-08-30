@@ -1,25 +1,31 @@
 <template>
   <AuthLayout>
     <template v-slot:form>
-      <form @submit="handleSubmit">
+      <form @submit.prevent="handleSubmit">
         <div>
           <h1>Log in</h1>
           <p class="subtitle">Log in to your account</p>
         </div>
 
         <div class="inputs-container">
-          <input
+          <TextInput
             type="email"
-            v-model="email"
             placeholder="Enter your email address"
+            @update-value="updateFormEmail"
+            :required="true"
           />
-          <input type="password" v-model="password" placeholder="*****" />
+          <TextInput
+            type="password"
+            placeholder="Password"
+            @update-value="updateFormPassword"
+            :required="true"
+          />
         </div>
 
         <div class="buttons-container">
           <a href="#">Forgot password?</a>
 
-          <button class="submit-button">
+          <button type="submit" class="submit-button">
             Next
             <span class="material-symbols-outlined"> arrow_right_alt </span>
           </button>
@@ -42,7 +48,7 @@
 
         <div class="alt-sign-in">
           <p>
-            Don’t have an account yet?
+            Don't have an account yet?
             <router-link :to="{ path: '/signup' }">Signup</router-link>
           </p>
         </div>
@@ -55,20 +61,30 @@
 import AuthLayout from '@/components/layout/AuthLayout.vue'
 import GoogleIcon from '@/components/icons/GoogleIcon.vue'
 import LinkedinIcon from '@/components/icons/LinkedinIcon.vue'
+import { mapActions } from 'vuex'
+import TextInput from '@/components/TextInput.vue'
 
 export default {
   name: 'Login',
-  components: { AuthLayout, GoogleIcon, LinkedinIcon },
+  components: { AuthLayout, GoogleIcon, LinkedinIcon, TextInput },
   data() {
     return {
-      email: '',
-      password: '',
+      form: {
+        email: '',
+        password: '',
+      },
     }
   },
   methods: {
-    handleSubmit(e) {
-      e.preventDefault()
-      if (this.email.trim()) alert(this.email)
+    ...mapActions('appStore', ['signIn']),
+    updateFormEmail(data) {
+      this.form.email = data
+    },
+    updateFormPassword(data) {
+      this.form.password = data
+    },
+    handleSubmit() {
+      this.signIn(this.form)
     },
   },
 }

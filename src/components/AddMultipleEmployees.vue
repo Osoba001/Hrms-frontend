@@ -5,7 +5,7 @@
         <th>Email</th>
         <th>Role</th>
       </tr>
-      <tr v-for="employee in data" :key="employee">
+      <tr v-for="(employee, index) in data" :key="employee + index">
         <td>{{ employee }}</td>
         <td>
           <select name="role" id="role">
@@ -16,6 +16,15 @@
             <option value="corper">Corper</option>
           </select>
         </td>
+        <td>
+          <div
+            class="delete-icon p-ripple"
+            @click="REMOVE_SELECTED_EMAIL(employee)"
+            v-ripple
+          >
+            <span class="material-symbols-outlined"> delete </span>
+          </div>
+        </td>
       </tr>
     </table>
   </section>
@@ -23,9 +32,14 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'AddMultipleEmployees',
   props: ['data'],
+  methods: {
+    ...mapMutations('appStore', ['REMOVE_SELECTED_EMAIL']),
+  },
 }
 </script>
 
@@ -48,6 +62,14 @@ tr:nth-child(even) {
   background-color: #eee;
 }
 
+select {
+  padding: 0.3em 0.5em;
+  font-size: 0.875rem;
+  border: 1px solid #cad6e4;
+  border-radius: 5px;
+  font-family: 'Lato', Helvetica, sans-serif;
+}
+
 button.configure-btn {
   padding: 0.5em 1em;
   background-color: #2b9de9;
@@ -67,5 +89,20 @@ button.configure-btn {
 
 button.configure-btn:hover {
   background-color: #255eb4;
+}
+
+.delete-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #eee;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.delete-icon span {
+  font-size: 1.2rem;
+  color: red;
 }
 </style>

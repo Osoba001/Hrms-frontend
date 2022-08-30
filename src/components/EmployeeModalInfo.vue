@@ -1,7 +1,10 @@
 <template>
   <ModalBackdrop @close="toggleModal">
     <div class="modal-inner">
-      <button class="edit-btn" @click="handleEdit">Validate</button>
+      <div class="buttons-container">
+        <button class="edit-btn" @click="handleEdit">Validate</button>
+        <button class="logout-btn" v-if="isCurrentUser">Log out</button>
+      </div>
 
       <div class="modal-top">
         <div class="left">
@@ -93,7 +96,7 @@ import ModalBackdrop from './ModalBackdrop.vue'
 export default {
   name: 'EmployeeModalInfo',
   components: { ModalBackdrop },
-  props: ['toggleModal'],
+  props: ['toggleModal', 'isCurrentUser'],
   methods: {
     handleEdit() {
       alert('Edit employee')
@@ -115,21 +118,31 @@ export default {
   width: 7px;
 }
 
-.modal-inner .edit-btn {
+.modal-inner button {
   padding: 0.3em 1em;
-  background-color: #192041;
-  border: 1px solid #192041;
   border-radius: 4px;
   color: #fff;
-  margin-left: auto;
   font-size: 0.875rem;
   cursor: pointer;
   transition: all 300ms ease;
 }
 
+.modal-inner .edit-btn {
+  background-color: #192041;
+  border: 1px solid #192041;
+  margin-left: auto;
+}
+
 .modal-inner .edit-btn:hover {
   background-color: transparent;
   color: #192041;
+}
+
+.modal-inner .logout-btn {
+  background-color: #ca1310;
+}
+
+.modal-inner .logout-btn:hover {
 }
 
 .modal-top,

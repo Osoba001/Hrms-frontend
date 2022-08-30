@@ -102,6 +102,7 @@
         </div>
       </section>
     </form>
+
     <DashboardBottomButtonsNav nextRoute="/job" />
   </div>
 </template>

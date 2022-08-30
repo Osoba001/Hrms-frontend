@@ -1,23 +1,37 @@
 <template>
   <div class="project-container">
-    <h2 class="section-title">Projects</h2>
+    <div class="project-section-title-container">
+      <h2 class="section-title">Projects</h2>
+      <button
+        class="add-project-btn"
+        @click="toggleManagerAddProjectsModal"
+        v-if="user.accountType === 'manager'"
+      >
+        <span class="material-symbols-rounded"> add </span>
+        Add Project
+      </button>
+    </div>
 
-    <section class="projects-container">
+    <section class="projects-container" v-if="projects.length">
       <Project
         v-for="project in projects"
         :key="project.id"
         :project="project"
       />
     </section>
+    <div class="loader-container" v-else>
+      <Loader />
+    </div>
 
-    <div class="personal-projects-container">
+    <div class="project-section-title-container personal-projects-title">
       <h2 class="section-title">Personal projects</h2>
-      <button @click="toggleModal">
+      <button class="add-project-btn" @click="toggleAddPersonalProjectsModal">
         <span class="material-symbols-rounded"> add </span>
         Add Project
       </button>
     </div>
-    <section class="personal-projects">
+
+    <section class="personal-projects" v-if="personalProjects.length">
       <Project
         v-for="project in personalProjects"
         :key="project.id"
@@ -25,16 +39,13 @@
         variant="personal"
       />
     </section>
+    <div v-else class="loader-container">
+      <Loader />
+    </div>
   </div>
 
-  <!-- <teleport to=".modals" v-if="showModal">
-    <ModalBackdrop @close="toggleModal">
-      <div class="modal-inner"></div>
-    </ModalBackdrop>
-  </teleport> -->
-
-  <teleport to=".modals" v-if="showModal">
-    <ModalBackdrop @close="toggleModal">
+  <teleport to=".modals" v-if="showAddPersonalProjectsModal">
+    <ModalBackdrop @close="toggleAddPersonalProjectsModal">
       <form class="add-experience-modal" @submit.prevent="handleSubmit">
         <h2 class="section-title">Add project</h2>
         <div class="modal-input">
@@ -56,108 +67,54 @@
       </form>
     </ModalBackdrop>
   </teleport>
+
+  <teleport to=".modals" v-if="showManagerAddProjectsModal">
+    <ManagerAddProjectModal :toggleModal="toggleManagerAddProjectsModal" />
+  </teleport>
 </template>
 
 <script>
 import Project from '@/components/Project.vue'
 import ModalBackdrop from '@/components/ModalBackdrop.vue'
 import TextInput from '@/components/TextInput.vue'
+import { mapActions, mapState } from 'vuex'
+import ManagerAddProjectModal from '@/components/modals/ManagerAddProjectModal.vue'
+import Loader from '@/components/Loader.vue'
 
 export default {
   name: 'Projects',
   data() {
     return {
-      projects: [
-        {
-          id: 1,
-          title: 'SEPAL 3.0',
-          numberOfPeople: 17,
-          duration: 4,
-          status: 'ongoing',
-        },
-        {
-          id: 2,
-          title: 'Nodal Analysis',
-          numberOfPeople: 22,
-          duration: 4,
-          status: 'not started',
-        },
-        {
-          id: 3,
-          title: 'BFS Economics',
-          numberOfPeople: 18,
-          duration: 4,
-          status: 'ongoing',
-        },
-        {
-          id: 4,
-          title: 'EPT',
-          numberOfPeople: 6,
-          duration: 4,
-          status: 'completed',
-        },
-        {
-          id: 5,
-          title: 'SMBS',
-          numberOfPeople: 10,
-          duration: 4,
-          status: 'cancelled',
-        },
-        {
-          id: 6,
-          title: 'WIMS',
-          numberOfPeople: 7,
-          duration: 4,
-          status: 'ongoing',
-        },
-      ],
-      personalProjects: [
-        {
-          id: 1,
-          title: 'WIMS',
-          status: 'ongoing',
-          github: '#',
-          liveLink: '#',
-          description: `
-          Voluptates blanditiis numquam magni nostrum odit libero,
-          dignissimos magnam dolorum officia veniam saepe cum eveniet,
-          doloremque tenetur. Blanditiis, repellat.
-          `,
-        },
-        {
-          id: 2,
-          title: 'WIMS',
-          status: 'completed',
-          github: '#',
-          liveLink: '#',
-          description: `
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur
-          dolor voluptates blanditiis numquam magni nostrum odit libero,
-          dignissimos magnam dolorum officia veniam saepe cum eveniet,
-          doloremque tenetur. Blanditiis, repellat assumenda!
-          `,
-        },
-        {
-          id: 3,
-          title: 'Web API integration',
-          status: 'completed',
-          github: '#',
-          liveLink: '#',
-          description: `
-          Voluptates blanditiis numquam magni nostrum odit libero,
-          dignissimos magnam dolorum officia veniam saepe cum eveniet,
-          doloremque tenetur. Blanditiis, repellat.
-          `,
-        },
-      ],
-      showModal: false,
+      projects: [],
+      personalProjects: [],
+      showAddPersonalProjectsModal: false,
+      showManagerAddProjectsModal: false,
     }
   },
-  components: { Project, ModalBackdrop, TextInput },
+  components: {
+    Project,
+    ModalBackdrop,
+    TextInput,
+    ManagerAddProjectModal,
+    Loader,
+  },
   methods: {
-    toggleModal() {
-      this.showModal = !this.showModal
+    ...mapActions('appStore', ['fetchPersonalProjects', 'fetchProjects']),
+    toggleAddPersonalProjectsModal() {
+      this.showAddPersonalProjectsModal = !this.showAddPersonalProjectsModal
     },
+    toggleManagerAddProjectsModal() {
+      this.showManagerAddProjectsModal = !this.showManagerAddProjectsModal
+    },
+  },
+  async created() {
+    setTimeout(async () => {
+      this.projects = await this.fetchProjects()
+      this.personalProjects = await this.fetchPersonalProjects()
+    }, 1000)
+  },
+  computed: {
+    ...mapState('appStore', ['user']),
   },
 }
 </script>
@@ -169,26 +126,36 @@ export default {
   overflow-y: auto;
 }
 
-section {
+section.projects-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 1.5rem;
   margin-bottom: 1rem;
 }
 
-.personal-projects-container {
+section.personal-projects {
   display: flex;
   flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.project-section-title-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  margin-top: 3rem;
   margin-bottom: 0.7rem;
 }
 
-.personal-projects-container .section-title {
+.personal-projects-title {
+  margin-top: 3rem;
+}
+
+.project-container .section-title {
   margin-bottom: 0;
 }
 
-.personal-projects-container button {
+.add-project-btn {
   padding: 0.5em 1em;
   background-color: #2b9de9;
   color: #fff;
@@ -203,7 +170,7 @@ section {
   gap: 5px;
 }
 
-.personal-projects-container button:hover {
+.add-project-btn:hover {
   background-color: #255eb4;
 }
 

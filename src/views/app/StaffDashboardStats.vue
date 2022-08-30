@@ -8,7 +8,7 @@
           </div>
           <div class="item-info">
             <h5>Department</h5>
-            <p>Software Development</p>
+            <p>{{ user.department }}</p>
           </div>
         </div>
         <div class="item">
@@ -17,7 +17,7 @@
           </div>
           <div class="item-info">
             <h5>Location</h5>
-            <p>Port Harcourt</p>
+            <p>{{ user.location }}</p>
           </div>
         </div>
         <div class="item">
@@ -25,8 +25,8 @@
             <span class="material-symbols-outlined"> person </span>
           </div>
           <div class="item-info">
-            <h5>Supervisor</h5>
-            <p>Jane Doe</p>
+            <h5>Manager</h5>
+            <p>{{ user.supervisor }}</p>
           </div>
         </div>
         <div class="item">
@@ -35,7 +35,7 @@
           </div>
           <div class="item-info">
             <h5>Work Anniversary</h5>
-            <p>June 3rd</p>
+            <p>{{ user.workAnniversary }}</p>
           </div>
         </div>
         <div class="item">
@@ -44,7 +44,7 @@
           </div>
           <div class="item-info">
             <h5>Time in company</h5>
-            <p>36 months</p>
+            <p>{{ user.timeInCompany }}</p>
           </div>
         </div>
       </article>
@@ -94,41 +94,12 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
-      projects: [
-        {
-          id: 1,
-          title: 'SEPAL 3.0',
-          status: 'ongoing',
-        },
-        {
-          id: 2,
-          title: 'Nodal Analysis',
-          status: 'not started',
-        },
-        {
-          id: 3,
-          title: 'BFS Economics',
-          status: 'ongoing',
-        },
-        {
-          id: 4,
-          title: 'EPT',
-          status: 'completed',
-        },
-        {
-          id: 5,
-          title: 'SMBS',
-          status: 'cancelled',
-        },
-        {
-          id: 6,
-          title: 'WIMS',
-          status: 'ongoing',
-        },
-      ],
+      projects: [],
       chartData: {
         labels: ['A', 'B', 'C'],
         datasets: [
@@ -148,14 +119,18 @@ export default {
           },
         },
       },
-      leaveData: [
-        { id: 6, type: 'Annual', availableDays: 17, totalDays: 24 },
-        { id: 1, type: 'Casual', availableDays: 2, totalDays: 5 },
-        { id: 2, type: 'Compassionate', availableDays: 5, totalDays: 5 },
-        { id: 3, type: 'Examination', availableDays: 4, totalDays: 5 },
-        { id: 4, type: 'Sick', availableDays: 3, totalDays: 5 },
-      ],
+      leaveData: [],
     }
+  },
+  methods: {
+    ...mapActions('appStore', ['fetchProjects', 'fetchLeaveData']),
+  },
+  computed: {
+    ...mapGetters('appStore', ['user']),
+  },
+  async created() {
+    this.projects = await this.fetchProjects()
+    this.leaveData = await this.fetchLeaveData()
   },
 }
 </script>

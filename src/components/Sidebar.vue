@@ -1,25 +1,22 @@
 <template>
   <aside>
     <header>
-      <div class="user-info">
+      <div class="user-info" @click="toggleModal">
         <div class="user-img">
-          <img
-            src="https://randomuser.me/api/portraits/thumb/men/75.jpg"
-            alt="user"
-          />
+          <img v-bind:src="user.image" alt="user" />
         </div>
         <div class="user-detail">
-          <h2>John Michael</h2>
-          <p v-if="accountType === 'admin'">Admin</p>
-          <p v-if="accountType === 'manager'">Manager</p>
-          <p v-if="accountType === 'staff'">Staff</p>
-          <p v-if="accountType === 'HR'">Human Resource</p>
+          <h2>{{ user.name }}</h2>
+          <p v-if="user.accountType === 'admin'">Admin</p>
+          <p v-if="user.accountType === 'manager'">Manager</p>
+          <p v-if="user.accountType === 'staff'">Staff</p>
+          <p v-if="user.accountType === 'HR'">Human Resource</p>
         </div>
       </div>
     </header>
     <div class="items">
       <router-link to="/dashboard">
-        <div class="item" v-if="accountType !== 'admin'">
+        <div class="item" v-if="user.accountType !== 'admin'">
           <span
             class="active-bar"
             :class="{
@@ -30,7 +27,8 @@
                 $route.path === '/employment-history' ||
                 $route.path === '/certifications' ||
                 $route.path === '/confirmation' ||
-                $route.path === '/dashboard',
+                $route.path === '/dashboard' ||
+                $route.path === '/dashboard/human-resources',
             }"
           />
           <div class="icon">
@@ -43,7 +41,7 @@
       <router-link to="/employees">
         <div
           class="item"
-          v-if="accountType === 'admin' || accountType === 'HR'"
+          v-if="user.accountType === 'admin' || user.accountType === 'HR'"
         >
           <span
             class="active-bar"
@@ -59,7 +57,7 @@
       <router-link to="/projects">
         <div
           class="item"
-          v-if="accountType === 'staff' || accountType === 'manager'"
+          v-if="user.accountType === 'staff' || user.accountType === 'manager'"
         >
           <span
             class="active-bar"
@@ -73,7 +71,7 @@
       </router-link>
 
       <router-link to="/department">
-        <div class="item" v-if="accountType === 'admin'">
+        <div class="item" v-if="user.accountType === 'admin'">
           <span
             class="active-bar"
             :class="{ active: $route.path === '/department' }"
@@ -88,14 +86,19 @@
       <router-link to="/leave">
         <div
           class="item"
-          v-if="accountType === 'staff' || accountType === 'manager'"
+          v-if="
+            user.accountType === 'staff' ||
+            user.accountType === 'manager' ||
+            user.accountType === 'HR'
+          "
         >
           <span
             class="active-bar"
             :class="{
               active:
                 $route.path === '/leave' ||
-                $route.path === '/leave/team-members',
+                $route.path === '/leave/team-members' ||
+                $route.path === '/leave/human-resources',
             }"
           />
           <div class="icon">
@@ -106,21 +109,49 @@
       </router-link>
     </div>
 
+    <div class="logout-container">
+      <button class="logout-btn" @click="handleSignOut">
+        <span class="material-symbols-outlined"> logout </span>
+        Logout
+      </button>
+    </div>
+
     <div class="logo-container">
       <CypherCrescentLogo />
     </div>
   </aside>
+
+  <teleport to=".modals" v-if="showModal">
+    <EmployeeModalInfo :toggleModal="toggleModal" :isCurrentUser="true" />
+  </teleport>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import CypherCrescentLogo from './icons/CypherCrescentLogo.vue'
+import EmployeeModalInfo from './EmployeeModalInfo.vue'
 
 export default {
   name: 'Sidebar',
-  components: { CypherCrescentLogo },
+  components: { CypherCrescentLogo, EmployeeModalInfo },
   computed: {
-    ...mapState('appStore', ['accountType']),
+    ...mapState('appStore', ['user']),
+  },
+  data() {
+    return {
+      showModal: false,
+    }
+  },
+  methods: {
+    ...mapActions('appStore', ['signOut']),
+    toggleModal() {
+      this.showModal = !this.showModal
+    },
+    handleSignOut() {
+      this.signOut().then(() => {
+        this.$router.replace('/login')
+      })
+    },
   },
 }
 </script>
@@ -150,6 +181,7 @@ header .user-info {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  cursor: pointer;
 }
 
 header .user-info .user-img {
@@ -216,5 +248,25 @@ header .user-info p {
 
 .logo-container {
   padding: 1.5rem;
+}
+
+.logout-btn {
+  position: relative;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  background-color: #ca1310;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 200ms ease;
+}
+.logout-btn:hover {
+  background-color: #e92e2b;
+}
+.logout-btn span {
+  font-size: 1.3rem;
 }
 </style>

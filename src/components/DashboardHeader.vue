@@ -11,7 +11,7 @@
       <form
         @submit.prevent=""
         class="add-staff-container"
-        v-if="accountType === 'admin' && $route.path === '/employees'"
+        v-if="user.accountType === 'admin' && $route.path === '/employees'"
       >
         <label class="active-directory-btn" for="active-directory">
           <span class="material-symbols-rounded"> save </span>
@@ -23,19 +23,20 @@
           type="file"
           name="active-directory"
           id="active-directory"
+          @click="removeCurrentExcelFile"
           @change="readExcel"
         />
 
         <button @click="toggleModal">
           <span class="material-symbols-rounded"> add </span>
-          Add staff
+          Add employee
         </button>
       </form>
 
       <!-- For manager to view leave information of team members under the manager -->
       <button
         @click="handleManagerLeave"
-        v-if="accountType === 'manager' && $route.path === '/leave'"
+        v-if="user.accountType === 'manager' && $route.path === '/leave'"
         class="team-info-btn"
       >
         View Team Info
@@ -47,7 +48,7 @@
   <teleport to=".modals">
     <ModalBackdrop @close="toggleModal" v-show="showModal">
       <div class="modal-inner">
-        <h3 class="section-title">Add new staff</h3>
+        <h3 class="section-title">Add new employee</h3>
 
         <div class="modal-text-inputs">
           <label for="email">Email</label>
@@ -98,8 +99,9 @@ export default {
         '/confirmation',
       ]
       return (
-        (this.accountType === 'staff' || this.accountType === 'manager') &&
-        !this.userInfoUpdated &&
+        (this.user.accountType === 'staff' ||
+          this.user.accountType === 'manager') &&
+        !this.user.userInfoUpdated &&
         routesToDisplayTab.includes(path)
       )
     },
@@ -120,9 +122,12 @@ export default {
         this.SET_ACTIVE_DIRECTORY(emailsArray)
       })
     },
+    removeCurrentExcelFile(event) {
+      event.target.value = ''
+    },
   },
   computed: {
-    ...mapState('appStore', ['accountType', 'userInfoUpdated']),
+    ...mapState('appStore', ['user']),
   },
 }
 </script>
@@ -209,16 +214,6 @@ header .project-title {
   font-weight: 600;
 }
 
-.modal-text-inputs select {
-  width: 100%;
-  padding: 0.7em 1em;
-  font-size: 0.875rem;
-  margin-bottom: 0.7rem;
-  border: 1px solid #cad6e4;
-  border-radius: 5px;
-  font-family: 'Lato', Helvetica, sans-serif;
-}
-
 .configure-button {
   margin-top: 1rem;
   padding: 0.7em 1em;
@@ -236,7 +231,7 @@ header .project-title {
   margin-block: 1rem;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 980px) {
   .project-title h2 {
     display: none;
   }

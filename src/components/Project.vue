@@ -6,8 +6,10 @@
       cancelled: project.status === 'cancelled',
       'not-started': project.status === 'not started',
       completed: project.status === 'completed',
+      small: user.accountType === 'staff' && variant !== 'personal',
+      personal: variant === 'personal',
     }"
-    @click="toggleModal"
+    @click="handleClick"
     v-ripple
   >
     <header>
@@ -27,8 +29,11 @@
     </header>
 
     <div class="project-info-wrapper">
-      <!-- To be shown for official projects -->
-      <div v-show="variant !== 'personal'">
+      <!-- To be shown for official projects and to managers only -->
+      <div
+        v-show="variant !== 'personal'"
+        v-if="user.accountType === 'manager'"
+      >
         <h3>Info</h3>
         <div class="project-info">
           <div>
@@ -68,7 +73,15 @@
 
   <teleport to=".modals" v-if="showModal">
     <ModalBackdrop @close="toggleModal">
-      <div class="modal-inner"></div>
+      <div class="modal-inner">
+        <h3>Team lead - {{ project.collaborators.teamLead }}</h3>
+        <p
+          v-for="member in project.collaborators.otherMembers"
+          :key="member.id"
+        >
+          {{ member.name }}
+        </p>
+      </div>
     </ModalBackdrop>
   </teleport>
 </template>
@@ -77,6 +90,7 @@
 import GithubIcon from './icons/GithubIcon.vue'
 import ExternalLinkIcon from './icons/ExternalLinkIcon.vue'
 import ModalBackdrop from './ModalBackdrop.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Project',
@@ -91,6 +105,12 @@ export default {
     toggleModal() {
       this.showModal = !this.showModal
     },
+    handleClick() {
+      if (this.variant !== 'personal') this.toggleModal()
+    },
+  },
+  computed: {
+    ...mapState('appStore', ['user']),
   },
 }
 </script>
@@ -107,6 +127,16 @@ export default {
   border-radius: 6px;
   box-shadow: 4px 4px 5px 4px rgba(182, 182, 182, 0.219);
   cursor: pointer;
+}
+
+.project.personal {
+  width: 100%;
+  max-width: 330px;
+}
+
+.project.small {
+  min-height: auto;
+  gap: 0;
 }
 
 .project.completed {

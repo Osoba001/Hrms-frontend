@@ -130,15 +130,6 @@ section.add-certificate {
   margin-bottom: 0.5rem;
 }
 
-/* .upload-btn {
-  padding: 0.2em 1em;
-  border-radius: 2px;
-  cursor: pointer;
-  background: #eee;
-  font-size: 0.875rem;
-  border: 1px solid rgb(133, 133, 133);
-} */
-
 section.skills-container {
   min-height: 250px;
 }
@@ -196,15 +187,6 @@ section.skills-container {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
-}
-
-.add-skill-modal .modal-input select {
-  width: 100%;
-  padding: 0.7em 1em;
-  font-size: 0.875rem;
-  margin-bottom: 0.7rem;
-  border: 1px solid #cad6e4;
-  border-radius: 5px;
 }
 
 .add-skill-modal .modal-add-btn {

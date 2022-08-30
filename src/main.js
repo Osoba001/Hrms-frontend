@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from '@/router'
 import store from './store'
 
 import PrimeVue from 'primevue/config'
@@ -11,13 +11,20 @@ import Ripple from 'primevue/ripple'
 import '@vuepic/vue-datepicker/dist/main.css'
 import 'primevue/resources/themes/lara-light-blue/theme.css'
 import 'primevue/resources/primevue.min.css'
+import axios from 'axios'
 
 const app = createApp(App)
 
-app.use(store)
-app.use(PrimeVue, { ripple: true })
-app.component('Datepicker', Datepicker)
-app.component('Chart', Chart)
-app.component('ProgressBar', ProgressBar)
-app.directive('ripple', Ripple)
-app.use(router).mount('#app')
+axios.defaults.baseURL = 'http://localhost:3000'
+
+store
+  .dispatch('appStore/attemptSignIn', localStorage.getItem('accessToken'))
+  .then(() => {
+    app.use(store)
+    app.use(PrimeVue, { ripple: true })
+    app.component('Datepicker', Datepicker)
+    app.component('Chart', Chart)
+    app.component('ProgressBar', ProgressBar)
+    app.directive('ripple', Ripple)
+    app.use(router).mount('#app')
+  })

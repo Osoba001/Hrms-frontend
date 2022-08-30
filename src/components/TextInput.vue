@@ -2,17 +2,54 @@
   <label v-if="label" :for="label">{{ label }}</label>
   <input
     :type="type || 'text'"
-    :v-model="data"
     :placeholder="placeholder || ''"
     :min="min"
     :max="max"
+    v-model="inputValue"
+    @focus="handleClearInputOnFocus"
+    @input="$emit('update-value', inputValue)"
+    :required="required"
   />
 </template>
 
 <script>
 export default {
   name: 'TextInput',
-  props: ['type', 'placeholder', 'label', 'data', 'min', 'max'],
+  props: {
+    type: {
+      type: String,
+    },
+    placeholder: {
+      type: String,
+    },
+    label: {
+      type: String,
+    },
+    min: {
+      type: String,
+    },
+    max: {
+      type: String,
+    },
+    clearOnFocus: {
+      type: Boolean,
+      default: false,
+    },
+    required: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      inputValue: '',
+    }
+  },
+  methods: {
+    handleClearInputOnFocus() {
+      if (this.clearOnFocus) this.inputValue = ''
+    },
+  },
 }
 </script>
 

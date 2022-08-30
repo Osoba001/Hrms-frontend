@@ -1,10 +1,10 @@
 <template>
   <div class="job-container tab-container">
     <form @submit.prevent="">
-      <section class="work-details">
-        <h2 class="section-title">Work details</h2>
+      <div class="sections-container">
+        <section class="work-details">
+          <h2 class="section-title">Work details</h2>
 
-        <div>
           <div class="inputs-container">
             <div class="input">
               <label for="department">Department</label>
@@ -21,14 +21,6 @@
             </div>
 
             <div class="input">
-              <label for="worktype">Work type</label>
-              <select name="worktype" id="worktype">
-                <option value="remote">Remote</option>
-                <option value="office">Office</option>
-              </select>
-            </div>
-
-            <div class="input">
               <label for="job-role">Job role</label>
               <select name="job-role" id="job-role">
                 <option value="remote">Software Development</option>
@@ -36,29 +28,40 @@
               </select>
             </div>
 
-            <div class="input">
-              <label for="contract-type">Contract type</label>
-              <select name="contract-type" id="contract-type">
-                <option value="full-time">Full Time</option>
-                <option value="part-time">Part Time</option>
-              </select>
+            <div class="input-flex">
+              <div class="input">
+                <label for="worktype">Work type</label>
+                <select name="worktype" id="worktype">
+                  <option value="office">On-site</option>
+                  <option value="remote">Remote</option>
+                  <option value="office">Hybrid</option>
+                </select>
+              </div>
+
+              <div class="input">
+                <label for="contract-type">Contract type</label>
+                <select name="contract-type" id="contract-type">
+                  <option value="full-time">Full Time</option>
+                  <option value="part-time">Part Time</option>
+                </select>
+              </div>
             </div>
 
-            <div class="input">
-              <label for="contract-type">Manager</label>
-              <select name="contract-type" id="contract-type">
-                <option value="eno-udonkwo">Eno Udonkwo</option>
-                <option value="emeka-duruzor">Emeka Duruzor</option>
-              </select>
-            </div>
-          </div>
+            <div class="input-flex">
+              <div class="input">
+                <label for="contract-type">Manager</label>
+                <select name="contract-type" id="contract-type">
+                  <option value="eno-udonkwo">Eno Udonkwo</option>
+                  <option value="emeka-duruzor">Emeka Duruzor</option>
+                </select>
+              </div>
 
-          <div class="inputs-container">
-            <div class="input">
-              <TextInput label="Date of Employment" type="date" />
+              <div class="input">
+                <TextInput label="Date of Employment" type="date" />
+              </div>
             </div>
 
-            <div>
+            <div class="radio-btns-wrapper">
               <h4>Confirmation Status</h4>
               <div class="radio-btns">
                 <div class="radio-btn-container">
@@ -82,7 +85,7 @@
               </div>
             </div>
 
-            <div>
+            <div class="radio-btns-wrapper">
               <h4>Offer letter status</h4>
               <div class="radio-btns">
                 <div class="radio-btn-container">
@@ -106,45 +109,45 @@
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section>
-        <h2 class="section-title">Previous role</h2>
-        <div class="personal-details">
-          <div class="inputs-container">
-            <div class="input">
-              <label for="contract-type">Department</label>
-              <select name="department" id="department">
-                <option value="petroleum-consulting">
-                  Petroleum consulting
-                </option>
-                <option value="petroleum-consulting">
-                  Petroleum consulting
-                </option>
-              </select>
-            </div>
+        <section>
+          <h2 class="section-title">Previous role</h2>
+          <div class="personal-details">
+            <div class="inputs-container">
+              <div class="input">
+                <label for="contract-type">Department</label>
+                <select name="department" id="department">
+                  <option value="petroleum-consulting">
+                    Petroleum consulting
+                  </option>
+                  <option value="petroleum-consulting">
+                    Petroleum consulting
+                  </option>
+                </select>
+              </div>
 
-            <div class="input">
-              <label for="previous-job-role">Job role</label>
-              <select name="previous-job-role" id="previous-job-role">
-                <option value="petroleum-engineer">Petroleum engineer</option>
-                <option value="petroleum-engineer">Petroleum engineer</option>
-              </select>
-            </div>
+              <div class="input">
+                <label for="previous-job-role">Job role</label>
+                <select name="previous-job-role" id="previous-job-role">
+                  <option value="petroleum-engineer">Petroleum engineer</option>
+                  <option value="petroleum-engineer">Petroleum engineer</option>
+                </select>
+              </div>
 
-            <div class="input">
-              <label for="">Reason for change</label>
-              <textarea
-                name="reason-for-change"
-                id="reason-for-change"
-                cols="30"
-                rows="10"
-              ></textarea>
+              <div class="input">
+                <label for="">Reason for change</label>
+                <textarea
+                  name="reason-for-change"
+                  id="reason-for-change"
+                  cols="30"
+                  rows="10"
+                ></textarea>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <dashboard-bottom-buttons-nav
         backRoute="/bio"
@@ -168,27 +171,19 @@ export default {
 .job-container {
   width: 100%;
 }
-section {
+
+form .sections-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+form .sections-container section {
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 0.5rem;
+  flex: 0.5;
 }
-section.work-details {
-  margin-bottom: 1rem;
-}
-section h4 {
-  font-weight: 400;
-  margin-bottom: 0.7rem;
-  font-size: 0.875rem;
-}
-form {
-  display: flex;
-  flex-direction: column;
-}
-section > div {
-  display: flex;
-  gap: 2rem;
-}
+
 .inputs-container {
   flex: 0.5;
   max-width: 420px;
@@ -196,6 +191,12 @@ section > div {
   flex-direction: column;
   gap: 1.5rem;
 }
+
+.inputs-container .input-flex {
+  display: flex;
+  gap: 1rem;
+}
+
 .input {
   width: 100%;
 }
@@ -214,6 +215,11 @@ section > div {
   font-family: 'Lato', Helvetica, sans-serif;
 }
 
+.job-container .radio-btns-wrapper {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 .job-container .radio-btns {
   display: flex;
   gap: 2rem;
@@ -226,10 +232,9 @@ section > div {
   margin-left: 0.5rem;
 }
 
-@media (max-width: 850px) {
-  section > div {
+@media (max-width: 890px) {
+  form .sections-container {
     flex-direction: column;
-    gap: 1rem;
   }
   .inputs-container {
     max-width: 100%;
