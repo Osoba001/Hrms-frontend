@@ -61,7 +61,7 @@
     "id": "1",
     "email": "hr@ccl.com.ng",
     "password": "000000",
-    "accountType": "staff",
+    "accountType": "HR",
     "name": "Sunday Michael",
     "userInfoUpdated": false,
     "image": "https://randomuser.me/api/portraits/thumb/men/15.jpg",

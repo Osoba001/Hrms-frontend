@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <lottie :options="defaultOptions" :height="50" :width="50" />
+    <lottie :options="defaultOptions" :height="40" :width="40" />
   </div>
 </template>
 

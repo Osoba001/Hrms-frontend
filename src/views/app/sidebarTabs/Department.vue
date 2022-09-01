@@ -1,6 +1,16 @@
 <template>
   <div class="department-container">
-    <section>
+    <section
+      v-motion
+      :initial="{
+        opacity: 0,
+        y: -50,
+      }"
+      :enter="{
+        opacity: 1,
+        y: 0,
+      }"
+    >
       <DepartmentCard
         v-for="department in departments"
         :key="department.id"

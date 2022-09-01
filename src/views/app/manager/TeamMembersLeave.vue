@@ -15,7 +15,21 @@
       </div>
     </section>
 
-    <section class="employees-detail">
+    <section
+      class="employees-detail"
+      v-motion
+      :initial="{
+        opacity: 0,
+        y: -30,
+      }"
+      :enter="{
+        opacity: 1,
+        y: 0,
+        transition: {
+          type: 'keyframes',
+        },
+      }"
+    >
       <table>
         <tr>
           <th>Name</th>

@@ -11,6 +11,7 @@ import Ripple from 'primevue/ripple'
 import '@vuepic/vue-datepicker/dist/main.css'
 import 'primevue/resources/themes/lara-light-blue/theme.css'
 import 'primevue/resources/primevue.min.css'
+import { MotionPlugin } from '@vueuse/motion'
 import axios from 'axios'
 
 const app = createApp(App)
@@ -21,6 +22,7 @@ store
   .dispatch('appStore/attemptSignIn', localStorage.getItem('accessToken'))
   .then(() => {
     app.use(store)
+    app.use(MotionPlugin)
     app.use(PrimeVue, { ripple: true })
     app.component('Datepicker', Datepicker)
     app.component('Chart', Chart)

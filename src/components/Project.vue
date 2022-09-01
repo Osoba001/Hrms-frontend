@@ -11,6 +11,15 @@
     }"
     @click="handleClick"
     v-ripple
+    v-motion
+    :initial="{
+      opacity: 0,
+      scale: 0.85,
+    }"
+    :enter="{
+      opacity: 1,
+      scale: 1,
+    }"
   >
     <header>
       <div class="project-title">

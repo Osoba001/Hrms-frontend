@@ -16,6 +16,15 @@
     <section
       class="employees"
       v-if="!importedEmails.length && employees.length"
+      v-motion
+      :initial="{
+        opacity: 0,
+        y: -50,
+      }"
+      :enter="{
+        opacity: 1,
+        y: 0,
+      }"
     >
       <EmployeeCard
         v-for="employee in employees"

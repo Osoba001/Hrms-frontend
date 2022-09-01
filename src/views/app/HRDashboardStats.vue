@@ -1,6 +1,17 @@
 <template>
   <div class="container">
-    <section class="grid">
+    <section
+      class="grid"
+      v-motion
+      :initial="{
+        opacity: 0,
+        y: -50,
+      }"
+      :enter="{
+        opacity: 1,
+        y: 0,
+      }"
+    >
       <article class="chart-container">
         <Chart type="doughnut" :data="rolesData" :options="lightOptions" />
       </article>

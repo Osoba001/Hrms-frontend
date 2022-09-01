@@ -1,6 +1,20 @@
 <template>
   <div class="container">
-    <section class="grid">
+    <section
+      class="grid"
+      v-motion
+      :initial="{
+        opacity: 0,
+        y: -50,
+      }"
+      :enter="{
+        opacity: 1,
+        y: 0,
+        transition: {
+          type: 'keyframes',
+        },
+      }"
+    >
       <article class="personal-info">
         <div class="item">
           <div class="icon">
