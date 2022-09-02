@@ -14,13 +14,16 @@
     >
       <article class="chart-container">
         <Chart type="doughnut" :data="rolesData" :options="lightOptions" />
+        <h2 class="chart-title">Distibution by roles</h2>
       </article>
       <article class="chart-container">
         <Chart type="pie" :data="ageData" :options="lightOptions" />
+        <h2 class="chart-title">Distibution by age</h2>
       </article>
 
       <article class="chart-container">
         <Chart type="doughnut" :data="locationData" :options="lightOptions" />
+        <h2 class="chart-title">Distibution by work location</h2>
       </article>
 
       <article class="chart-container">
@@ -29,10 +32,12 @@
           :data="departmentsData"
           :options="horizontalOptions"
         />
+        <h2 class="chart-title">Distibution by department</h2>
       </article>
 
       <article class="chart-container">
         <Chart type="pie" :data="worktypeData" :options="lightOptions" />
+        <h2 class="chart-title">Distibution by work-type</h2>
       </article>
 
       <!-- <article class="chart-container line-chart">
@@ -92,15 +97,25 @@ export default {
           {
             data: [51, 13, 8, 6, 20, 4, 1],
             backgroundColor: [
-              'coral',
-              '#36A2EB',
-              '#FFCE56',
-              '#FF6384',
-              'violet',
-              '#FFCE56',
-              '#FF6384',
+              'rgb(158, 71, 11)',
+              'rgb(66, 116, 195)',
+              'rgb(148, 50, 31)',
+              'rgb(163, 166, 164)',
+              'rgb(60, 59, 60)',
+              'rgb(88, 156, 214)',
+              'rgb(147, 208, 77)',
+              'rgb(151, 206, 239)',
             ],
-            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            hoverBackgroundColor: [
+              'rgb(158, 71, 11)',
+              'rgb(66, 116, 195)',
+              'rgb(148, 50, 31)',
+              'rgb(163, 166, 164)',
+              'rgb(60, 59, 60)',
+              'rgb(88, 156, 214)',
+              'rgb(147, 208, 77)',
+              'rgb(151, 206, 239)',
+            ],
           },
         ],
       },
@@ -110,15 +125,23 @@ export default {
           {
             data: [9, 17, 22, 20, 31, 27, 3],
             backgroundColor: [
-              '#36A2EB',
+              'rgb(158, 71, 11)',
+              'rgb(66, 116, 195)',
               '#FFCE56',
-              '#FF6384',
-              'violet',
-              '#FFCE56',
-              '#FF6384',
-              'coral',
+              'rgb(163, 166, 164)',
+              'rgb(60, 59, 60)',
+              'rgb(88, 156, 214)',
+              'rgb(147, 208, 77)',
             ],
-            hoverBackgroundColor: ['#64B5F6', '#81C784', '#FFB74D'],
+            hoverBackgroundColor: [
+              'rgb(158, 71, 11, 0.9)',
+              'rgb(66, 116, 195, 0.9)',
+              'rgb(148, 50, 31, 0.9)',
+              'rgb(163, 166, 164, 0.9)',
+              'rgb(60, 59, 60, 0.9)',
+              'rgb(88, 156, 214, 0.9)',
+              'rgb(147, 208, 77, 0.9)',
+            ],
           },
         ],
       },
@@ -127,8 +150,18 @@ export default {
         datasets: [
           {
             data: [80, 15, 10, 7],
-            backgroundColor: ['#0854cc', '#09b579', '#FFA726', 'coral'],
-            hoverBackgroundColor: ['#0854cc', '#09b579', '#FFA726', 'coral'],
+            backgroundColor: [
+              'rgb(66, 116, 195)',
+              'rgb(60, 59, 60)',
+              'rgb(88, 156, 214)',
+              'rgb(147, 208, 77)',
+            ],
+            hoverBackgroundColor: [
+              'rgb(66, 116, 195, 0.9)',
+              'rgb(60, 59, 60, 0.9)',
+              'rgb(88, 156, 214, 0.9)',
+              'rgb(147, 208, 77, 0.9)',
+            ],
           },
         ],
       },
@@ -137,8 +170,16 @@ export default {
         datasets: [
           {
             data: [53, 45, 39],
-            backgroundColor: ['#0854cc', '#09b579', '#FFA726'],
-            hoverBackgroundColor: ['#64B5F6', '#81C784', '#FFB74D'],
+            backgroundColor: [
+              'rgb(147, 208, 77)',
+              'rgb(66, 116, 195)',
+              'rgb(60, 59, 60)',
+            ],
+            hoverBackgroundColor: [
+              'rgb(147, 208, 77, 0.9)',
+              'rgb(66, 116, 195, 0.9)',
+              'rgb(60, 59, 60, 0.9)',
+            ],
           },
         ],
       },
@@ -238,6 +279,12 @@ article.personal-info {
 /* Chart card */
 article.chart-container {
   padding: 1rem;
+}
+
+.chart-container h2 {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 0.5rem;
 }
 
 section.bottom {

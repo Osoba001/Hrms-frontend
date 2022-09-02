@@ -30,6 +30,11 @@
         },
       }"
     >
+      <button class="back-btn" @click="$router.back()">
+        <span class="material-symbols-outlined"> arrow_back </span>
+        Back
+      </button>
+
       <table>
         <tr>
           <th>Name</th>
@@ -135,6 +140,21 @@ section.employees-detail {
   flex: 1;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+}
+
+.back-btn {
+  padding: 0.5em 1em;
+  background-color: #2b9de9;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 1rem;
 }
 
 table {

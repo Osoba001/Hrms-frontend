@@ -43,11 +43,19 @@
             <label for="endDate">End date</label>
             <input type="date" name="endDate" id="endDate" />
           </div>
+          <div class="input">
+            <label for="handover-colleague">Handover colleague</label>
+            <input
+              type="text"
+              name="handover-colleague"
+              id="handover-colleague"
+            />
+          </div>
         </div>
 
         <div class="inputs-container">
           <div class="input">
-            <label for="">Message (Optional)</label>
+            <label for="">Handover message (Optional)</label>
             <textarea
               name="reason-for-change"
               id="reason-for-change"
@@ -64,12 +72,12 @@
 </template>
 
 <script>
-import Datepicker from '@vuepic/vue-datepicker'
-import '@vuepic/vue-datepicker/dist/main.css'
+// import Datepicker from '@vuepic/vue-datepicker'
+// import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
   name: 'Leave',
-  components: { Datepicker },
+  components: {},
   data() {
     return {
       date: null,
@@ -151,7 +159,7 @@ input {
 }
 
 .input textarea {
-  height: 220px;
+  height: 247px;
 }
 
 .apply-btn {

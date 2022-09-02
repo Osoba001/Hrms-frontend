@@ -61,7 +61,7 @@
     "id": "1",
     "email": "hr@ccl.com.ng",
     "password": "000000",
-    "accountType": "HR",
+    "accountType": "staff",
     "name": "Sunday Michael",
     "userInfoUpdated": false,
     "image": "https://randomuser.me/api/portraits/thumb/men/15.jpg",
@@ -394,10 +394,35 @@
     }
   ],
   "leave": [
-    { "id": 6, "type": "Annual", "availableDays": 17, "totalDays": 24 },
-    { "id": 1, "type": "Casual", "availableDays": 2, "totalDays": 5 },
-    { "id": 2, "type": "Compassionate", "availableDays": 5, "totalDays": 5 },
-    { "id": 3, "type": "Examination", "availableDays": 4, "totalDays": 5 },
-    { "id": 4, "type": "Sick", "availableDays": 3, "totalDays": 5 }
+    {
+      "id": 6,
+      "type": "Annual",
+      "availableDays": 17,
+      "totalDays": 24
+    },
+    {
+      "id": 1,
+      "type": "Casual",
+      "availableDays": 2,
+      "totalDays": 5
+    },
+    {
+      "id": 2,
+      "type": "Compassionate",
+      "availableDays": 5,
+      "totalDays": 5
+    },
+    {
+      "id": 3,
+      "type": "Examination",
+      "availableDays": 4,
+      "totalDays": 5
+    },
+    {
+      "id": 4,
+      "type": "Sick",
+      "availableDays": 3,
+      "totalDays": 5
+    }
   ]
 }

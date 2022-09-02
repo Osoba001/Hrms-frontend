@@ -10,6 +10,41 @@
       </header>
 
       <article
+        v-for="employment in userInfo.employmentHistory"
+        v-bind:key="employment.id"
+        class="previous-employment"
+      >
+        <div class="organisation-logo">
+          <img
+            v-if="employment.logo"
+            :src="employment.logo"
+            alt="organisation-logo"
+          />
+          <span class="material-symbols-outlined" v-if="!employment.logo">
+            location_city
+          </span>
+        </div>
+        <div class="employment-details">
+          <h3>{{ employment.role }}</h3>
+          <p class="organisation-name">{{ employment.organisation }}</p>
+          <p class="duration">
+            {{ monthNames[new Date(employment.startDate).getMonth()] }}
+            {{ new Date(employment.startDate).getFullYear() }} -
+            {{ monthNames[new Date(employment.endDate).getMonth()] }}
+            {{ new Date(employment.endDate).getFullYear() }} ·
+            {{
+              monthDiff(
+                new Date(employment.startDate),
+                new Date(employment.endDate)
+              )
+            }}mos
+          </p>
+          <p class="location">{{ employment.location }}</p>
+        </div>
+      </article>
+
+      <!-- TEMPORARY -->
+      <article
         v-for="employment in previousEmployments"
         v-bind:key="employment.id"
         class="previous-employment"
@@ -32,41 +67,36 @@
     />
 
     <teleport to=".modals" v-if="showModal">
-      <ModalBackdrop @close="toggleModal">
-        <form class="add-experience-modal" @submit.prevent="handleSubmit">
-          <h2 class="section-title">Add experience</h2>
-          <div class="modal-input">
-            <TextInput
-              label="Organisation"
-              placeholder="E.g, CypherCrescent Ltd."
-            />
-          </div>
-          <div class="modal-input">
-            <TextInput label="Role" placeholder="È.g, Director" />
-          </div>
-          <div class="modal-input">
-            <TextInput
-              label="Location"
-              placeholder="E.g, Port Harcourt, Rivers, Nigeria"
-            />
-          </div>
-          <button class="add-experience-btn modal-add-btn">Add</button>
-        </form>
-      </ModalBackdrop>
+      <AddEmploymentHistoryModal :toggleModal="toggleModal" />
     </teleport>
   </div>
 </template>
 
 <script>
 import DashboardBottomButtonsNav from '@/components/DashboardBottomButtonsNav.vue'
-import ModalBackdrop from '@/components/ModalBackdrop.vue'
-import TextInput from '@/components/TextInput.vue'
+import AddEmploymentHistoryModal from '@/components/modals/AddEmploymentHistoryModal.vue'
+import { mapGetters } from 'vuex'
+import { monthDiff } from '@/utils'
 
 export default {
-  components: { DashboardBottomButtonsNav, ModalBackdrop, TextInput },
+  components: { DashboardBottomButtonsNav, AddEmploymentHistoryModal },
   data() {
     return {
       showModal: false,
+      monthNames: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
       previousEmployments: [
         {
           id: 1,
@@ -93,12 +123,16 @@ export default {
           logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrOqZsDzJMEmyrnSNBzrXKUaNrQTXuXAGjFbAyDhBzLw&s',
         },
       ],
+      monthDiff,
     }
   },
   methods: {
     toggleModal() {
       this.showModal = !this.showModal
     },
+  },
+  computed: {
+    ...mapGetters('appStore', ['userInfo']),
   },
 }
 </script>
@@ -128,23 +162,6 @@ header {
   gap: 1rem;
 }
 
-h4 {
-  margin-bottom: 0.5rem;
-}
-
-.radio-btns {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.radio-btn-container {
-  margin-top: 0;
-}
-.radio-btn-container label {
-  margin-left: 0.5rem;
-}
-
 .add-experience-btn {
   padding: 0.7em 1em;
   background-color: #2b9de9;
@@ -157,26 +174,6 @@ h4 {
   justify-content: center;
   align-items: center;
   gap: 5px;
-}
-
-.add-skill-btn:hover {
-  background-color: #255eb4;
-}
-
-.add-experience-modal {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  justify-content: center;
-}
-
-.add-experience-modal .section-title {
-  margin-bottom: 0;
-}
-
-.modal-add-btn {
-  padding-inline: 2em;
 }
 
 article.previous-employment {
@@ -195,7 +192,14 @@ article.previous-employment {
   height: 50px;
   background: #eee;
   border-radius: 6px;
-  overflow: hiddden;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.organisation-logo span {
+  font-size: 2em;
+  color: rgb(86, 86, 86);
 }
 
 .organisation-logo img {

@@ -4,36 +4,22 @@
       <h2 class="section-title">Upload supporting document</h2>
 
       <div class="upload-container">
-        <h4>First degree cetificate</h4>
-        <input
-          type="file"
-          name="first-degree-certificate"
-          id="first-degree-certificate"
-          accept="image/*"
-        />
-        <!-- <label class="upload-btn" for="first-degree-certificate"
-            >Upload</label
-          > -->
-      </div>
-
-      <div class="upload-container">
-        <h4>Other cetificates</h4>
+        <h4>Cetificate</h4>
         <input
           type="file"
           name="other-certificate"
           id="other-certificate"
           accept="image/*"
         />
-        <!-- <label class="upload-btn" for="other-certificate">Upload</label> -->
       </div>
     </section>
 
     <section class="skills-container">
       <h2 class="section-title">Skills</h2>
 
-      <div class="skills-wrapper">
-        <span v-for="skill in skills" :key="skill" class="skill">
-          {{ skill }}
+      <div class="skills-wrapper" v-show="userInfo.skills.length">
+        <span v-for="item in userInfo.skills" :key="item.id" class="skill">
+          {{ item.skill }}
         </span>
       </div>
 
@@ -53,17 +39,26 @@
         <form class="add-skill-modal" @submit.prevent="handleSubmit">
           <h2 class="section-title">Add skill</h2>
           <div class="modal-input">
-            <TextInput label="Skill" placeholder="E.g, React Native" />
+            <TextInput
+              label="Skill"
+              placeholder="E.g, React Native"
+              @update-value="(data) => (form.skill = data)"
+            />
           </div>
           <div class="modal-input">
             <label for="proficiency">Proficiency</label>
-            <select name="proficiency" id="proficiency" class="proficiency">
+            <select
+              name="proficiency"
+              id="proficiency"
+              class="proficiency"
+              v-model="form.proficiency"
+            >
               <option value="beginner">Beginner</option>
               <option value="intermediate">Intermediate</option>
               <option value="advanced">Advanced</option>
             </select>
           </div>
-          <button class="add-skill-btn modal-add-btn">Add</button>
+          <button type="submit" class="add-skill-btn modal-add-btn">Add</button>
         </form>
       </ModalBackdrop>
     </teleport>
@@ -74,36 +69,33 @@
 import DashboardBottomButtonsNav from '@/components/DashboardBottomButtonsNav.vue'
 import TextInput from '@/components/TextInput.vue'
 import ModalBackdrop from '@/components/ModalBackdrop.vue'
+import { mapState } from 'vuex'
 
 export default {
   components: { DashboardBottomButtonsNav, TextInput, ModalBackdrop },
   data() {
     return {
       showModal: false,
-      skills: [
-        'React.js',
-        'React Native',
-        'ASP.Net',
-        'C#',
-        'WPF',
-        'Vue.js',
-        'TypeScript',
-        'Node.js',
-        'Django',
-        'GoLang',
-        'Ruby on rails',
-        'R',
-        'Python',
-        'Rust',
-        'JavaScript',
-      ],
+      form: {
+        skill: '',
+        proficiency: '',
+      },
     }
   },
   methods: {
-    handleSubmit() {},
+    handleSubmit(e) {
+      if (!this.form.skill || !this.form.proficiency) return
+      this.userInfo.skills.push({ ...this.form })
+      this.form.skill = ''
+      this.form.proficiency = ''
+      e.target.reset()
+    },
     toggleModal() {
       this.showModal = !this.showModal
     },
+  },
+  computed: {
+    ...mapState('appStore', ['userInfo']),
   },
 }
 </script>
@@ -130,10 +122,6 @@ section.add-certificate {
   margin-bottom: 0.5rem;
 }
 
-section.skills-container {
-  min-height: 250px;
-}
-
 .add-skill-btn {
   padding: 0.7em 1em;
   background-color: #2b9de9;
@@ -146,7 +134,6 @@ section.skills-container {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  /* margin-top: 1rem; */
   margin-left: auto;
 }
 

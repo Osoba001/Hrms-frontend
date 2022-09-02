@@ -8,7 +8,11 @@
           <div class="inputs-container">
             <div class="input">
               <label for="department">Department</label>
-              <select name="Department" id="department">
+              <select
+                name="Department"
+                id="department"
+                v-model="userInfo.job.workDetails.department"
+              >
                 <option value="Research and Development">
                   Research and Development
                 </option>
@@ -22,16 +26,26 @@
 
             <div class="input">
               <label for="job-role">Job role</label>
-              <select name="job-role" id="job-role">
-                <option value="remote">Software Development</option>
-                <option value="office">UI/UX</option>
+              <select
+                name="job-role"
+                id="job-role"
+                v-model="userInfo.job.workDetails.role"
+              >
+                <option value="software-development">
+                  Software Development
+                </option>
+                <option value="ui/ux">UI/UX</option>
               </select>
             </div>
 
             <div class="input-flex">
               <div class="input">
                 <label for="worktype">Work type</label>
-                <select name="worktype" id="worktype">
+                <select
+                  name="worktype"
+                  id="worktype"
+                  v-model="userInfo.job.workDetails.workType"
+                >
                   <option value="office">On-site</option>
                   <option value="remote">Remote</option>
                   <option value="office">Hybrid</option>
@@ -40,7 +54,11 @@
 
               <div class="input">
                 <label for="contract-type">Contract type</label>
-                <select name="contract-type" id="contract-type">
+                <select
+                  name="contract-type"
+                  id="contract-type"
+                  v-model="userInfo.job.workDetails.contractType"
+                >
                   <option value="full-time">Full Time</option>
                   <option value="part-time">Part Time</option>
                 </select>
@@ -50,38 +68,26 @@
             <div class="input-flex">
               <div class="input">
                 <label for="contract-type">Manager</label>
-                <select name="contract-type" id="contract-type">
+                <select
+                  name="contract-type"
+                  id="contract-type"
+                  v-model="userInfo.job.workDetails.manager"
+                >
                   <option value="eno-udonkwo">Eno Udonkwo</option>
                   <option value="emeka-duruzor">Emeka Duruzor</option>
                 </select>
               </div>
 
               <div class="input">
-                <TextInput label="Date of Employment" type="date" />
-              </div>
-            </div>
-
-            <div class="radio-btns-wrapper">
-              <h4>Confirmation Status</h4>
-              <div class="radio-btns">
-                <div class="radio-btn-container">
-                  <input
-                    type="radio"
-                    id="yes"
-                    name="employment-confirmation"
-                    value="yes"
-                  />
-                  <label for="yes">Yes</label><br />
-                </div>
-                <div class="radio-btn-container">
-                  <input
-                    type="radio"
-                    id="no"
-                    name="employment-confirmation"
-                    value="no"
-                  />
-                  <label for="no">No</label><br />
-                </div>
+                <TextInput
+                  label="Date of hire"
+                  type="date"
+                  min="2012-01-01"
+                  max="2040-01-01"
+                  @update-value="
+                    (data) => (userInfo.job.workDetails.dateOfHire = data)
+                  "
+                />
               </div>
             </div>
 
@@ -94,6 +100,7 @@
                     id="received"
                     name="offer-letter-status"
                     value="received"
+                    v-model="userInfo.job.workDetails.offerLetterStatus"
                   />
                   <label for="received">Received</label><br />
                 </div>
@@ -103,6 +110,7 @@
                     id="not-received"
                     name="offer-letter-status"
                     value="not-received"
+                    v-model="userInfo.job.workDetails.offerLetterStatus"
                   />
                   <label for="not-received">Not received</label><br />
                 </div>
@@ -117,7 +125,11 @@
             <div class="inputs-container">
               <div class="input">
                 <label for="contract-type">Department</label>
-                <select name="department" id="department">
+                <select
+                  name="department"
+                  id="department"
+                  v-model="userInfo.job.previousRole.department"
+                >
                   <option value="petroleum-consulting">
                     Petroleum consulting
                   </option>
@@ -129,7 +141,11 @@
 
               <div class="input">
                 <label for="previous-job-role">Job role</label>
-                <select name="previous-job-role" id="previous-job-role">
+                <select
+                  name="previous-job-role"
+                  id="previous-job-role"
+                  v-model="userInfo.job.previousRole.role"
+                >
                   <option value="petroleum-engineer">Petroleum engineer</option>
                   <option value="petroleum-engineer">Petroleum engineer</option>
                 </select>
@@ -140,6 +156,7 @@
                 <textarea
                   name="reason-for-change"
                   id="reason-for-change"
+                  v-model="userInfo.job.previousRole.reasonForChange"
                   cols="30"
                   rows="10"
                 ></textarea>
@@ -160,10 +177,14 @@
 <script>
 import TextInput from '@/components/TextInput.vue'
 import DashboardBottomButtonsNav from '@/components/DashboardBottomButtonsNav.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Job',
   components: { TextInput, DashboardBottomButtonsNav },
+  computed: {
+    ...mapState('appStore', ['userInfo']),
+  },
 }
 </script>
 

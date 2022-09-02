@@ -5,6 +5,64 @@ const state = {
   user: null,
   accessToken: null,
   importedEmails: [],
+  userInfo: {
+    bio: {
+      employee: {
+        surname: '',
+        firstName: '',
+        email: '',
+        phoneNumber: '',
+        residentialAddress: '',
+        stateOfOrigin: '',
+        dateOfBirth: '',
+        dateOfHire: '',
+        gender: '',
+        maritalStatus: '',
+      },
+      nextOfKin: {
+        surname: '',
+        firstName: '',
+        email: '',
+        phoneNumber: '',
+        residentialAddress: '',
+        relationship: '',
+      },
+      inCaseOfEmergency: {
+        surname: '',
+        firstName: '',
+        phoneNumber: '',
+        residentialAddress: '',
+        relationship: '',
+        dateOfBirth: '',
+      },
+      maritalInformation: {
+        name: '',
+        phoneNumber: '',
+        residentialAddress: '',
+        profession: '',
+        dateOfBirth: '',
+        numberOfChildren: '',
+      },
+    },
+    job: {
+      workDetails: {
+        department: '',
+        role: '',
+        workType: '',
+        contractType: '',
+        manager: '',
+        dateOfHire: '',
+        offerLetterStatus: '',
+      },
+      previousRole: {
+        department: '',
+        role: '',
+        reasonForChange: '',
+      },
+    },
+    employmentHistory: [],
+    skills: [],
+  },
 }
 
 const mutations = {
@@ -83,6 +141,18 @@ const actions = {
       console.log(err.message)
     }
   },
+  // eslint-disable-next-line no-empty-pattern
+  async addPersonalProjects(_, formData) {
+    try {
+      const response = await axios.post('/personalProjects', {
+        ...formData,
+      })
+      window.location.reload()
+      return response
+    } catch (err) {
+      console.log(err.message)
+    }
+  },
   async fetchLeaveData() {
     try {
       const response = await axios.get('/leave')
@@ -110,6 +180,7 @@ const getters = {
     }
   },
   user: (state) => state.user,
+  userInfo: (state) => state.userInfo,
 }
 
 export default {

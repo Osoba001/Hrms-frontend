@@ -46,24 +46,53 @@
 
   <teleport to=".modals" v-if="showAddPersonalProjectsModal">
     <ModalBackdrop @close="toggleAddPersonalProjectsModal">
-      <form class="add-experience-modal" @submit.prevent="handleSubmit">
-        <h2 class="section-title">Add project</h2>
+      <form
+        class="add-experience-modal"
+        @submit.prevent="handlePersonalProjectSubmit"
+      >
+        <h2 class="section-title">Add personal project</h2>
+        <div class="modal-input">
+          <TextInput
+            label="Title"
+            placeholder="e.g, Project 1"
+            @update-value="(data) => (form.personalProject.title = data)"
+          />
+        </div>
         <div class="modal-input">
           <TextInput
             label="Github link"
             placeholder="https://github.com/example-001"
+            @update-value="(data) => (form.personalProject.github = data)"
           />
         </div>
         <div class="modal-input">
           <TextInput
             label="Live link"
             placeholder="https://myliveproject.com"
+            @update-value="(data) => (form.personalProject.liveLink = data)"
           />
         </div>
         <div class="modal-input">
-          <TextInput label="Description" placeholder="..." />
+          <label class="form-label" for="status">Project status</label>
+          <select
+            name="status"
+            id="status"
+            v-model="form.personalProject.status"
+          >
+            <option value="ongoing">Ongoing</option>
+            <option value="completed">Completed</option>
+          </select>
         </div>
-        <button class="add-experience-btn modal-add-btn">Add</button>
+        <div class="modal-input">
+          <TextInput
+            label="Description"
+            placeholder="..."
+            @update-value="(data) => (form.personalProject.description = data)"
+          />
+        </div>
+        <button type="submit" class="add-experience-btn modal-add-btn">
+          Add
+        </button>
       </form>
     </ModalBackdrop>
   </teleport>
@@ -89,6 +118,15 @@ export default {
       personalProjects: [],
       showAddPersonalProjectsModal: false,
       showManagerAddProjectsModal: false,
+      form: {
+        personalProject: {
+          github: '',
+          liveLink: '',
+          description: '',
+          title: '',
+          status: '',
+        },
+      },
     }
   },
   components: {
@@ -99,12 +137,20 @@ export default {
     Loader,
   },
   methods: {
-    ...mapActions('appStore', ['fetchPersonalProjects', 'fetchProjects']),
+    ...mapActions('appStore', [
+      'fetchPersonalProjects',
+      'fetchProjects',
+      'addPersonalProjects',
+    ]),
     toggleAddPersonalProjectsModal() {
       this.showAddPersonalProjectsModal = !this.showAddPersonalProjectsModal
     },
     toggleManagerAddProjectsModal() {
       this.showManagerAddProjectsModal = !this.showManagerAddProjectsModal
+    },
+    async handlePersonalProjectSubmit() {
+      const res = await this.addPersonalProjects(this.form.personalProject)
+      alert(JSON.stringify(res.data))
     },
   },
   async created() {
