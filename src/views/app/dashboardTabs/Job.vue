@@ -1,6 +1,6 @@
 <template>
   <div class="job-container tab-container">
-    <form @submit.prevent="">
+    <form @submit.prevent="handleSubmit">
       <div class="sections-container">
         <section class="work-details">
           <h2 class="section-title">Work details</h2>

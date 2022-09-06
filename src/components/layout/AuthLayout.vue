@@ -75,13 +75,7 @@ main.auth-wrapper {
 }
 
 .form-container .inputs-container input {
-  width: 100%;
-  padding: 0.7em 1em;
-  font-size: 0.875rem;
-  margin-bottom: 0.7rem;
-  border: 1px solid #cad6e4;
-  border-radius: 5px;
-  font-family: 'Lato', Helvetica, sans-serif;
+  margin-bottom: 0.5rem;
 }
 
 .buttons-container {

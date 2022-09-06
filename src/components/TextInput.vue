@@ -9,7 +9,11 @@
     @focus="handleClearInputOnFocus"
     @input="$emit('update-value', inputValue)"
     :required="required"
+    @blur="$emit('validate')"
+    @keypress="$emit('validate')"
+    :class="{ error: !!error }"
   />
+  <!-- <p class="form-input-hint" v-if="error">{{ error }}</p> -->
 </template>
 
 <script>
@@ -21,6 +25,10 @@ export default {
     },
     placeholder: {
       type: String,
+    },
+    name: {
+      type: String,
+      default: '',
     },
     label: {
       type: String,
@@ -38,6 +46,10 @@ export default {
     required: {
       type: Boolean,
       default: false,
+    },
+    error: {
+      type: String,
+      default: '',
     },
   },
   data() {
@@ -66,5 +78,24 @@ input {
   border: 1px solid #cad6e4;
   border-radius: 5px;
   font-family: 'Lato', Helvetica, sans-serif;
+}
+input:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 5px #9ecaed;
+}
+
+input.error {
+  border: 1px solid rgb(220, 43, 43);
+}
+input.error:focus {
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.609);
+}
+.form-input-hint {
+  color: red;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  margin-left: auto;
+  width: fit-content;
 }
 </style>

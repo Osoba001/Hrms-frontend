@@ -61,7 +61,7 @@
     "id": "1",
     "email": "hr@ccl.com.ng",
     "password": "000000",
-    "accountType": "staff",
+    "accountType": "HR",
     "name": "Sunday Michael",
     "userInfoUpdated": false,
     "image": "https://randomuser.me/api/portraits/thumb/men/15.jpg",
@@ -78,7 +78,9 @@
       "role": "General Manager",
       "department": "Development",
       "image": "https://randomuser.me/api/portraits/thumb/women/8.jpg",
-      "email": "john.doe@ccl.com.ng"
+      "email": "john.doe@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
     },
     {
       "id": 2,
@@ -86,7 +88,9 @@
       "role": "Director",
       "department": "Design",
       "image": "https://randomuser.me/api/portraits/thumb/men/75.jpg",
-      "email": "antoine.griezmann@ccl.com.ng"
+      "email": "antoine.griezmann@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
     },
     {
       "id": 3,
@@ -94,7 +98,9 @@
       "role": "Staff",
       "department": "Development",
       "image": "https://randomuser.me/api/portraits/thumb/men/71.jpg",
-      "email": "john.michael@ccl.com.ng"
+      "email": "john.michael@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
     },
     {
       "id": 4,
@@ -102,7 +108,9 @@
       "role": "Corper",
       "department": "Design",
       "image": "https://randomuser.me/api/portraits/thumb/men/5.jpg",
-      "email": "isaac.aku@ccl.com.ng"
+      "email": "isaac.aku@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
     },
     {
       "id": 5,
@@ -110,7 +118,9 @@
       "role": "Intern",
       "department": "Development",
       "image": "https://randomuser.me/api/portraits/thumb/women/52.jpg",
-      "email": "gabriel.john@ccl.com.ng"
+      "email": "gabriel.john@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
     },
     {
       "id": 6,
@@ -118,7 +128,9 @@
       "role": "General Manager",
       "department": "Design",
       "image": "https://randomuser.me/api/portraits/thumb/men/35.jpg",
-      "email": "sunday.mike@ccl.com.ng"
+      "email": "sunday.mike@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
     },
     {
       "id": 7,
@@ -126,7 +138,9 @@
       "role": "Director",
       "department": "Development",
       "image": "https://randomuser.me/api/portraits/thumb/men/23.jpg",
-      "email": "victor.chinedu@ccl.com.ng"
+      "email": "victor.chinedu@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
     },
     {
       "id": 8,
@@ -134,7 +148,9 @@
       "role": "Staff",
       "department": "Design",
       "image": "https://randomuser.me/api/portraits/thumb/women/78.jpg",
-      "email": "innocent.samuel@ccl.com.ng"
+      "email": "innocent.samuel@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
     },
     {
       "id": 9,
@@ -142,7 +158,9 @@
       "role": "Corper",
       "department": "Development",
       "image": "https://randomuser.me/api/portraits/thumb/men/36.jpg",
-      "email": "paul.emmanuel@ccl.com.ng"
+      "email": "paul.emmanuel@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
     },
     {
       "id": 10,
@@ -150,7 +168,30 @@
       "role": "Intern",
       "department": "Design",
       "image": "https://randomuser.me/api/portraits/thumb/women/18.jpg",
-      "email": "marvelous.jack@ccl.com.ng"
+      "email": "marvelous.jack@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "email": "michael.faraday@ccl.com.ng",
+      "role": "staff",
+      "id": 11,
+      "status": "inactive",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "email": "jamessmith@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-06T12:12:13.440Z",
+      "id": 12
+    },
+    {
+      "email": "isaac.afula@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-06T13:50:07.712Z",
+      "id": 13
     }
   ],
   "projects": [

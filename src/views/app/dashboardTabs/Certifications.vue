@@ -36,13 +36,15 @@
 
     <teleport to=".modals" v-if="showModal">
       <ModalBackdrop @close="toggleModal">
-        <form class="add-skill-modal" @submit.prevent="handleSubmit">
+        <form class="add-skill-modal" @submit.prevent="handleAddSkill">
           <h2 class="section-title">Add skill</h2>
           <div class="modal-input">
             <TextInput
               label="Skill"
               placeholder="E.g, React Native"
               @update-value="(data) => (form.skill = data)"
+              @validate="validate('skill')"
+              :error="errors.skill"
             />
           </div>
           <div class="modal-input">
@@ -51,7 +53,9 @@
               name="proficiency"
               id="proficiency"
               class="proficiency"
+              :class="{ error: errors.proficiency }"
               v-model="form.proficiency"
+              @blur="validate(proficiency)"
             >
               <option value="beginner">Beginner</option>
               <option value="intermediate">Intermediate</option>
@@ -70,6 +74,12 @@ import DashboardBottomButtonsNav from '@/components/DashboardBottomButtonsNav.vu
 import TextInput from '@/components/TextInput.vue'
 import ModalBackdrop from '@/components/ModalBackdrop.vue'
 import { mapState } from 'vuex'
+import { object, string } from 'yup'
+
+const schema = object().shape({
+  skill: string().min(1).max(255).required(),
+  proficiency: string().required(),
+})
 
 export default {
   components: { DashboardBottomButtonsNav, TextInput, ModalBackdrop },
@@ -80,10 +90,14 @@ export default {
         skill: '',
         proficiency: '',
       },
+      errors: {
+        skill: '',
+        proficiency: '',
+      },
     }
   },
   methods: {
-    handleSubmit(e) {
+    onSubmit(e) {
       if (!this.form.skill || !this.form.proficiency) return
       this.userInfo.skills.push({ ...this.form })
       this.form.skill = ''
@@ -92,6 +106,28 @@ export default {
     },
     toggleModal() {
       this.showModal = !this.showModal
+    },
+    handleAddSkill(e) {
+      schema
+        .validate(this.form, { abortEarly: false })
+        .then(() => {
+          this.onSubmit(e)
+        })
+        .catch((err) => {
+          err.inner.forEach((error) => {
+            this.errors = { ...this.errors, [error.path]: error.message }
+          })
+        })
+    },
+    validate(field) {
+      schema
+        .validateAt(field, this.form)
+        .then(() => {
+          this.errors[field] = ''
+        })
+        .catch((err) => {
+          this.errors[err.path] = err.message
+        })
     },
   },
   computed: {
@@ -178,5 +214,9 @@ section.add-certificate {
 
 .add-skill-modal .modal-add-btn {
   margin-left: 0;
+}
+
+select.error {
+  border: 1px solid red;
 }
 </style>

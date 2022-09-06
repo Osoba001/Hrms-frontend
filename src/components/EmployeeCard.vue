@@ -1,19 +1,31 @@
 <template>
-  <article class="employee p-ripple" @click="toggleModal" v-ripple>
+  <article
+    class="employee p-ripple"
+    @click="employee.status === 'active' && toggleModal()"
+    v-ripple
+  >
     <header class="employee-status-wrapper">
-      <div class="status">
-        <span>Active</span>
+      <div class="status" :class="{ inactive: employee.status === 'inactive' }">
+        <span>{{ employee.status }}</span>
       </div>
-      <div class="icon-container p-ripple" @click="handleClick" v-ripple>
+      <div
+        v-if="employee.status === 'active'"
+        class="icon-container p-ripple"
+        @click="handleClick"
+        v-ripple
+      >
         <span class="material-symbols-outlined icon"> more_horiz </span>
       </div>
     </header>
 
     <div class="employee-info-top">
       <div class="img-container">
-        <img :src="employee.image" alt="user" />
+        <img v-if="employee.image" :src="employee.image" alt="user" />
+        <span v-if="!employee.image" class="material-symbols-outlined">
+          person
+        </span>
       </div>
-      <h3 class="name">{{ employee.name }}</h3>
+      <h3 class="name">{{ !employee.name ? '-' : employee.name }}</h3>
       <p class="role">{{ employee.role }}</p>
     </div>
 
@@ -25,7 +37,9 @@
         </div>
         <div>
           <h4>Date Hired</h4>
-          <p>Aug 5, 2022</p>
+          <p>
+            {{ new Date(employee.dateHired).toLocaleDateString() }}
+          </p>
         </div>
       </div>
       <div class="contact-info">
@@ -97,6 +111,12 @@ export default {
   font-size: 0.75rem;
   font-weight: 700;
   margin-right: auto;
+  text-transform: capitalize;
+}
+.status.inactive {
+  background-color: rgba(255, 166, 0, 0.159);
+  border: 1.5px solid orange;
+  color: orange;
 }
 
 .employee .icon-container {
@@ -129,6 +149,10 @@ export default {
   align-items: center;
   overflow: hidden;
 }
+.img-container span {
+  font-size: 2em;
+  color: #333;
+}
 .img-container img {
   width: 100%;
   height: 100%;
@@ -147,6 +171,7 @@ export default {
   font-size: 0.875rem;
   font-weight: 600;
   color: #00000080;
+  text-transform: capitalize;
 }
 .employee-info-bottom {
   background-color: rgba(238, 238, 238, 0.747);

@@ -1,12 +1,14 @@
 <template>
   <ModalBackdrop @close="toggleModal">
-    <form class="add-experience-modal" @submit.prevent="handleSubmit">
+    <form class="add-experience-modal" @submit.prevent="handleAddExperience">
       <h2 class="section-title">Add experience</h2>
       <div class="modal-input">
         <TextInput
           label="Organisation"
           placeholder="e.g, CypherCrescent Ltd."
           @update-value="(data) => (form.organisation = data)"
+          @validate="validate('organisation')"
+          :error="errors.organisation"
         />
       </div>
       <div class="modal-input">
@@ -14,6 +16,8 @@
           label="Role"
           placeholder="e.g, Director"
           @update-value="(data) => (form.role = data)"
+          @validate="validate('role')"
+          :error="errors.role"
         />
       </div>
       <div class="modal-input">
@@ -21,6 +25,8 @@
           label="Location"
           placeholder="e.g, Port Harcourt, Rivers, Nigeria"
           @update-value="(data) => (form.location = data)"
+          @validate="validate('location')"
+          :error="errors.location"
         />
       </div>
       <div class="modal-input">
@@ -30,6 +36,8 @@
           min="1960-01-01"
           max="2040-01-01"
           @update-value="(data) => (form.startDate = data)"
+          @validate="validate('startDate')"
+          :error="errors.startDate"
         />
       </div>
       <div class="modal-input">
@@ -39,6 +47,8 @@
           min="1960-01-01"
           max="2040-01-01"
           @update-value="(data) => (form.endDate = data)"
+          @validate="validate('endDate')"
+          :error="errors.endDate"
         />
       </div>
       <button type="submit" class="add-experience-btn modal-add-btn">
@@ -52,6 +62,15 @@
 import { mapGetters } from 'vuex'
 import ModalBackdrop from '../ModalBackdrop.vue'
 import TextInput from '../TextInput.vue'
+import { date, object, string } from 'yup'
+
+const schema = object().shape({
+  organisation: string().required(),
+  location: string().required(),
+  role: string().required(),
+  startDate: date().required(),
+  endDate: date().required(),
+})
 
 export default {
   components: { ModalBackdrop, TextInput },
@@ -65,22 +84,51 @@ export default {
         startDate: '',
         endDate: '',
       },
+      errors: {
+        organisation: '',
+        role: '',
+        location: '',
+        startDate: '',
+        endDate: '',
+      },
     }
   },
   methods: {
-    handleSubmit(e) {
-      if (
-        !this.form.organisation ||
-        !this.form.role ||
-        !this.form.location ||
-        !this.form.startDate ||
-        !this.form.endDate
-      ) {
-        return
-      }
-      this.userInfo.employmentHistory.push({ id: Math.random(), ...this.form })
-      e.target.reset()
-      this.toggleModal()
+    handleAddExperience(e) {
+      schema
+        .validate(this.form, { abortEarly: false })
+        .then(() => {
+          if (
+            !this.form.organisation ||
+            !this.form.role ||
+            !this.form.location ||
+            !this.form.startDate ||
+            !this.form.endDate
+          ) {
+            return
+          }
+          this.userInfo.employmentHistory.push({
+            id: Math.random(),
+            ...this.form,
+          })
+          e.target.reset()
+          this.toggleModal()
+        })
+        .catch((err) => {
+          err.inner.forEach((error) => {
+            this.errors = { ...this.errors, [error.path]: error.message }
+          })
+        })
+    },
+    validate(field) {
+      schema
+        .validateAt(field, this.form)
+        .then(() => {
+          this.errors[field] = ''
+        })
+        .catch((err) => {
+          this.errors[err.path] = err.message
+        })
     },
   },
   computed: {

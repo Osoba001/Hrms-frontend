@@ -1,7 +1,7 @@
 <template>
   <AuthLayout>
     <template v-slot:form>
-      <form @submit.prevent="handleSubmit">
+      <form @submit.prevent="loginUser">
         <div>
           <h1>Log in</h1>
           <p class="subtitle">Log in to your account</p>
@@ -13,12 +13,18 @@
             placeholder="Enter your email address"
             @update-value="updateFormEmail"
             :required="true"
+            name="email"
+            @validate="validate('email')"
+            :error="errors.email"
           />
           <TextInput
             type="password"
             placeholder="Password"
             @update-value="updateFormPassword"
             :required="true"
+            name="password"
+            @validate="validate('password')"
+            :error="errors.password"
           />
         </div>
 
@@ -48,8 +54,10 @@
 
         <div class="alt-sign-in">
           <p>
-            Don't have an account yet?
-            <router-link :to="{ path: '/signup' }">Signup</router-link>
+            Forgot password?
+            <router-link :to="{ path: '/forgot-password' }"
+              >Click to reset</router-link
+            >
           </p>
         </div>
       </form>
@@ -63,6 +71,12 @@ import GoogleIcon from '@/components/icons/GoogleIcon.vue'
 import LinkedinIcon from '@/components/icons/LinkedinIcon.vue'
 import { mapActions } from 'vuex'
 import TextInput from '@/components/TextInput.vue'
+import { object, string } from 'yup'
+
+const loginFormSchema = object().shape({
+  email: string().email().required(),
+  password: string().min(6).max(255).required(),
+})
 
 export default {
   name: 'Login',
@@ -70,6 +84,10 @@ export default {
   data() {
     return {
       form: {
+        email: '',
+        password: '',
+      },
+      errors: {
         email: '',
         password: '',
       },
@@ -83,8 +101,27 @@ export default {
     updateFormPassword(data) {
       this.form.password = data
     },
-    handleSubmit() {
-      this.signIn(this.form)
+    loginUser() {
+      loginFormSchema
+        .validate(this.form, { abortEarly: false })
+        .then(() => {
+          this.signIn(this.form)
+        })
+        .catch((err) => {
+          err.inner.forEach((error) => {
+            this.errors = { ...this.errors, [error.path]: error.message }
+          })
+        })
+    },
+    validate(field) {
+      loginFormSchema
+        .validateAt(field, this.form)
+        .then(() => {
+          this.errors[field] = ''
+        })
+        .catch((err) => {
+          this.errors[err.path] = err.message
+        })
     },
   },
 }

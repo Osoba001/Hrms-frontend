@@ -19,7 +19,6 @@ import HRDashboardStats from '@/views/app/HRDashboardStats.vue'
 import ChangePassword from '@/views/auth/ChangePassword.vue'
 
 import Login from '@/views/auth/Login.vue'
-import Signup from '@/views/auth/Signup.vue'
 
 import store from '@/store'
 
@@ -29,12 +28,6 @@ const routes = [
     name: 'Login',
     component: Login,
     meta: { title: 'Login' },
-  },
-  {
-    path: '/signup',
-    name: 'Signup',
-    component: Signup,
-    meta: { title: 'Create account' },
   },
   {
     path: '/',

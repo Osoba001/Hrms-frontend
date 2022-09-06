@@ -1,6 +1,6 @@
 <template>
   <div class="bio-container tab-container">
-    <form>
+    <form @submit.prevent="handleSubmit">
       <!-- Personal details -->
       <section class="personal-details">
         <h2 class="section-title">Personal details</h2>
@@ -9,6 +9,7 @@
           <div class="inputs-container">
             <div class="input">
               <TextInput
+                :required="true"
                 label="Surname"
                 placeholder="Enter your surname"
                 @update-value="(data) => (userInfo.bio.employee.surname = data)"
@@ -16,6 +17,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="First name"
                 placeholder="Enter your first name"
                 @update-value="
@@ -25,6 +27,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="Email address"
                 type="email"
                 placeholder="Enter your email"
@@ -33,6 +36,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="Phone number"
                 type="number"
                 placeholder="Enter your phone number"
@@ -43,6 +47,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="Residential address"
                 placeholder="Enter your residential address"
                 @update-value="
@@ -55,6 +60,7 @@
           <div class="inputs-container">
             <div class="input">
               <TextInput
+                :required="true"
                 label="State of origin"
                 @update-value="
                   (data) => (userInfo.bio.employee.stateOfOrigin = data)
@@ -63,6 +69,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="Date of Birth"
                 type="date"
                 min="1960-01-01"
@@ -74,6 +81,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="Date of hire"
                 type="date"
                 min="2012-01-01"
@@ -119,6 +127,7 @@
           <div class="inputs-container">
             <div class="input">
               <TextInput
+                :required="true"
                 label="Surname"
                 placeholder="Enter your surname"
                 @update-value="
@@ -128,6 +137,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="First name"
                 placeholder="Enter your first name"
                 @update-value="
@@ -137,6 +147,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="Phone number"
                 type="number"
                 placeholder="Enter your phone number"
@@ -150,6 +161,7 @@
           <div class="inputs-container">
             <div class="input">
               <TextInput
+                :required="true"
                 label="Email address"
                 type="email"
                 placeholder="Enter your email"
@@ -158,6 +170,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="Residential address"
                 placeholder="Enter your residential address"
                 @update-value="
@@ -197,6 +210,7 @@
           <div class="inputs-container">
             <div class="input">
               <TextInput
+                :required="true"
                 label="Surname"
                 placeholder="Enter your surname"
                 @update-value="
@@ -206,6 +220,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="First name"
                 placeholder="Enter your first name"
                 @update-value="
@@ -215,6 +230,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="Phone number"
                 type="number"
                 placeholder="Enter your phone number"
@@ -228,6 +244,7 @@
           <div class="inputs-container">
             <div class="input">
               <TextInput
+                :required="true"
                 label="Residential address"
                 placeholder="Enter your residential address"
                 @update-value="
@@ -259,6 +276,7 @@
 
             <div class="input">
               <TextInput
+                :required="true"
                 label="Date of Birth"
                 type="date"
                 min="1960-01-01"
@@ -280,6 +298,7 @@
           <div class="inputs-container">
             <div class="input">
               <TextInput
+                :required="true"
                 label="Spouse's name"
                 placeholder="Enter spouse's name"
                 @update-value="
@@ -289,6 +308,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="Spouse's phone number"
                 type="number"
                 placeholder="Enter spouse's phone number"
@@ -299,6 +319,7 @@
             </div>
             <div class="input">
               <TextInput
+                :required="true"
                 label="Spouse's profession"
                 placeholder="Enter spouse's profession"
                 @update-value="
@@ -311,6 +332,7 @@
           <div class="inputs-container">
             <div class="input">
               <TextInput
+                :required="true"
                 label="Residential address"
                 placeholder="Enter spouse's residential address"
                 @update-value="
@@ -322,6 +344,7 @@
 
             <div class="input">
               <TextInput
+                :required="true"
                 label="Number of children"
                 type="number"
                 placeholder="Enter number of children"
@@ -335,6 +358,7 @@
 
             <div class="input">
               <TextInput
+                :required="true"
                 label="Date of Birth"
                 type="date"
                 min="1960-01-01"
@@ -363,6 +387,11 @@ export default {
   components: { TextInput, DashboardBottomButtonsNav },
   computed: {
     ...mapState('appStore', ['userInfo']),
+  },
+  methods: {
+    handleSubmit() {
+      alert('Submitting...')
+    },
   },
 }
 </script>

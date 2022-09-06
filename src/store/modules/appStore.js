@@ -169,6 +169,17 @@ const actions = {
       console.log(err.message)
     }
   },
+  async addEmployee(_, formData) {
+    try {
+      const response = await axios.post('/employees', {
+        ...formData,
+      })
+      window.location.reload()
+      return response
+    } catch (err) {
+      console.log(err.message)
+    }
+  },
 }
 
 const getters = {

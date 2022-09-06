@@ -45,43 +45,23 @@
     <DashboardTopTabNavigator v-if="displayTab(this.$route.path)" />
   </header>
 
-  <teleport to=".modals">
-    <ModalBackdrop @close="toggleModal" v-show="showModal">
-      <div class="modal-inner">
-        <h3 class="section-title">Add new employee</h3>
-
-        <div class="modal-text-inputs">
-          <label for="email">Email</label>
-          <TextInput
-            placeholder="e.g, john.doe@cyphercrescent.com.ng"
-            type="email"
-          />
-          <label for="role">Role</label>
-          <select name="role" id="role">
-            <option value="manager">Manager</option>
-            <option value="director">Director</option>
-            <option value="staff">Staff</option>
-            <option value="intern">Intern</option>
-            <option value="corper">Corper</option>
-          </select>
-        </div>
-
-        <button class="configure-button">Configure</button>
-      </div>
-    </ModalBackdrop>
+  <teleport to=".modals" v-if="showModal">
+    <AddNewEmployeeModal :toggleModal="toggleModal" />
   </teleport>
 </template>
 
 <script>
 import DashboardTopTabNavigator from '@/components/DashboardTopTabNavigator.vue'
-import TextInput from '@/components/TextInput.vue'
-import ModalBackdrop from '@/components/ModalBackdrop.vue'
 import readXlsxFile from 'read-excel-file'
 import { mapMutations, mapState } from 'vuex'
+import AddNewEmployeeModal from './modals/AddNewEmployeeModal.vue'
 
 export default {
   name: 'DashboardHeader',
-  components: { DashboardTopTabNavigator, TextInput, ModalBackdrop },
+  components: {
+    DashboardTopTabNavigator,
+    AddNewEmployeeModal,
+  },
   data() {
     return {
       showModal: false,
@@ -199,34 +179,6 @@ header .project-title {
   color: #192041;
 }
 
-/* Modal */
-.modal-inner {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.modal-text-inputs label {
-  display: block;
-  margin-bottom: 0.5rem;
-  margin-top: 0.8rem;
-  font-weight: 600;
-}
-
-.configure-button {
-  margin-top: 1rem;
-  padding: 0.7em 1em;
-  background-color: #2b9de9;
-  color: #fff;
-  font-weight: 500;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 250ms ease;
-}
-.configure-button:hover {
-  background-color: #255eb4;
-}
 .active-directory {
   margin-block: 1rem;
 }
