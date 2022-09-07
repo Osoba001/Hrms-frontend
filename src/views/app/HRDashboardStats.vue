@@ -12,21 +12,102 @@
         y: 0,
       }"
     >
-      <article class="chart-container">
-        <Chart type="doughnut" :data="rolesData" :options="lightOptions" />
-        <h2 class="chart-title">Distibution by roles</h2>
-      </article>
-      <article class="chart-container">
-        <Chart type="pie" :data="ageData" :options="lightOptions" />
-        <h2 class="chart-title">Distibution by age</h2>
+      <article class="card small-card total-employees-card">
+        <h2 class="card-title">Total employees</h2>
+        <div>
+          <p class="numberOfEmployees">151</p>
+          <span class="material-symbols-outlined"> diversity_3 </span>
+        </div>
       </article>
 
-      <article class="chart-container">
+      <article class="card small-card gender-card">
+        <div class="gender-details">
+          <span class="material-symbols-outlined"> face_6 </span>
+          <h3>Male</h3>
+          <p class="number">155</p>
+          <p class="percentage">76.16%</p>
+        </div>
+        <div class="gender-details">
+          <span class="material-symbols-outlined"> face_3 </span>
+          <h3>Female</h3>
+          <p class="number">155</p>
+          <p class="percentage">76.16%</p>
+        </div>
+      </article>
+
+      <article class="card small-card"></article>
+
+      <article class="card small-card marital-status-card">
+        <div class="marital-status-details">
+          <span class="material-symbols-outlined"> group </span>
+          <h3>Married</h3>
+          <p class="number">155</p>
+          <p class="percentage">76.16%</p>
+        </div>
+        <div class="gender-details">
+          <span class="material-symbols-outlined"> person </span>
+          <h3>Single</h3>
+          <p class="number">155</p>
+          <p class="percentage">76.16%</p>
+        </div>
+      </article>
+
+      <article class="card chart-container">
         <Chart type="doughnut" :data="locationData" :options="lightOptions" />
         <h2 class="chart-title">Distibution by work location</h2>
       </article>
 
-      <article class="chart-container">
+      <article class="card chart-container">
+        <Chart type="pie" :data="worktypeData" :options="lightOptions" />
+        <h2 class="chart-title">Distibution by work-type</h2>
+      </article>
+
+      <article class="card chart-container">
+        <Chart type="pie" :data="ageData" :options="lightOptions" />
+        <h2 class="chart-title">Distibution by age</h2>
+      </article>
+
+      <div class="card flex-column location-container">
+        <article class="small-card active-workers-card active">
+          <header>
+            <h2 class="card-title">Active workers</h2>
+
+            <div class="percentage-container">
+              <span class="material-symbols-outlined green">
+                arrow_drop_up
+              </span>
+              <p>59.22%</p>
+            </div>
+          </header>
+
+          <div>
+            <span class="material-symbols-outlined icon"> verified </span>
+            <p class="number">173</p>
+            <span />
+          </div>
+        </article>
+
+        <article class="small-card active-workers-card inactive">
+          <header>
+            <h2 class="card-title">Inactive workers</h2>
+
+            <div class="percentage-container">
+              <span class="material-symbols-outlined red">
+                arrow_drop_down
+              </span>
+              <p>59.22%</p>
+            </div>
+          </header>
+
+          <div>
+            <span class="material-symbols-outlined icon"> person_off </span>
+            <p class="number">173</p>
+            <span />
+          </div>
+        </article>
+      </div>
+
+      <article class="card chart-container department-chart">
         <Chart
           type="bar"
           :data="departmentsData"
@@ -35,9 +116,9 @@
         <h2 class="chart-title">Distibution by department</h2>
       </article>
 
-      <article class="chart-container">
-        <Chart type="pie" :data="worktypeData" :options="lightOptions" />
-        <h2 class="chart-title">Distibution by work-type</h2>
+      <article class="card chart-container roles-chart">
+        <Chart type="bar" :options="horizontalOptions" :data="roles" />
+        <h2 class="chart-title">Distibution by roles</h2>
       </article>
 
       <!-- <article class="chart-container line-chart">
@@ -83,7 +164,7 @@ export default {
           status: 'ongoing',
         },
       ],
-      rolesData: {
+      roles: {
         labels: [
           'Staff',
           'Intern',
@@ -95,27 +176,9 @@ export default {
         ],
         datasets: [
           {
+            label: 'Distribution by Roles',
+            backgroundColor: '#FFA726',
             data: [51, 13, 8, 6, 20, 4, 1],
-            backgroundColor: [
-              'rgb(158, 71, 11)',
-              'rgb(66, 116, 195)',
-              'rgb(148, 50, 31)',
-              'rgb(163, 166, 164)',
-              'rgb(60, 59, 60)',
-              'rgb(88, 156, 214)',
-              'rgb(147, 208, 77)',
-              'rgb(151, 206, 239)',
-            ],
-            hoverBackgroundColor: [
-              'rgb(158, 71, 11)',
-              'rgb(66, 116, 195)',
-              'rgb(148, 50, 31)',
-              'rgb(163, 166, 164)',
-              'rgb(60, 59, 60)',
-              'rgb(88, 156, 214)',
-              'rgb(147, 208, 77)',
-              'rgb(151, 206, 239)',
-            ],
           },
         ],
       },
@@ -171,13 +234,13 @@ export default {
           {
             data: [53, 45, 39],
             backgroundColor: [
-              'rgb(147, 208, 77)',
               'rgb(66, 116, 195)',
+              '#192041',
               'rgb(60, 59, 60)',
             ],
             hoverBackgroundColor: [
-              'rgb(147, 208, 77, 0.9)',
-              'rgb(66, 116, 195, 0.9)',
+              'rgba(66, 116, 195, 0.9)',
+              '#19204195',
               'rgb(60, 59, 60, 0.9)',
             ],
           },
@@ -251,6 +314,8 @@ export default {
   width: 100%;
   padding: 0.5rem 0.5rem 1rem;
   overflow-y: auto;
+  max-width: 1146px;
+  /* margin-inline: auto; */
 }
 section {
   margin-bottom: 1rem;
@@ -258,22 +323,147 @@ section {
 }
 section.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
 }
 
 article {
-  background-color: #fff;
   border-radius: 8px;
   box-shadow: 4px 4px 5px 4px rgba(182, 182, 182, 0.219);
+  background-color: #fff;
 }
 
-/* Personal info card */
-article.personal-info {
-  flex: 0.4;
-  padding: 1.5rem;
+.small-card {
+  padding: 1rem;
+  height: 140px;
+  background-color: #192041;
+  color: rgb(218, 218, 218);
+}
+
+.flex-column {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.7rem;
+}
+
+/* Total employees card */
+.total-employees-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.total-employees-card > div {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.total-employees-card span {
+  font-size: 4rem;
+  margin-left: auto;
+  color: #fff;
+}
+
+.numberOfEmployees {
+  font-size: 2.7rem;
+  margin-top: 0.5rem;
+  color: #fff;
+}
+
+h2.card-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Gender info card and marital status */
+.gender-card,
+.marital-status-card {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.gender-card span,
+.marital-status-card span {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.gender-card h3,
+.marital-status-card h3 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.3rem;
+}
+
+.gender-card p.number,
+.marital-status-card p.number {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-block: 2.5px;
+  color: #fff;
+}
+
+.gender-card p.percentage,
+.marital-status-card p.percentage {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+/* Active workers */
+.active-workers-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.active-workers-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+}
+
+.active-workers-card > div {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 50px;
+}
+
+.active-workers-card span.icon {
+  position: absolute;
+  font-size: 3rem;
+  color: #fff;
+  top: 100%;
+  transform: translateY(-100%);
+  left: 0;
+}
+
+.active-workers-card .number {
+  font-size: 2.7rem;
+  color: #fff;
+}
+
+.active-workers-card .percentage-container {
+  display: flex;
+  align-items: center;
+}
+
+.active-workers-card .percentage-container {
+  font-size: 1rem;
+}
+
+.active-workers-card .percentage-container .green {
+  color: green;
+}
+.active-workers-card .percentage-container .red {
+  color: red;
+}
+
+.active-workers-card .percentage-container p {
+  font-size: 0.875rem;
 }
 
 /* Chart card */
@@ -287,38 +477,179 @@ article.chart-container {
   margin-top: 0.5rem;
 }
 
-section.bottom {
-  display: flex;
+.chart-container.department-chart {
+  grid-column: span 2;
+}
+.chart-container.roles-chart {
+  grid-column: span 2;
 }
 
-.chart-container:nth-child(1) {
+.card:nth-child(1) {
   order: 1;
 }
-.chart-container:nth-child(2) {
+.card:nth-child(2) {
   order: 2;
 }
-.chart-container:nth-child(3) {
+.card:nth-child(3) {
   order: 3;
 }
-.chart-container:nth-child(4) {
+.card:nth-child(4) {
   order: 4;
-  grid-column: 1 / span 2;
 }
-.chart-container:nth-child(5) {
+.card:nth-child(5) {
   order: 5;
 }
+.card:nth-child(6) {
+  order: 6;
+}
+.card:nth-child(7) {
+  order: 7;
+}
+.card:nth-child(8) {
+  order: 8;
+}
+.card:nth-child(9) {
+  order: 9;
+}
+.card:nth-child(10) {
+  order: 10;
+}
 
-@media (max-width: 1024px) {
-  .chart-container:nth-child(4) {
+@media (max-width: 1221px) {
+  .card:nth-child(1) {
+    order: 1;
+  }
+  .card:nth-child(2) {
+    order: 2;
+  }
+  .card:nth-child(3) {
+    order: 3;
+  }
+  .card:nth-child(4) {
+    order: 10;
+  }
+  .card:nth-child(5) {
+    order: 4;
+  }
+  .card:nth-child(6) {
     order: 5;
   }
-  .chart-container:nth-child(5) {
-    order: 4;
+  .card:nth-child(7) {
+    order: 6;
+  }
+  .card:nth-child(8) {
+    order: 7;
+  }
+  .card:nth-child(9) {
+    order: 8;
+  }
+  .card:nth-child(10) {
+    order: 9;
   }
 }
 
-@media (max-width: 523px) {
-  .chart-container:nth-child(4) {
+@media (max-width: 956px) {
+  .card:nth-child(1) {
+    order: 1;
+  }
+  .card:nth-child(2) {
+    order: 2;
+  }
+  .card:nth-child(3) {
+    order: 3;
+  }
+  .card:nth-child(4) {
+    order: 4;
+  }
+  .card:nth-child(5) {
+    order: 5;
+  }
+  .card:nth-child(6) {
+    order: 6;
+  }
+  .card:nth-child(7) {
+    order: 8;
+  }
+  .card:nth-child(8) {
+    order: 7;
+  }
+  .card:nth-child(9) {
+    order: 9;
+  }
+  .card:nth-child(10) {
+    order: 10;
+  }
+}
+
+@media (max-width: 780px) {
+  .card:nth-child(1) {
+    order: 1;
+  }
+  .card:nth-child(2) {
+    order: 2;
+  }
+  .card:nth-child(3) {
+    order: 3;
+  }
+  .card:nth-child(4) {
+    order: 10;
+  }
+  .card:nth-child(5) {
+    order: 5;
+  }
+  .card:nth-child(6) {
+    order: 6;
+  }
+  .card:nth-child(7) {
+    order: 7;
+  }
+  .card:nth-child(8) {
+    order: 4;
+  }
+  .card:nth-child(9) {
+    order: 8;
+  }
+  .card:nth-child(10) {
+    order: 9;
+  }
+}
+@media (max-width: 728px) {
+  .card:nth-child(1) {
+    order: 1;
+  }
+  .card:nth-child(2) {
+    order: 2;
+  }
+  .card:nth-child(3) {
+    order: 3;
+  }
+  .card:nth-child(4) {
+    order: 4;
+  }
+  .card:nth-child(5) {
+    order: 5;
+  }
+  .card:nth-child(6) {
+    order: 6;
+  }
+  .card:nth-child(7) {
+    order: 7;
+  }
+  .card:nth-child(8) {
+    order: 8;
+  }
+  .card:nth-child(9) {
+    order: 9;
+  }
+  .card:nth-child(10) {
+    order: 10;
+  }
+}
+@media (max-width: 487px) {
+  .chart-container.department-chart {
+    grid-column: 1;
+  }
+  .chart-container.roles-chart {
     grid-column: 1;
   }
 }

@@ -10,14 +10,13 @@ import Confirmation from '@/views/app/dashboardTabs/Confirmation.vue'
 import Employees from '@/views/app/admin/Employees.vue'
 import Department from '@/views/app/sidebarTabs/Department'
 import Leave from '@/views/app/sidebarTabs/Leave'
-import HRLeave from '@/views/hr/HRLeave.vue'
+import HRLeave from '@/views/app/hr/HRLeave'
 import TeamMembersLeave from '@/views/app/manager/TeamMembersLeave.vue'
 import PersonalInfo from '@/views/app/sidebarTabs/PersonalInfo'
 import Projects from '@/views/app/sidebarTabs/Projects'
 import StaffDashboardStats from '@/views/app/StaffDashboardStats.vue'
 import HRDashboardStats from '@/views/app/HRDashboardStats.vue'
 import ChangePassword from '@/views/auth/ChangePassword.vue'
-
 import Login from '@/views/auth/Login.vue'
 
 import store from '@/store'
@@ -35,7 +34,6 @@ const routes = [
     component: Dashboard,
     meta: { title: 'CypherCrescent Portal' },
     beforeEnter: (to, from, next) => {
-      console.log(store.getters['appStore/authenticated'])
       store.getters['appStore/authenticated'] ? next() : next('/login')
     },
     children: [
