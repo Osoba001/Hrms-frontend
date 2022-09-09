@@ -34,12 +34,13 @@ const routes = [
     component: Dashboard,
     meta: { title: 'CypherCrescent Portal' },
     beforeEnter: (to, from, next) => {
-      store.getters['appStore/authenticated'] ? next() : next('/login')
+      store.getters['appStore/authenticated'] ? next() : next({ name: 'Login' })
     },
     children: [
       {
         path: '/bio',
         component: Bio,
+        name: 'Bio',
         beforeEnter: (to, from, next) => {
           if (
             (store.getters['appStore/user']?.accountType === 'staff' ||
@@ -55,6 +56,7 @@ const routes = [
       {
         path: '/job',
         component: Job,
+        name: 'Job',
         beforeEnter: (to, from, next) => {
           if (
             (store.getters['appStore/user']?.accountType === 'staff' ||
@@ -70,6 +72,7 @@ const routes = [
       {
         path: '/employment-history',
         component: EmploymentHistory,
+        name: 'Employment History',
         beforeEnter: (to, from, next) => {
           if (
             (store.getters['appStore/user']?.accountType === 'staff' ||

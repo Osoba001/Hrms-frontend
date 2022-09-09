@@ -32,7 +32,7 @@
         :employee="employee"
       />
     </section>
-    <div v-else style="flex: 1" class="loader-container">
+    <div v-if="!employees.length" style="flex: 1" class="loader-container">
       <Loader />
     </div>
 

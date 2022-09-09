@@ -192,6 +192,13 @@
       "status": "inactive",
       "dateHired": "2022-09-06T13:50:07.712Z",
       "id": 13
+    },
+    {
+      "email": "john.stones@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-08T15:06:37.226Z",
+      "id": 14
     }
   ],
   "projects": [
@@ -388,6 +395,14 @@
       "github": "#",
       "liveLink": "#",
       "description": "Voluptates blanditiis numquam magni nostrum odit libero, dignissimos magnam dolorum officia veniam saepe cum eveniet, doloremque tenetur. Blanditiis, repellat."
+    },
+    {
+      "github": "https://example.com",
+      "liveLink": "https://example.com",
+      "description": "asdasdasdasd",
+      "title": "Test Project",
+      "status": "completed",
+      "id": 4
     }
   ],
   "departments": [

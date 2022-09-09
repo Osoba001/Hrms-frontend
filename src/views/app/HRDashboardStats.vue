@@ -21,13 +21,13 @@
       </article>
 
       <article class="card small-card gender-card">
-        <div class="gender-details">
+        <div>
           <span class="material-symbols-outlined"> face_6 </span>
           <h3>Male</h3>
           <p class="number">155</p>
           <p class="percentage">76.16%</p>
         </div>
-        <div class="gender-details">
+        <div>
           <span class="material-symbols-outlined"> face_3 </span>
           <h3>Female</h3>
           <p class="number">155</p>
@@ -35,16 +35,14 @@
         </div>
       </article>
 
-      <article class="card small-card"></article>
-
       <article class="card small-card marital-status-card">
-        <div class="marital-status-details">
+        <div>
           <span class="material-symbols-outlined"> group </span>
           <h3>Married</h3>
           <p class="number">155</p>
           <p class="percentage">76.16%</p>
         </div>
-        <div class="gender-details">
+        <div>
           <span class="material-symbols-outlined"> person </span>
           <h3>Single</h3>
           <p class="number">155</p>
@@ -52,19 +50,32 @@
         </div>
       </article>
 
+      <article class="card small-card employment-details">
+        <div>
+          <h3>Fully employed</h3>
+          <p class="number">155</p>
+          <p class="percentage">76.16%</p>
+        </div>
+        <div>
+          <h3>Exited</h3>
+          <p class="number">155</p>
+          <p class="percentage">76.16%</p>
+        </div>
+      </article>
+
       <article class="card chart-container">
         <Chart type="doughnut" :data="locationData" :options="lightOptions" />
-        <h2 class="chart-title">Distibution by work location</h2>
+        <h2 class="chart-title">Distibution by Work Location</h2>
       </article>
 
       <article class="card chart-container">
         <Chart type="pie" :data="worktypeData" :options="lightOptions" />
-        <h2 class="chart-title">Distibution by work-type</h2>
+        <h2 class="chart-title">Distibution by Work-type</h2>
       </article>
 
       <article class="card chart-container">
         <Chart type="pie" :data="ageData" :options="lightOptions" />
-        <h2 class="chart-title">Distibution by age</h2>
+        <h2 class="chart-title">Distibution by Age</h2>
       </article>
 
       <div class="card flex-column location-container">
@@ -113,12 +124,12 @@
           :data="departmentsData"
           :options="horizontalOptions"
         />
-        <h2 class="chart-title">Distibution by department</h2>
+        <h2 class="chart-title">Distibution by Department</h2>
       </article>
 
       <article class="card chart-container roles-chart">
         <Chart type="bar" :options="horizontalOptions" :data="roles" />
-        <h2 class="chart-title">Distibution by roles</h2>
+        <h2 class="chart-title">Distibution by Roles</h2>
       </article>
 
       <!-- <article class="chart-container line-chart">
@@ -177,7 +188,7 @@ export default {
         datasets: [
           {
             label: 'Distribution by Roles',
-            backgroundColor: '#FFA726',
+            backgroundColor: 'rgb(66, 116, 195)',
             data: [51, 13, 8, 6, 20, 4, 1],
           },
         ],
@@ -261,7 +272,7 @@ export default {
         datasets: [
           {
             label: 'Distribution by Department',
-            backgroundColor: '#FFA726',
+            backgroundColor: 'rgb(66, 116, 195)',
             data: [28, 48, 40, 19, 86, 27, 90, 134, 35],
           },
         ],
@@ -376,7 +387,8 @@ h2.card-title {
 
 /* Gender info card and marital status */
 .gender-card,
-.marital-status-card {
+.marital-status-card,
+.employment-details {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -384,28 +396,36 @@ h2.card-title {
 }
 
 .gender-card span,
-.marital-status-card span {
+.marital-status-card span,
+.employment-details span {
   font-size: 2rem;
   color: #fff;
 }
 
 .gender-card h3,
-.marital-status-card h3 {
+.marital-status-card h3,
+.employment-details h3 {
   font-size: 0.875rem;
   font-weight: 500;
   margin-top: 0.3rem;
 }
 
 .gender-card p.number,
-.marital-status-card p.number {
+.marital-status-card p.number,
+.employment-details p.number {
   font-size: 1.4rem;
   font-weight: 600;
   margin-block: 2.5px;
   color: #fff;
 }
 
+.employment-details p.number {
+  margin-block: 1rem;
+}
+
 .gender-card p.percentage,
-.marital-status-card p.percentage {
+.marital-status-card p.percentage,
+.employment-details p.percentage {
   font-size: 0.875rem;
   opacity: 0.8;
 }
