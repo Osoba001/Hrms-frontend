@@ -1,20 +1,5 @@
 <template>
   <div class="leave-container">
-    <section class="statistics">
-      <div class="stat-container">
-        <h1 class="stat">4</h1>
-        <p class="label">Annual Leave</p>
-      </div>
-      <div class="stat-container">
-        <h1 class="stat">2</h1>
-        <p class="label">Sick Leave</p>
-      </div>
-      <div class="stat-container">
-        <h1 class="stat">1</h1>
-        <p class="label">Casual Leave</p>
-      </div>
-    </section>
-
     <section class="leave-application">
       <h2>Leave Application</h2>
       <div class="personal-details">

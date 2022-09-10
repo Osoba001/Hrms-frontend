@@ -1,5 +1,5 @@
 <template>
-  <div class="department-container">
+  <div v-if="departments.length" class="department-container">
     <section
       v-motion
       :initial="{
@@ -18,13 +18,17 @@
       />
     </section>
   </div>
+  <div v-else class="loader-container">
+    <Loader />
+  </div>
 </template>
 
 <script>
 import DepartmentCard from '@/components/DepartmentCard.vue'
 import { mapActions } from 'vuex'
+import Loader from '@/components/Loader.vue'
 export default {
-  components: { DepartmentCard },
+  components: { DepartmentCard, Loader },
   data() {
     return {
       departments: [],
@@ -33,8 +37,10 @@ export default {
   methods: {
     ...mapActions('appStore', ['getDepartments']),
   },
-  async created() {
-    this.departments = await this.getDepartments()
+  created() {
+    setTimeout(async () => {
+      this.departments = await this.getDepartments()
+    }, 1000)
   },
 }
 </script>
@@ -51,5 +57,8 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
   margin-bottom: 1rem;
+}
+.loader-container {
+  flex: 1;
 }
 </style>
