@@ -1,0 +1,18 @@
+export const ROUTES = Object.freeze({
+  login: 'Login',
+  home: 'Dashboard',
+  bio: 'Bio',
+  job: 'Job',
+  employmentHistory: 'Employment History',
+  certifications: 'Certifications',
+  confirmation: 'Confirmation',
+  staffDashboard: 'Staff Dashboard',
+  hrDashboard: 'HR Dashboard',
+  employees: 'Employees',
+  projects: 'Projects',
+  leave: 'Leave',
+  hrLeave: 'HR Leave',
+  viewTeamLeaveInfo: 'View Team Leave',
+  departments: 'Departments',
+  changePassword: 'Change Password',
+})

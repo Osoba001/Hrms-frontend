@@ -55,7 +55,7 @@
         <div class="alt-sign-in">
           <p>
             Forgot password?
-            <router-link :to="{ path: '/forgot-password' }"
+            <router-link :to="{ name: 'Change Password' }"
               >Click to reset</router-link
             >
           </p>

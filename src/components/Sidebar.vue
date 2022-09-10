@@ -7,28 +7,35 @@
         </div>
         <div class="user-detail">
           <h2>{{ user.name }}</h2>
-          <p v-if="user.accountType === 'admin'">Admin</p>
-          <p v-if="user.accountType === 'manager'">Manager</p>
-          <p v-if="user.accountType === 'staff'">Staff</p>
-          <p v-if="user.accountType === 'HR'">Human Resource</p>
+          <p v-if="user.accountType === ACCOUNT_TYPES.admin">Admin</p>
+          <p v-if="user.accountType === ACCOUNT_TYPES.manager">Manager</p>
+          <p v-if="user.accountType === ACCOUNT_TYPES.staff">Staff</p>
+          <p v-if="user.accountType === ACCOUNT_TYPES.HR">Human Resource</p>
         </div>
       </div>
     </header>
     <div class="items">
-      <router-link to="/dashboard">
-        <div class="item" v-if="user.accountType !== 'admin'">
+      <router-link
+        :to="{
+          name:
+            user.accountType === ACCOUNT_TYPES.HR
+              ? 'HR Dashboard'
+              : 'Staff Dashboard',
+        }"
+      >
+        <div class="item" v-if="user.accountType !== ACCOUNT_TYPES.admin">
           <span
             class="active-bar"
             :class="{
               active:
-                $route.path === '/' ||
-                $route.path === '/bio' ||
-                $route.path === '/job' ||
-                $route.path === '/employment-history' ||
-                $route.path === '/certifications' ||
-                $route.path === '/confirmation' ||
-                $route.path === '/dashboard' ||
-                $route.path === '/dashboard/human-resources',
+                $route.name === ROUTES.home ||
+                $route.name === ROUTES.bio ||
+                $route.name === ROUTES.job ||
+                $route.name === ROUTES.employmentHistory ||
+                $route.name === ROUTES.certifications ||
+                $route.name === ROUTES.confirmation ||
+                $route.name === ROUTES.staffDashboard ||
+                $route.name === ROUTES.hrDashboard,
             }"
           />
           <div class="icon">
@@ -38,14 +45,17 @@
         </div>
       </router-link>
 
-      <router-link to="/employees">
+      <router-link :to="{ name: 'Employees' }">
         <div
           class="item"
-          v-if="user.accountType === 'admin' || user.accountType === 'HR'"
+          v-if="
+            user.accountType === ACCOUNT_TYPES.admin ||
+            user.accountType === ACCOUNT_TYPES.HR
+          "
         >
           <span
             class="active-bar"
-            :class="{ active: $route.path === '/employees' }"
+            :class="{ active: $route.name === ROUTES.employees }"
           />
           <div class="icon">
             <span class="material-symbols-outlined"> badge </span>
@@ -54,14 +64,17 @@
         </div>
       </router-link>
 
-      <router-link to="/projects">
+      <router-link :to="{ name: 'Projects' }">
         <div
           class="item"
-          v-if="user.accountType === 'staff' || user.accountType === 'manager'"
+          v-if="
+            user.accountType === ACCOUNT_TYPES.staff ||
+            user.accountType === ACCOUNT_TYPES.manager
+          "
         >
           <span
             class="active-bar"
-            :class="{ active: $route.path === '/projects' }"
+            :class="{ active: $route.name === ROUTES.projects }"
           />
           <div class="icon">
             <span class="material-symbols-outlined"> sticky_note_2 </span>
@@ -70,11 +83,11 @@
         </div>
       </router-link>
 
-      <router-link to="/department">
-        <div class="item" v-if="user.accountType === 'admin'">
+      <router-link :to="{ name: 'Departments' }">
+        <div class="item" v-if="user.accountType === ACCOUNT_TYPES.admin">
           <span
             class="active-bar"
-            :class="{ active: $route.path === '/department' }"
+            :class="{ active: $route.name === ROUTES.departments }"
           />
           <div class="icon">
             <span class="material-symbols-outlined"> apartment </span>
@@ -83,22 +96,22 @@
         </div>
       </router-link>
 
-      <router-link to="/leave">
+      <router-link :to="{ name: 'Leave' }">
         <div
           class="item"
           v-if="
-            user.accountType === 'staff' ||
-            user.accountType === 'manager' ||
-            user.accountType === 'HR'
+            user.accountType === ACCOUNT_TYPES.staff ||
+            user.accountType === ACCOUNT_TYPES.manager ||
+            user.accountType === ACCOUNT_TYPES.HR
           "
         >
           <span
             class="active-bar"
             :class="{
               active:
-                $route.path === '/leave' ||
-                $route.path === '/leave/team-members' ||
-                $route.path === '/leave/human-resources',
+                $route.name === ROUTES.leave ||
+                $route.name === ROUTES.viewTeamLeaveInfo ||
+                $route.name === ROUTES.hrLeave,
             }"
           />
           <div class="icon">
@@ -130,6 +143,8 @@
 import { mapActions, mapState } from 'vuex'
 import CypherCrescentLogo from './icons/CypherCrescentLogo.vue'
 import EmployeeModalInfo from './EmployeeModalInfo.vue'
+import { ACCOUNT_TYPES } from '@/global/accountTypes'
+import { ROUTES } from '@/global/routes'
 
 export default {
   name: 'Sidebar',
@@ -140,6 +155,8 @@ export default {
   data() {
     return {
       showModal: false,
+      ACCOUNT_TYPES,
+      ROUTES,
     }
   },
   methods: {

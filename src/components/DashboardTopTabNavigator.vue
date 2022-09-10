@@ -1,28 +1,28 @@
 <template>
   <div class="tabs-container">
     <ul>
-      <router-link to="/bio">
-        <li :class="{ active: $route.path === '/bio' }">
+      <router-link :to="{ name: 'Bio' }">
+        <li :class="{ active: $route.name === ROUTES.bio }">
           <a>Bio details</a>
         </li>
       </router-link>
-      <router-link to="/job">
-        <li :class="{ active: $route.path === '/job' }">
+      <router-link :to="{ name: 'Job' }">
+        <li :class="{ active: $route.name === ROUTES.job }">
           <a>Job details</a>
         </li>
       </router-link>
-      <router-link to="/employment-history">
-        <li :class="{ active: $route.path === '/employment-history' }">
+      <router-link :to="{ name: 'Employment History' }">
+        <li :class="{ active: $route.name === ROUTES.employmentHistory }">
           <a>Employment History</a>
         </li>
       </router-link>
-      <router-link to="/certifications">
-        <li :class="{ active: $route.path === '/certifications' }">
+      <router-link :to="{ name: 'Certifications' }">
+        <li :class="{ active: $route.name === ROUTES.certifications }">
           <a>Skills/Certifications</a>
         </li>
       </router-link>
-      <router-link to="/confirmation">
-        <li :class="{ active: $route.path === '/confirmation' }">
+      <router-link :to="{ name: 'Confirmation' }">
+        <li :class="{ active: $route.name === ROUTES.confirmation }">
           <a>Confirmation</a>
         </li>
       </router-link>
@@ -31,8 +31,15 @@
 </template>
 
 <script>
+import { ROUTES } from '@/global/routes'
+
 export default {
   name: 'DashboardTopTabNavigator',
+  data() {
+    return {
+      ROUTES,
+    }
+  },
 }
 </script>
 

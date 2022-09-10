@@ -45,16 +45,7 @@ export default {
     ...mapState('appStore', ['user']),
   },
 
-  created() {
-    // const user = localStorage.getItem('access-token')
-    // if (!user) this.$router.push('/login')
-    // this.$router.push('/bio')
-    // if (this.user.accountType === 'admin') {
-    //   this.$router.push('/employees')
-    // } else {
-    //   this.$router.push('/dashboard')
-    // }
-  },
+  created() {},
 }
 </script>
 

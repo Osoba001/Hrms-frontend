@@ -11,7 +11,10 @@
       <form
         @submit.prevent=""
         class="add-staff-container"
-        v-if="user.accountType === 'admin' && $route.path === '/employees'"
+        v-if="
+          user.accountType === ACCOUNT_TYPES.admin &&
+          $route.name === ROUTES.employees
+        "
       >
         <label class="active-directory-btn" for="active-directory">
           <span class="material-symbols-rounded"> save </span>
@@ -36,13 +39,16 @@
       <!-- For manager to view leave information of team members under the manager -->
       <button
         @click="handleManagerLeave"
-        v-if="user.accountType === 'manager' && $route.path === '/leave'"
+        v-if="
+          user.accountType === ACCOUNT_TYPES.manager &&
+          $route.name === ROUTES.leave
+        "
         class="team-info-btn"
       >
         View Team Info
       </button>
     </div>
-    <DashboardTopTabNavigator v-if="displayTab(this.$route.path)" />
+    <DashboardTopTabNavigator v-if="displayTab(this.$route.name)" />
   </header>
 
   <teleport to=".modals" v-if="showModal">
@@ -55,6 +61,8 @@ import DashboardTopTabNavigator from '@/components/DashboardTopTabNavigator.vue'
 import readXlsxFile from 'read-excel-file'
 import { mapMutations, mapState } from 'vuex'
 import AddNewEmployeeModal from './modals/AddNewEmployeeModal.vue'
+import { ACCOUNT_TYPES } from '@/global/accountTypes'
+import { ROUTES } from '@/global/routes'
 
 export default {
   name: 'DashboardHeader',
@@ -65,22 +73,24 @@ export default {
   data() {
     return {
       showModal: false,
+      ACCOUNT_TYPES,
+      ROUTES,
     }
   },
   methods: {
     ...mapMutations('appStore', ['SET_ACTIVE_DIRECTORY']),
     displayTab(path) {
       const routesToDisplayTab = [
-        '/',
-        '/bio',
-        '/job',
-        '/employment-history',
-        '/certifications',
-        '/confirmation',
+        ROUTES.home,
+        ROUTES.bio,
+        ROUTES.job,
+        ROUTES.employmentHistory,
+        ROUTES.certifications,
+        ROUTES.confirmation,
       ]
       return (
         (this.user.accountType === 'staff' ||
-          this.user.accountType === 'manager') &&
+          this.user.accountType === ACCOUNT_TYPES.manager) &&
         !this.user.userInfoUpdated &&
         routesToDisplayTab.includes(path)
       )
