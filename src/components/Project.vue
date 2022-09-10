@@ -6,7 +6,7 @@
       cancelled: project.status === 'cancelled',
       'not-started': project.status === 'not started',
       completed: project.status === 'completed',
-      small: user.accountType === 'staff' && variant !== 'personal',
+      small: user.accountType === ACCOUNT_TYPES.staff && variant !== 'personal',
       personal: variant === 'personal',
     }"
     @click="handleClick"
@@ -41,7 +41,7 @@
       <!-- To be shown for official projects and to managers only -->
       <div
         v-show="variant !== 'personal'"
-        v-if="user.accountType === 'manager'"
+        v-if="user.accountType === ACCOUNT_TYPES.manager"
       >
         <h3>Info</h3>
         <div class="project-info">
@@ -100,6 +100,7 @@ import GithubIcon from './icons/GithubIcon.vue'
 import ExternalLinkIcon from './icons/ExternalLinkIcon.vue'
 import ModalBackdrop from './ModalBackdrop.vue'
 import { mapState } from 'vuex'
+import { ACCOUNT_TYPES } from '@/global/accountTypes'
 
 export default {
   name: 'Project',
@@ -108,6 +109,7 @@ export default {
   data() {
     return {
       showModal: false,
+      ACCOUNT_TYPES,
     }
   },
   methods: {

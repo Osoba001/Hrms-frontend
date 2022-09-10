@@ -89,7 +89,7 @@ export default {
         ROUTES.confirmation,
       ]
       return (
-        (this.user.accountType === 'staff' ||
+        (this.user.accountType === ACCOUNT_TYPES.staff ||
           this.user.accountType === ACCOUNT_TYPES.manager) &&
         !this.user.userInfoUpdated &&
         routesToDisplayTab.includes(path)

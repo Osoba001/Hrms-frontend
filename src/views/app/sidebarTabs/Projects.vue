@@ -5,7 +5,7 @@
       <button
         class="add-project-btn"
         @click="toggleManagerAddProjectsModal"
-        v-if="user.accountType === 'manager'"
+        v-if="user.accountType === ACCOUNT_TYPES.manager"
       >
         <span class="material-symbols-rounded"> add </span>
         Add Project
@@ -109,11 +109,13 @@ import TextInput from '@/components/TextInput.vue'
 import { mapActions, mapState } from 'vuex'
 import ManagerAddProjectModal from '@/components/modals/ManagerAddProjectModal.vue'
 import Loader from '@/components/Loader.vue'
+import { ACCOUNT_TYPES } from '@/global/accountTypes'
 
 export default {
   name: 'Projects',
   data() {
     return {
+      ACCOUNT_TYPES,
       projects: [],
       personalProjects: [],
       showAddPersonalProjectsModal: false,
