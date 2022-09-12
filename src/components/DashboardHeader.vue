@@ -81,7 +81,7 @@ export default {
     ...mapMutations('appStore', ['SET_ACTIVE_DIRECTORY']),
     displayTab(path) {
       const routesToDisplayTab = [
-        ROUTES.home,
+        ROUTES.userInfo,
         ROUTES.bio,
         ROUTES.job,
         ROUTES.employmentHistory,

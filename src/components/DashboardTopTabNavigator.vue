@@ -72,6 +72,7 @@ export default {
   gap: 1rem;
 }
 .tabs-container li {
+  position: relative;
   cursor: pointer;
   white-space: nowrap;
   padding: 0.7rem 1.5rem;
@@ -81,6 +82,7 @@ export default {
 .tabs-container li.active {
   background: #192041;
 }
+
 .tabs-container li a {
   transition: color 500ms ease;
 }

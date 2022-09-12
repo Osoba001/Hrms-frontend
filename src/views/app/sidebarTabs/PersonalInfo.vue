@@ -1,5 +1,5 @@
 <template>
-  <h1>Personal info</h1>
+  <router-view />
 </template>
 
 <script>

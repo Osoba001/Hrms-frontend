@@ -40,96 +40,6 @@ const routes = [
     },
     children: [
       {
-        path: '/bio',
-        component: Bio,
-        name: ROUTES.bio,
-        beforeEnter: (to, from, next) => {
-          if (
-            (store.getters['appStore/user']?.accountType ===
-              ACCOUNT_TYPES.staff ||
-              store.getters['appStore/user']?.accountType ===
-                ACCOUNT_TYPES.manager) &&
-            !store.getters['appStore/user']?.userInfoUpdated
-          ) {
-            next()
-          } else {
-            next('/dashboard')
-          }
-        },
-      },
-      {
-        path: '/job',
-        component: Job,
-        name: ROUTES.job,
-        beforeEnter: (to, from, next) => {
-          if (
-            (store.getters['appStore/user']?.accountType ===
-              ACCOUNT_TYPES.staff ||
-              store.getters['appStore/user']?.accountType ===
-                ACCOUNT_TYPES.manager) &&
-            !store.getters['appStore/user']?.userInfoUpdated
-          ) {
-            next()
-          } else {
-            next('/dashboard')
-          }
-        },
-      },
-      {
-        path: '/employment-history',
-        component: EmploymentHistory,
-        name: ROUTES.employmentHistory,
-        beforeEnter: (to, from, next) => {
-          if (
-            (store.getters['appStore/user']?.accountType ===
-              ACCOUNT_TYPES.staff ||
-              store.getters['appStore/user']?.accountType ===
-                ACCOUNT_TYPES.manager) &&
-            !store.getters['appStore/user']?.userInfoUpdated
-          ) {
-            next()
-          } else {
-            next('/dashboard')
-          }
-        },
-      },
-      {
-        path: '/certifications',
-        component: Certifications,
-        name: ROUTES.certifications,
-        beforeEnter: (to, from, next) => {
-          if (
-            (store.getters['appStore/user']?.accountType ===
-              ACCOUNT_TYPES.staff ||
-              store.getters['appStore/user']?.accountType ===
-                ACCOUNT_TYPES.manager) &&
-            !store.getters['appStore/user']?.userInfoUpdated
-          ) {
-            next()
-          } else {
-            next('/dashboard')
-          }
-        },
-      },
-      {
-        path: '/confirmation',
-        name: ROUTES.confirmation,
-        component: Confirmation,
-        beforeEnter: (to, from, next) => {
-          if (
-            (store.getters['appStore/user']?.accountType ===
-              ACCOUNT_TYPES.staff ||
-              store.getters['appStore/user']?.accountType ===
-                ACCOUNT_TYPES.manager) &&
-            !store.getters['appStore/user']?.userInfoUpdated
-          ) {
-            next()
-          } else {
-            next('/dashboard')
-          }
-        },
-      },
-      {
         path: '/dashboard',
         component: StaffDashboardStats,
         name: ROUTES.staffDashboard,
@@ -224,7 +134,37 @@ const routes = [
         name: ROUTES.departments,
         component: Department,
       },
-      { path: '/profile', component: PersonalInfo },
+      {
+        path: '/me',
+        name: ROUTES.userInfo,
+        component: PersonalInfo,
+        beforeEnter: (to, from, next) => {
+          store.getters['appStore/user']?.accountType ===
+            ACCOUNT_TYPES.manager ||
+          store.getters['appStore/user']?.accountType === ACCOUNT_TYPES.staff
+            ? next()
+            : next('/')
+        },
+        children: [
+          { path: '/me/bio', component: Bio, name: ROUTES.bio },
+          { path: '/me/job', component: Job, name: ROUTES.job },
+          {
+            path: '/me/employment-history',
+            component: EmploymentHistory,
+            name: ROUTES.employmentHistory,
+          },
+          {
+            path: '/me/certifications',
+            component: Certifications,
+            name: ROUTES.certifications,
+          },
+          {
+            path: '/me/confirmation',
+            name: ROUTES.confirmation,
+            component: Confirmation,
+          },
+        ],
+      },
     ],
   },
   {
@@ -251,3 +191,53 @@ appRouter.beforeEach((to, from, next) => {
 })
 
 export default appRouter
+
+// import { ACCOUNT_TYPES } from '@/global/accountTypes'
+// import { ROUTES } from '@/global/routes'
+// import store from '@/store'
+// import LoginVue from '@/views/auth/Login.vue'
+// import { createRouter, createWebHistory } from 'vue-router'
+// import adminRoutes from '@/router/adminRoutes'
+// import hrRoutes from '@/router/hrRoutes'
+// import managerRoutes from '@/router/managerRoutes'
+// import staffRoutes from '@/router/staffRoutes'
+
+// let otherRoutes = null
+
+// // Optionally select routes depending on account type
+// if (store.getters['appStore/user']?.accountType === ACCOUNT_TYPES.admin) {
+//   otherRoutes = adminRoutes
+// } else if (
+//   store.getters['appStore/user']?.accountType === ACCOUNT_TYPES.staff
+// ) {
+//   otherRoutes = staffRoutes
+// } else if (
+//   store.getters['appStore/user']?.accountType === ACCOUNT_TYPES.manager
+// ) {
+//   otherRoutes = managerRoutes
+// } else if (store.getters['appStore/user']?.accountType === ACCOUNT_TYPES.HR) {
+//   otherRoutes = hrRoutes
+// }
+
+// const routes = [
+//   {
+//     path: '/auth',
+//     name: 'Auth',
+//     children: [
+//       { path: '/auth/login', name: ROUTES.login, component: LoginVue },
+//     ],
+//   },
+//   ...otherRoutes,
+// ]
+
+// const router = createRouter({
+//   history: createWebHistory(),
+//   routes: routes,
+// })
+
+// router.beforeEach((to, from, next) => {
+//   document.title = to.meta.title
+//   next()
+// })
+
+// export default router

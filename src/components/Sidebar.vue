@@ -15,6 +15,7 @@
       </div>
     </header>
     <div class="items">
+      <!-- Home -->
       <router-link
         :to="{
           name:
@@ -29,11 +30,6 @@
             :class="{
               active:
                 $route.name === ROUTES.home ||
-                $route.name === ROUTES.bio ||
-                $route.name === ROUTES.job ||
-                $route.name === ROUTES.employmentHistory ||
-                $route.name === ROUTES.certifications ||
-                $route.name === ROUTES.confirmation ||
                 $route.name === ROUTES.staffDashboard ||
                 $route.name === ROUTES.hrDashboard,
             }"
@@ -45,6 +41,7 @@
         </div>
       </router-link>
 
+      <!-- Employees -->
       <router-link :to="{ name: 'Employees' }">
         <div
           class="item"
@@ -64,6 +61,7 @@
         </div>
       </router-link>
 
+      <!-- Projects -->
       <router-link :to="{ name: 'Projects' }">
         <div
           class="item"
@@ -83,6 +81,7 @@
         </div>
       </router-link>
 
+      <!-- Departments -->
       <router-link :to="{ name: 'Departments' }">
         <div class="item" v-if="user.accountType === ACCOUNT_TYPES.admin">
           <span
@@ -96,6 +95,7 @@
         </div>
       </router-link>
 
+      <!-- Leave -->
       <router-link :to="{ name: 'Leave' }">
         <div
           class="item"
@@ -118,6 +118,34 @@
             <span class="material-symbols-outlined"> handshake </span>
           </div>
           <span>Leave</span>
+        </div>
+      </router-link>
+
+      <!-- User info -->
+      <router-link :to="{ name: ROUTES.userInfo }">
+        <div
+          class="item"
+          v-if="
+            user.accountType === ACCOUNT_TYPES.staff ||
+            user.accountType === ACCOUNT_TYPES.manager
+          "
+        >
+          <span
+            class="active-bar"
+            :class="{
+              active:
+                $route.name === ROUTES.userInfo ||
+                $route.name === ROUTES.bio ||
+                $route.name === ROUTES.job ||
+                $route.name === ROUTES.employmentHistory ||
+                $route.name === ROUTES.certifications ||
+                $route.name === ROUTES.confirmation,
+            }"
+          />
+          <div class="icon">
+            <span class="material-symbols-outlined"> person </span>
+          </div>
+          <span>My info</span>
         </div>
       </router-link>
     </div>
@@ -166,7 +194,7 @@ export default {
     },
     handleSignOut() {
       this.signOut().then(() => {
-        this.$router.replace('/login')
+        this.$router.replace({ name: ROUTES.login })
       })
     },
   },
