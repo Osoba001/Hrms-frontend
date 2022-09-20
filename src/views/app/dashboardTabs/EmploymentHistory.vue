@@ -62,8 +62,8 @@
     </section>
 
     <dashboard-bottom-buttons-nav
-      backRoute="/job"
-      nextRoute="/certifications"
+      :backRoute="{ name: ROUTES.job }"
+      :nextRoute="{ name: ROUTES.certifications }"
     />
 
     <teleport to=".modals" v-if="showModal">
@@ -73,68 +73,70 @@
 </template>
 
 <script>
-import DashboardBottomButtonsNav from '@/components/DashboardBottomButtonsNav.vue'
-import AddEmploymentHistoryModal from '@/components/modals/AddEmploymentHistoryModal.vue'
-import { mapGetters } from 'vuex'
-import { monthDiff } from '@/utils'
+import DashboardBottomButtonsNav from "@/components/DashboardBottomButtonsNav.vue";
+import AddEmploymentHistoryModal from "@/components/modals/AddEmploymentHistoryModal.vue";
+import { mapGetters } from "vuex";
+import { monthDiff } from "@/utils";
+import { ROUTES } from "@/global/routes";
 
 export default {
   components: { DashboardBottomButtonsNav, AddEmploymentHistoryModal },
   data() {
     return {
+      ROUTES,
       showModal: false,
       monthNames: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
       ],
       previousEmployments: [
         {
           id: 1,
-          role: 'Snr. Petroleum Engineer',
-          organisation: 'Shell Petroleum Development Company',
-          duration: 'Jul 2022 - Present · 2mos',
-          location: 'Port Harcourt, Rivers, Nigeria',
-          logo: 'https://img.favpng.com/13/24/3/royal-dutch-shell-logo-petroleum-shell-oil-company-png-favpng-uxtfbiEHNvpwRBQ042W5XASMA.jpg',
+          role: "Snr. Petroleum Engineer",
+          organisation: "Shell Petroleum Development Company",
+          duration: "Jul 2022 - Present · 2mos",
+          location: "Port Harcourt, Rivers, Nigeria",
+          logo: "https://img.favpng.com/13/24/3/royal-dutch-shell-logo-petroleum-shell-oil-company-png-favpng-uxtfbiEHNvpwRBQ042W5XASMA.jpg",
         },
         {
           id: 2,
-          role: 'Software Engineer',
-          organisation: 'CypherCrescent Limited',
-          duration: 'Jul 2021 - Present · 2mos',
-          location: 'Port Harcourt, Rivers, Nigeria',
-          logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoohJtjombSWhBmoTYmWl_sibtCWmgPorDfw&usqp=CAU',
+          role: "Software Engineer",
+          organisation: "CypherCrescent Limited",
+          duration: "Jul 2021 - Present · 2mos",
+          location: "Port Harcourt, Rivers, Nigeria",
+          logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoohJtjombSWhBmoTYmWl_sibtCWmgPorDfw&usqp=CAU",
         },
         {
           id: 3,
-          role: 'Petroleum and Gas Engineer Intern',
-          organisation: 'Schlumberger',
-          duration: 'Jul 2022 - Present · 2mos',
-          location: 'Port Harcourt, Rivers, Nigeria',
-          logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrOqZsDzJMEmyrnSNBzrXKUaNrQTXuXAGjFbAyDhBzLw&s',
+          role: "Petroleum and Gas Engineer Intern",
+          organisation: "Schlumberger",
+          duration: "Jul 2022 - Present · 2mos",
+          location: "Port Harcourt, Rivers, Nigeria",
+          logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrOqZsDzJMEmyrnSNBzrXKUaNrQTXuXAGjFbAyDhBzLw&s",
         },
       ],
       monthDiff,
-    }
+    };
   },
   methods: {
     toggleModal() {
-      this.showModal = !this.showModal
+      this.showModal = !this.showModal;
     },
   },
   computed: {
-    ...mapGetters('appStore', ['userInfo']),
+    ...mapGetters("appStore", ["userInfo"]),
   },
-}
+};
 </script>
 
 <style scoped>

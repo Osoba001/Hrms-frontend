@@ -167,8 +167,8 @@
       </div>
 
       <dashboard-bottom-buttons-nav
-        backRoute="/bio"
-        nextRoute="/employment-history"
+        :backRoute="{name: ROUTES.bio}"
+        :nextRoute="{name: ROUTES.employmentHistory}"
       />
     </form>
   </div>
@@ -178,13 +178,19 @@
 import TextInput from '@/components/TextInput.vue'
 import DashboardBottomButtonsNav from '@/components/DashboardBottomButtonsNav.vue'
 import { mapState } from 'vuex'
+import { ROUTES } from '@/global/routes' 
 
 export default {
   name: 'Job',
-  components: { TextInput, DashboardBottomButtonsNav },
+  components: { TextInput, DashboardBottomButtonsNav,  },
   computed: {
     ...mapState('appStore', ['userInfo']),
   },
+  data() {
+    return {
+      ROUTES
+    }
+  }
 }
 </script>
 

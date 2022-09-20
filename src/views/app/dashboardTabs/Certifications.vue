@@ -30,8 +30,8 @@
     </section>
 
     <dashboard-bottom-buttons-nav
-      backRoute="/employment-history"
-      nextRoute="/confirmation"
+      :backRoute="{ name: ROUTES.employmentHistory }"
+      :nextRoute="{ name: ROUTES.confirmation }"
     />
 
     <teleport to=".modals" v-if="showModal">
@@ -70,70 +70,72 @@
 </template>
 
 <script>
-import DashboardBottomButtonsNav from '@/components/DashboardBottomButtonsNav.vue'
-import TextInput from '@/components/TextInput.vue'
-import ModalBackdrop from '@/components/ModalBackdrop.vue'
-import { mapState } from 'vuex'
-import { object, string } from 'yup'
+import DashboardBottomButtonsNav from "@/components/DashboardBottomButtonsNav.vue";
+import TextInput from "@/components/TextInput.vue";
+import ModalBackdrop from "@/components/ModalBackdrop.vue";
+import { mapState } from "vuex";
+import { object, string } from "yup";
+import { ROUTES } from "@/global/routes";
 
 const schema = object().shape({
   skill: string().min(1).max(255).required(),
   proficiency: string().required(),
-})
+});
 
 export default {
   components: { DashboardBottomButtonsNav, TextInput, ModalBackdrop },
   data() {
     return {
+      ROUTES,
       showModal: false,
       form: {
-        skill: '',
-        proficiency: '',
+        skill: "",
+        proficiency: "",
       },
       errors: {
-        skill: '',
-        proficiency: '',
+        skill: "",
+        proficiency: "",
       },
-    }
+    };
   },
   methods: {
     onSubmit(e) {
-      if (!this.form.skill || !this.form.proficiency) return
-      this.userInfo.skills.push({ ...this.form })
-      this.form.skill = ''
-      this.form.proficiency = ''
-      e.target.reset()
+      if (!this.form.skill || !this.form.proficiency) return;
+      this.userInfo.skills.push({ ...this.form });
+      this.form.skill = "";
+      this.form.proficiency = "";
+      e.target.reset();
     },
     toggleModal() {
-      this.showModal = !this.showModal
+      this.showModal = !this.showModal;
     },
     handleAddSkill(e) {
       schema
         .validate(this.form, { abortEarly: false })
         .then(() => {
-          this.onSubmit(e)
+          this.onSubmit(e);
         })
         .catch((err) => {
           err.inner.forEach((error) => {
-            this.errors = { ...this.errors, [error.path]: error.message }
-          })
-        })
+            this.errors = { ...this.errors, [error.path]: error.message };
+          });
+        });
     },
     validate(field) {
       schema
         .validateAt(field, this.form)
         .then(() => {
-          this.errors[field] = ''
+          this.errors[field] = "";
         })
         .catch((err) => {
-          this.errors[err.path] = err.message
-        })
+          this.errors[err.path] = err.message;
+        });
     },
   },
   computed: {
-    ...mapState('appStore', ['userInfo']),
+    ...mapState("appStore", ["userInfo"]),
   },
-}
+};
 </script>
 
 <style scoped>

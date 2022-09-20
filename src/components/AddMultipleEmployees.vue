@@ -82,7 +82,7 @@ button.configure-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  flex-gap: 5px;
   margin-top: 2rem;
   margin-left: auto;
 }

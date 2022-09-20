@@ -373,7 +373,7 @@
       </section>
     </form>
 
-    <DashboardBottomButtonsNav nextRoute="/job" />
+    <DashboardBottomButtonsNav :nextRoute="{name: ROUTES.job}" />
   </div>
 </template>
 
@@ -381,12 +381,18 @@
 import TextInput from '@/components/TextInput.vue'
 import DashboardBottomButtonsNav from '@/components/DashboardBottomButtonsNav.vue'
 import { mapState } from 'vuex'
+import { ROUTES } from '@/global/routes'
 
 export default {
   name: 'Bio',
   components: { TextInput, DashboardBottomButtonsNav },
   computed: {
     ...mapState('appStore', ['userInfo']),
+  },
+  data() {
+    return {
+      ROUTES
+    }
   },
   methods: {
     handleSubmit() {

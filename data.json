@@ -61,7 +61,7 @@
     "id": "1",
     "email": "hr@ccl.com.ng",
     "password": "000000",
-    "accountType": "HR",
+    "accountType": "staff",
     "name": "Sunday Michael",
     "userInfoUpdated": false,
     "image": "https://randomuser.me/api/portraits/thumb/men/15.jpg",
@@ -199,6 +199,20 @@
       "status": "inactive",
       "dateHired": "2022-09-08T15:06:37.226Z",
       "id": 14
+    },
+    {
+      "email": "johnson.mike@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-13T13:54:24.114Z",
+      "id": 15
+    },
+    {
+      "email": "faruq@nitda.com",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-15T21:17:31.072Z",
+      "id": 16
     }
   ],
   "projects": [
