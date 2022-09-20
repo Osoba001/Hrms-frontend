@@ -189,8 +189,9 @@ const actions = {
           email: data,
           role: "staff",
           status: "inactive",
-          dateHired: "2022-09-20T08:17:22.616Z",
+          dateHired: new Date(),
         });
+        state.importedEmails = [];
         window.location.reload();
       } catch (err) {
         console.log(err.message);
