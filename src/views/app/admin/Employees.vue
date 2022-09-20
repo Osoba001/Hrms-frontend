@@ -1,7 +1,7 @@
 <template>
   <div class="employees-container">
     <h2 class="section-title">
-      {{ !importedEmails.length ? 'List of Employees' : 'Add Employees' }}
+      {{ !importedEmails.length ? "List of Employees" : "Add Employees" }}
     </h2>
 
     <div
@@ -41,43 +41,43 @@
 </template>
 
 <script>
-import EmployeeCard from '@/components/EmployeeCard.vue'
-import AddMultipleEmployees from '@/components/AddMultipleEmployees.vue'
-import { mapActions, mapMutations, mapState } from 'vuex'
-import Loader from '@/components/Loader.vue'
+import EmployeeCard from "@/components/EmployeeCard.vue";
+import AddMultipleEmployees from "@/components/AddMultipleEmployees.vue";
+import { mapActions, mapMutations, mapState } from "vuex";
+import Loader from "@/components/Loader.vue";
 
 export default {
-  name: 'Employees',
+  name: "Employees",
   components: { EmployeeCard, AddMultipleEmployees, Loader },
   data() {
     return {
       showModal: false,
       employees: [],
       employeeToBeEdited: null,
-    }
+    };
   },
   methods: {
-    ...mapMutations('appStore', ['REMOVE_IMPORTED_EMAILS']),
-    ...mapActions('appStore', ['fetchEmployees']),
+    ...mapMutations("appStore", ["REMOVE_IMPORTED_EMAILS"]),
+    ...mapActions("appStore", ["fetchEmployees"]),
     handleSubmit() {},
     toggleModal(employeeId) {
       if (this.showModal === false) {
         this.employeeToBeEdited = this.employees.find(
           (employee) => employee.id === employeeId
-        )
+        );
       }
-      this.showModal = !this.showModal
+      this.showModal = !this.showModal;
     },
   },
   computed: {
-    ...mapState('appStore', ['user', 'importedEmails']),
+    ...mapState("appStore", ["user", "importedEmails"]),
   },
   async created() {
     setTimeout(async () => {
-      this.employees = await this.fetchEmployees()
-    }, 1000)
+      this.employees = await this.fetchEmployees();
+    }, 1000);
   },
-}
+};
 </script>
 
 <style scoped>

@@ -28,19 +28,23 @@
       </tr>
     </table>
   </section>
-  <button class="configure-btn">Configure users</button>
+  <button class="configure-btn" @click="addEmployees">Configure users</button>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
-  name: 'AddMultipleEmployees',
-  props: ['data'],
-  methods: {
-    ...mapMutations('appStore', ['REMOVE_SELECTED_EMAIL']),
+  name: "AddMultipleEmployees",
+  props: ["data"],
+  computed: {
+    ...mapGetters("appStore", ["importedEmails"]),
   },
-}
+  methods: {
+    ...mapMutations("appStore", ["REMOVE_SELECTED_EMAIL"]),
+    ...mapActions("appStore", ["addEmployees"]),
+  },
+};
 </script>
 
 <style scoped>
@@ -67,7 +71,7 @@ select {
   font-size: 0.875rem;
   border: 1px solid #cad6e4;
   border-radius: 5px;
-  font-family: 'Lato', Helvetica, sans-serif;
+  font-family: "Lato", Helvetica, sans-serif;
 }
 
 button.configure-btn {

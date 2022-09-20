@@ -61,7 +61,7 @@
     "id": "1",
     "email": "hr@ccl.com.ng",
     "password": "000000",
-    "accountType": "staff",
+    "accountType": "admin",
     "name": "Sunday Michael",
     "userInfoUpdated": false,
     "image": "https://randomuser.me/api/portraits/thumb/men/15.jpg",
@@ -213,6 +213,104 @@
       "status": "inactive",
       "dateHired": "2022-09-15T21:17:31.072Z",
       "id": 16
+    },
+    {
+      "email": "John.smaith@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 17
+    },
+    {
+      "email": "maria.doe@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 18
+    },
+    {
+      "email": "james.smith@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 19
+    },
+    {
+      "email": "ada.jones@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 20
+    },
+    {
+      "email": "marvelous.trinity@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 21
+    },
+    {
+      "email": "jack.smith@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 22
+    },
+    {
+      "email": "paul.emmanuel@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 23
+    },
+    {
+      "email": "victor.emmanuel@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 24
+    },
+    {
+      "email": "jackson.james@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 25
+    },
+    {
+      "email": "john.michael@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 26
+    },
+    {
+      "email": "isaac.james@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 27
+    },
+    {
+      "email": "chris.emmanuel@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 28
+    },
+    {
+      "email": "innocent.chidera@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 29
+    },
+    {
+      "email": "moses.johnson@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-20T08:17:22.616Z",
+      "id": 30
     }
   ],
   "projects": [
