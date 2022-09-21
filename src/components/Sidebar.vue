@@ -6,7 +6,10 @@
           <img v-bind:src="user.image" alt="user" />
         </div>
         <div class="user-detail">
-          <h2>{{ user.name }}</h2>
+          <h2 v-if="user.accountType !== ACCOUNT_TYPES.admin">
+            {{ `${user.firstName} ${user.surname}` }}
+          </h2>
+          <h2 v-else>Welcome,</h2>
           <p v-if="user.accountType === ACCOUNT_TYPES.admin">Admin</p>
           <p v-if="user.accountType === ACCOUNT_TYPES.manager">Manager</p>
           <p v-if="user.accountType === ACCOUNT_TYPES.staff">Staff</p>
@@ -168,37 +171,37 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import CypherCrescentLogo from './icons/CypherCrescentLogo.vue'
-import EmployeeModalInfo from './EmployeeModalInfo.vue'
-import { ACCOUNT_TYPES } from '@/global/accountTypes'
-import { ROUTES } from '@/global/routes'
+import { mapActions, mapState } from "vuex";
+import CypherCrescentLogo from "./icons/CypherCrescentLogo.vue";
+import EmployeeModalInfo from "./EmployeeModalInfo.vue";
+import { ACCOUNT_TYPES } from "@/global/accountTypes";
+import { ROUTES } from "@/global/routes";
 
 export default {
-  name: 'Sidebar',
+  name: "Sidebar",
   components: { CypherCrescentLogo, EmployeeModalInfo },
   computed: {
-    ...mapState('appStore', ['user']),
+    ...mapState("appStore", ["user"]),
   },
   data() {
     return {
       showModal: false,
       ACCOUNT_TYPES,
       ROUTES,
-    }
+    };
   },
   methods: {
-    ...mapActions('appStore', ['signOut']),
+    ...mapActions("appStore", ["signOut"]),
     toggleModal() {
-      this.showModal = !this.showModal
+      this.showModal = !this.showModal;
     },
     handleSignOut() {
       this.signOut().then(() => {
-        this.$router.replace({ name: ROUTES.login })
-      })
+        this.$router.replace({ name: ROUTES.login });
+      });
     },
   },
-}
+};
 </script>
 
 <style scoped>

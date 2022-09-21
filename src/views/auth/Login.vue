@@ -66,65 +66,65 @@
 </template>
 
 <script>
-import AuthLayout from '@/components/layout/AuthLayout.vue'
-import GoogleIcon from '@/components/icons/GoogleIcon.vue'
-import LinkedinIcon from '@/components/icons/LinkedinIcon.vue'
-import { mapActions } from 'vuex'
-import TextInput from '@/components/TextInput.vue'
-import { object, string } from 'yup'
+import AuthLayout from "@/components/layout/AuthLayout.vue";
+import GoogleIcon from "@/components/icons/GoogleIcon.vue";
+import LinkedinIcon from "@/components/icons/LinkedinIcon.vue";
+import { mapActions } from "vuex";
+import TextInput from "@/components/TextInput.vue";
+import { object, string } from "yup";
 
 const loginFormSchema = object().shape({
   email: string().email().required(),
-  password: string().min(6).max(255).required(),
-})
+  password: string().min(2).max(255).required(),
+});
 
 export default {
-  name: 'Login',
+  name: "Login",
   components: { AuthLayout, GoogleIcon, LinkedinIcon, TextInput },
   data() {
     return {
       form: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
       errors: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
-    }
+    };
   },
   methods: {
-    ...mapActions('appStore', ['signIn']),
+    ...mapActions("appStore", ["signIn"]),
     updateFormEmail(data) {
-      this.form.email = data
+      this.form.email = data;
     },
     updateFormPassword(data) {
-      this.form.password = data
+      this.form.password = data;
     },
     loginUser() {
       loginFormSchema
         .validate(this.form, { abortEarly: false })
         .then(() => {
-          this.signIn(this.form)
+          this.signIn(this.form);
         })
         .catch((err) => {
           err.inner.forEach((error) => {
-            this.errors = { ...this.errors, [error.path]: error.message }
-          })
-        })
+            this.errors = { ...this.errors, [error.path]: error.message };
+          });
+        });
     },
     validate(field) {
       loginFormSchema
         .validateAt(field, this.form)
         .then(() => {
-          this.errors[field] = ''
+          this.errors[field] = "";
         })
         .catch((err) => {
-          this.errors[err.path] = err.message
-        })
+          this.errors[err.path] = err.message;
+        });
     },
   },
-}
+};
 </script>
 
 <style></style>

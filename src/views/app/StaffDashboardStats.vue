@@ -40,7 +40,7 @@
           </div>
           <div class="item-info">
             <h5>Manager</h5>
-            <p>{{ user.supervisor }}</p>
+            <p>{{ user.manager }}</p>
           </div>
         </div>
         <div class="item">
@@ -108,19 +108,19 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   data() {
     return {
       projects: [],
       chartData: {
-        labels: ['A', 'B', 'C'],
+        labels: ["A", "B", "C"],
         datasets: [
           {
             data: [300, 100, 170],
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
           },
         ],
       },
@@ -128,25 +128,25 @@ export default {
         plugins: {
           legend: {
             labels: {
-              color: '#495057',
+              color: "#495057",
             },
           },
         },
       },
       leaveData: [],
-    }
+    };
   },
   methods: {
-    ...mapActions('appStore', ['fetchProjects', 'fetchLeaveData']),
+    ...mapActions("appStore", ["fetchProjects", "fetchLeaveData"]),
   },
   computed: {
-    ...mapGetters('appStore', ['user']),
+    ...mapGetters("appStore", ["user"]),
   },
   async created() {
-    this.projects = await this.fetchProjects()
-    this.leaveData = await this.fetchLeaveData()
+    this.projects = await this.fetchProjects();
+    this.leaveData = await this.fetchLeaveData();
   },
-}
+};
 </script>
 
 <style scoped>

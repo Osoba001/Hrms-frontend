@@ -17,6 +17,7 @@
     "primevue": "^3.16.0",
     "read-excel-file": "^5.4.5",
     "vue": "^3.2.13",
+    "vue-jwt-decode": "^0.1.0",
     "vue-lottie": "^0.2.1",
     "vue-router": "^4.0.13",
     "vuex": "^4.0.2",
