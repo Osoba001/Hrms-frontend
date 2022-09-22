@@ -2,11 +2,11 @@
   <article class="department">
     <header>
       <h3>DEPARTMENT</h3>
-      <p>{{ department.title }}</p>
+      <p>{{ department.name }}</p>
     </header>
 
     <div class="about-department-wrapper">
-      <div>
+      <div class="about-department-inner">
         <h3>About</h3>
         <div class="department-info">
           <p class="description">
@@ -18,16 +18,16 @@
 
     <div class="department-manager">
       <h3>Manager</h3>
-      <p>{{ department.manager }}</p>
+      <p>{{ department.hod }}</p>
     </div>
   </article>
 </template>
 
 <script>
 export default {
-  name: 'DepartmentCard',
-  props: ['department'],
-}
+  name: "DepartmentCard",
+  props: ["department"],
+};
 </script>
 
 <style scoped>
@@ -61,6 +61,12 @@ header p {
   display: flex;
   flex-direction: column;
   margin-top: 0.7rem;
+}
+
+.about-department-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .about-department-wrapper h3 {

@@ -5,8 +5,17 @@
     v-ripple
   >
     <header class="employee-status-wrapper">
-      <div class="status" :class="{ inactive: employee.status === 'inactive' }">
-        <span>{{ employee.status }}</span>
+      <div
+        class="status"
+        :class="{
+          inactive: employee.surname === 'string' || !employee.surname,
+        }"
+      >
+        <span>{{
+          employee.surname === "string" || !employee.surname
+            ? "Inactive"
+            : "Active"
+        }}</span>
       </div>
       <div
         v-if="employee.status === 'active'"
@@ -25,27 +34,39 @@
           person
         </span>
       </div>
-      <h3 class="name">{{ !employee.name ? '-' : employee.name }}</h3>
-      <p class="role">{{ employee.role }}</p>
+      <h3 class="name">
+        {{
+          !employee.firstName
+            ? "-"
+            : employee.firstName + " " + employee.surname
+        }}
+      </h3>
+      <p class="role">{{ identifyAccountType(employee.role) }}</p>
     </div>
 
     <div class="employee-info-bottom">
       <div class="bottom-info">
         <div>
           <h4>Department</h4>
-          <p>{{ employee.department }}</p>
+          <p>
+            {{
+              employee.departmentName !== "No Department"
+                ? employee.departmentName
+                : "-"
+            }}
+          </p>
         </div>
         <div>
           <h4>Date Hired</h4>
           <p>
-            {{ new Date(employee.dateHired).toLocaleDateString() }}
+            {{ new Date(employee.dateEmployed).toLocaleDateString() }}
           </p>
         </div>
       </div>
       <div class="contact-info">
         <div class="contact">
           <span class="material-symbols-outlined"> mail </span>
-          <p>{{ employee.email }}</p>
+          <p>{{ employee.email.toLowerCase() }}</p>
         </div>
       </div>
     </div>
@@ -57,23 +78,25 @@
 </template>
 
 <script>
-import EmployeeModalInfo from './EmployeeModalInfo.vue'
+import EmployeeModalInfo from "./EmployeeModalInfo.vue";
+import { identifyAccountType } from "@/utils";
 
 export default {
-  name: 'EmployeeCard',
-  props: ['employee'],
+  name: "EmployeeCard",
+  props: ["employee"],
   data() {
     return {
       showModal: false,
-    }
+      identifyAccountType,
+    };
   },
   methods: {
     toggleModal() {
-      this.showModal = !this.showModal
+      this.showModal = !this.showModal;
     },
   },
   components: { EmployeeModalInfo },
-}
+};
 </script>
 
 <style scoped>

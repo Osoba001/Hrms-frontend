@@ -1,6 +1,7 @@
 import axios from "axios";
 import VueJwtDecode from "vue-jwt-decode";
 import router from "@/router";
+import { identifyAccountType, identifyAccountTypeFromString } from "@/utils";
 
 const state = {
   user: null,
@@ -89,8 +90,6 @@ const mutations = {
 const actions = {
   async signIn({ commit, dispatch }, loginDetails) {
     try {
-      console.log("Form data", loginDetails);
-
       const response = await axios.patch(
         "http://creshr.svr.cyphercrescent.com:44386/api/Authentication/login",
         { ...loginDetails }
@@ -110,6 +109,7 @@ const actions = {
 
     if (!state.accessToken) return;
 
+    // Decode token and hit endpoint to get user
     try {
       let decoded = VueJwtDecode.decode(token);
       const userId =
@@ -118,28 +118,13 @@ const actions = {
         ];
 
       const response = await axios.get(
-        `http://creshr.svr.cyphercrescent.com:44386/api/Employee/byId?id=${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        `http://creshr.svr.cyphercrescent.com:44386/api/Employee/byId?id=${userId}`
       );
-      localStorage.setItem("accessToken", token);
 
       const user = response.data;
-      let role;
-      switch (user.role) {
-        case 0:
-          role = "admin";
-          break;
-        case 2:
-          role = "manager";
-          break;
-        case 6:
-          role = "staff";
-          break;
-      }
+
+      // Role from response returns numbers mapped to account types
+      const role = identifyAccountType(user.role);
 
       commit("SET_USER", {
         ...user,
@@ -160,7 +145,9 @@ const actions = {
   },
   async fetchEmployees() {
     try {
-      const response = await axios.get("/employees");
+      const response = await axios.get(
+        "http://creshr.svr.cyphercrescent.com:44386/api/Employee"
+      );
       return response.data;
     } catch (err) {
       console.log(err.message);
@@ -182,7 +169,6 @@ const actions = {
       console.log(err.message);
     }
   },
-  // eslint-disable-next-line no-empty-pattern
   async addPersonalProjects(_, formData) {
     try {
       const response = await axios.post("/personalProjects", {
@@ -204,17 +190,25 @@ const actions = {
   },
   async getDepartments() {
     try {
-      const response = await axios.get("/departments");
+      const response = await axios.get(
+        "http://creshr.svr.cyphercrescent.com:44386/api/Department"
+      );
+      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err.message);
     }
   },
   async addEmployee(_, formData) {
+    const role = identifyAccountTypeFromString(formData.role);
     try {
-      const response = await axios.post("/employees", {
-        ...formData,
-      });
+      const response = await axios.post(
+        "http://creshr.svr.cyphercrescent.com:44386/api/Employee",
+        {
+          ...formData,
+          role,
+        }
+      );
       window.location.reload();
       return response;
     } catch (err) {
@@ -223,14 +217,17 @@ const actions = {
   },
   addEmployees({ state }) {
     state.importedEmails.forEach(async (data) => {
+      // const role = identifyAccountTypeFromString(data.role);
+
       try {
         // Temporary
-        await axios.post("/employees", {
-          email: data,
-          role: "staff",
-          status: "inactive",
-          dateHired: new Date(),
-        });
+        await axios.post(
+          "http://creshr.svr.cyphercrescent.com:44386/api/Employee",
+          {
+            email: data,
+            role: 6,
+          }
+        );
         state.importedEmails = [];
         window.location.reload();
       } catch (err) {

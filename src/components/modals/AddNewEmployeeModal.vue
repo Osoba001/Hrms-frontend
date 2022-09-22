@@ -34,61 +34,59 @@
 </template>
 
 <script>
-import ModalBackdrop from '../ModalBackdrop.vue'
-import TextInput from '../TextInput.vue'
-import { object, string } from 'yup'
-import { mapActions } from 'vuex'
+import ModalBackdrop from "../ModalBackdrop.vue";
+import TextInput from "../TextInput.vue";
+import { object, string } from "yup";
+import { mapActions } from "vuex";
 
 const schema = object().shape({
   email: string().email().required(),
   role: string().required(),
-})
+});
 
 export default {
   components: { ModalBackdrop, TextInput },
-  props: ['toggleModal'],
+  props: ["toggleModal"],
   data() {
     return {
       form: {
-        email: '',
-        role: '',
+        email: "",
+        role: "",
       },
       errors: {
-        email: '',
-        role: '',
+        email: "",
+        role: "",
       },
-    }
+    };
   },
   methods: {
-    ...mapActions('appStore', ['addEmployee']),
+    ...mapActions("appStore", ["addEmployee"]),
     handleAddEmployee() {
       schema
         .validate(this.form, { abortEarly: false })
         .then(() => {
           this.addEmployee({
             ...this.form,
-            status: 'inactive',
-            dateHired: new Date(),
-          })
+          });
         })
         .catch((err) => {
           err.inner.forEach((error) => {
-            this.errors = { ...this.errors, [error.path]: error.message }
-          })
-        })
+            this.errors = { ...this.errors, [error.path]: error.message };
+          });
+        });
     },
     validate(field) {
       schema
         .validateAt(field, this.form)
         .then(() => {
-          this.errors[field] = ''
+          this.errors[field] = "";
         })
         .catch((err) => {
-          this.errors[err.path] = err.message
-        })
+          this.errors[err.path] = err.message;
+        });
     },
   },
-}
+};
 </script>
 
 <style scoped>
