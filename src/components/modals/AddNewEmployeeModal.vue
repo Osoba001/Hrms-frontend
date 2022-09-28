@@ -25,6 +25,7 @@
           <option value="staff">Staff</option>
           <option value="intern">Intern</option>
           <option value="corper">Corper</option>
+          <option value="HR">Human Resource</option>
         </select>
       </div>
 

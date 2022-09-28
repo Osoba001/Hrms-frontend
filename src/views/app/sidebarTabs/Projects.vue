@@ -12,7 +12,7 @@
       </button>
     </div>
 
-    <section class="projects-container" v-if="projects.length">
+    <section class="projects-container" v-if="!isLoading">
       <Project
         v-for="project in projects"
         :key="project.id"
@@ -31,7 +31,7 @@
       </button>
     </div>
 
-    <section class="personal-projects" v-if="personalProjects.length">
+    <section class="personal-projects" v-if="!isLoading">
       <Project
         v-for="project in personalProjects"
         :key="project.id"
@@ -103,33 +103,34 @@
 </template>
 
 <script>
-import Project from '@/components/Project.vue'
-import ModalBackdrop from '@/components/ModalBackdrop.vue'
-import TextInput from '@/components/TextInput.vue'
-import { mapActions, mapState } from 'vuex'
-import ManagerAddProjectModal from '@/components/modals/ManagerAddProjectModal.vue'
-import Loader from '@/components/Loader.vue'
-import { ACCOUNT_TYPES } from '@/global/accountTypes'
+import Project from "@/components/Project.vue";
+import ModalBackdrop from "@/components/ModalBackdrop.vue";
+import TextInput from "@/components/TextInput.vue";
+import { mapActions, mapState } from "vuex";
+import ManagerAddProjectModal from "@/components/modals/ManagerAddProjectModal.vue";
+import Loader from "@/components/Loader.vue";
+import { ACCOUNT_TYPES } from "@/global/accountTypes";
 
 export default {
-  name: 'Projects',
+  name: "Projects",
   data() {
     return {
       ACCOUNT_TYPES,
+      isLoading: false,
       projects: [],
       personalProjects: [],
       showAddPersonalProjectsModal: false,
       showManagerAddProjectsModal: false,
       form: {
         personalProject: {
-          github: '',
-          liveLink: '',
-          description: '',
-          title: '',
-          status: '',
+          github: "",
+          liveLink: "",
+          description: "",
+          title: "",
+          status: "",
         },
       },
-    }
+    };
   },
   components: {
     Project,
@@ -139,32 +140,31 @@ export default {
     Loader,
   },
   methods: {
-    ...mapActions('appStore', [
-      'fetchPersonalProjects',
-      'fetchProjects',
-      'addPersonalProjects',
-    ]),
+    ...mapActions("appStore", ["addPersonalProjects"]),
     toggleAddPersonalProjectsModal() {
-      this.showAddPersonalProjectsModal = !this.showAddPersonalProjectsModal
+      this.showAddPersonalProjectsModal = !this.showAddPersonalProjectsModal;
     },
     toggleManagerAddProjectsModal() {
-      this.showManagerAddProjectsModal = !this.showManagerAddProjectsModal
+      this.showManagerAddProjectsModal = !this.showManagerAddProjectsModal;
     },
     async handlePersonalProjectSubmit() {
-      const res = await this.addPersonalProjects(this.form.personalProject)
-      alert(JSON.stringify(res.data))
+      await this.addPersonalProjects(this.form.personalProject);
     },
   },
-  async created() {
+  async mounted() {
+    this.isLoading = true;
     setTimeout(async () => {
-      this.projects = await this.fetchProjects()
-      this.personalProjects = await this.fetchPersonalProjects()
-    }, 1000)
+      this.projects = this.user.companyProjects;
+      this.personalProjects = this.user.employeeProjects;
+      //   this.projects = await this.fetchProjects()
+      //   this.personalProjects = await this.fetchPersonalProjects()
+      this.isLoading = false;
+    }, 1000);
   },
   computed: {
-    ...mapState('appStore', ['user']),
+    ...mapState("appStore", ["user"]),
   },
-}
+};
 </script>
 
 <style scoped>
@@ -172,6 +172,10 @@ export default {
   flex: 1;
   padding: 0.5rem 1rem;
   overflow-y: auto;
+}
+
+section {
+  min-height: 250px;
 }
 
 section.projects-container {

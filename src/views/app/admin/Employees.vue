@@ -15,7 +15,7 @@
 
     <section
       class="employees"
-      v-if="!importedEmails.length && employees.length"
+      v-if="!importedEmails.length && !isLoading"
       v-motion
       :initial="{
         opacity: 0,
@@ -32,7 +32,7 @@
         :employee="employee"
       />
     </section>
-    <div v-if="!employees.length" style="flex: 1" class="loader-container">
+    <div v-if="isLoading" style="flex: 1" class="loader-container">
       <Loader />
     </div>
 
@@ -51,6 +51,7 @@ export default {
   components: { EmployeeCard, AddMultipleEmployees, Loader },
   data() {
     return {
+      isLoading: false,
       showModal: false,
       employees: [],
       employeeToBeEdited: null,
@@ -72,10 +73,10 @@ export default {
   computed: {
     ...mapState("appStore", ["user", "importedEmails"]),
   },
-  async created() {
-    setTimeout(async () => {
-      this.employees = await this.fetchEmployees();
-    }, 1000);
+  async mounted() {
+    this.isLoading = true;
+    this.employees = await this.fetchEmployees();
+    this.isLoading = false;
   },
 };
 </script>

@@ -22,7 +22,7 @@
           </div>
           <div class="item-info">
             <h5>Department</h5>
-            <p>{{ user.department }}</p>
+            <p>{{ user.departmentName }}</p>
           </div>
         </div>
         <div class="item">
@@ -31,7 +31,7 @@
           </div>
           <div class="item-info">
             <h5>Location</h5>
-            <p>{{ user.location }}</p>
+            <p>{{ user.jobLocation }}</p>
           </div>
         </div>
         <div class="item">
@@ -49,7 +49,7 @@
           </div>
           <div class="item-info">
             <h5>Work Anniversary</h5>
-            <p>{{ user.workAnniversary }}</p>
+            <p>{{ new Date(user.dateEmployed).toDateString() }}</p>
           </div>
         </div>
         <div class="item">
@@ -142,7 +142,7 @@ export default {
   computed: {
     ...mapGetters("appStore", ["user"]),
   },
-  async created() {
+  async mounted() {
     this.projects = await this.fetchProjects();
     this.leaveData = await this.fetchLeaveData();
   },

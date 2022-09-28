@@ -76,7 +76,30 @@
 </template>
 
 <script>
-export default {}
+import axios from "axios";
+
+export default {
+  name: "HRLeave",
+  data() {
+    return {
+      isLoading: false,
+      leaveInfo: null,
+    };
+  },
+  async mounted() {
+    try {
+      this.isLoading = true;
+      const { data } = await axios.get(
+        "http://creshr.svr.cyphercrescent.com:44386/api/Leave"
+      );
+      this.leaveInfo = data;
+      this.isLoading = false;
+    } catch (err) {
+      console.log(err.message);
+      this.isLoading = false;
+    }
+  },
+};
 </script>
 
 <style scoped>

@@ -24,25 +24,32 @@
 </template>
 
 <script>
-import DepartmentCard from '@/components/DepartmentCard.vue'
-import { mapActions } from 'vuex'
-import Loader from '@/components/Loader.vue'
+import DepartmentCard from "@/components/DepartmentCard.vue";
+import { mapActions } from "vuex";
+import Loader from "@/components/Loader.vue";
+import axios from "axios";
 export default {
   components: { DepartmentCard, Loader },
   data() {
     return {
       departments: [],
-    }
+    };
   },
   methods: {
-    ...mapActions('appStore', ['getDepartments']),
+    ...mapActions("appStore", ["getDepartments"]),
   },
-  created() {
-    setTimeout(async () => {
-      this.departments = await this.getDepartments()
-    }, 1000)
+  async mounted() {
+    try {
+      const response = await axios.get(
+        "http://creshr.svr.cyphercrescent.com:44386/api/Department"
+      );
+      this.departments = response.data;
+    } catch (err) {
+      alert("Failed to fetch departments", err.message);
+      console.log(err.message);
+    }
   },
-}
+};
 </script>
 <style scoped>
 .department-container {

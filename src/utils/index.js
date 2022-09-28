@@ -18,8 +18,9 @@ export const identifyAccountType = (roleNumber) => {
     case 6:
       role = "staff";
       break;
-    default:
-      role = "staff";
+    case 9:
+      role = "HR";
+      break;
   }
 
   return role;
@@ -39,6 +40,8 @@ export const identifyAccountTypeFromString = (role) => {
     case "corper":
       roleNumber = 6;
       break;
+    case "HR":
+      roleNumber = 9;
   }
 
   return roleNumber;
