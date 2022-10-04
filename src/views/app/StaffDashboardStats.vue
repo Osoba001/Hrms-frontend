@@ -108,6 +108,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -137,7 +138,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions("appStore", ["fetchProjects", "fetchLeaveData"]),
+    ...mapActions("appStore", ["fetchProjects"]),
+    async fetchLeaveData() {
+      try {
+        const response = await axios.get("/leave");
+        return response.data;
+      } catch (err) {
+        console.log(err.message);
+      }
+    },
   },
   computed: {
     ...mapGetters("appStore", ["user"]),

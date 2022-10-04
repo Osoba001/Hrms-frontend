@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import axios from "axios";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "AddMultipleEmployees",
@@ -42,7 +43,23 @@ export default {
   },
   methods: {
     ...mapMutations("appStore", ["REMOVE_SELECTED_EMAIL"]),
-    ...mapActions("appStore", ["addEmployees"]),
+    addEmployees() {
+      this.importedEmails.forEach(async (data) => {
+        try {
+          // Temporary
+          await axios.post("/employees", {
+            email: data,
+            role: "staff",
+            status: "inactive",
+            dateHired: new Date(),
+          });
+          this.importedEmails = [];
+          window.location.reload();
+        } catch (err) {
+          console.log(err.message);
+        }
+      });
+    },
   },
 };
 </script>

@@ -24,14 +24,14 @@
     <header>
       <div class="project-title">
         <h3>TITLE</h3>
-        <p>{{ project.title }}</p>
+        <p>{{ project.name }}</p>
       </div>
 
       <div class="links" v-show="variant === 'personal'">
-        <a target="_blank" :href="project.github">
+        <a target="_blank" :href="project.githubLink">
           <GithubIcon />
         </a>
-        <a target="_blank" :href="project.liveLink">
+        <a target="_blank" :href="project.link">
           <ExternalLinkIcon />
         </a>
       </div>
@@ -70,13 +70,13 @@
     <div
       class="project-status"
       :class="{
-        ongoing: project.status === 'ongoing',
-        cancelled: project.status === 'cancelled',
-        'not-started': project.status === 'not started',
-        completed: project.status === 'completed',
+        ongoing: projectInfo.status === 'ongoing',
+        cancelled: projectInfo.status === 'cancelled',
+        'not-started': projectInfo.status === 'not started',
+        completed: projectInfo.status === 'completed',
       }"
     >
-      <span>{{ project.status }}</span>
+      <span>{{ projectInfo.status }} </span>
     </div>
   </article>
 
@@ -96,34 +96,52 @@
 </template>
 
 <script>
-import GithubIcon from './icons/GithubIcon.vue'
-import ExternalLinkIcon from './icons/ExternalLinkIcon.vue'
-import ModalBackdrop from './ModalBackdrop.vue'
-import { mapState } from 'vuex'
-import { ACCOUNT_TYPES } from '@/global/accountTypes'
+import GithubIcon from "./icons/GithubIcon.vue";
+import ExternalLinkIcon from "./icons/ExternalLinkIcon.vue";
+import ModalBackdrop from "./ModalBackdrop.vue";
+import { mapState } from "vuex";
+import { ACCOUNT_TYPES } from "@/global/accountTypes";
 
 export default {
-  name: 'Project',
-  props: ['project', 'variant'],
+  name: "Project",
+  props: ["project", "variant"],
   components: { GithubIcon, ExternalLinkIcon, ModalBackdrop },
   data() {
     return {
       showModal: false,
       ACCOUNT_TYPES,
-    }
+    };
   },
   methods: {
     toggleModal() {
-      this.showModal = !this.showModal
+      this.showModal = !this.showModal;
     },
     handleClick() {
-      if (this.variant !== 'personal') this.toggleModal()
+      if (this.variant !== "personal") this.toggleModal();
     },
   },
   computed: {
-    ...mapState('appStore', ['user']),
+    ...mapState("appStore", ["user"]),
+    projectInfo: function () {
+      let status = null;
+      if (this.project?.status === 0) {
+        status = "not started";
+      } else if (this.project?.status === 1) {
+        status = "ongoing";
+      } else if (this.project?.status === 2) {
+        status = "cancelled";
+      } else if (this.project?.status === 3) {
+        status = "completed";
+      }
+
+      const projectData = {
+        ...this.project,
+        status,
+      };
+      return projectData;
+    },
   },
-}
+};
 </script>
 
 <style scoped>

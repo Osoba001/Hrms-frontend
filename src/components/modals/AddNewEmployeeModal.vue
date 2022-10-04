@@ -38,7 +38,8 @@
 import ModalBackdrop from "../ModalBackdrop.vue";
 import TextInput from "../TextInput.vue";
 import { object, string } from "yup";
-import { mapActions } from "vuex";
+import { identifyAccountTypeFromString } from "@/utils";
+import axios from "axios";
 
 const schema = object().shape({
   email: string().email().required(),
@@ -61,7 +62,24 @@ export default {
     };
   },
   methods: {
-    ...mapActions("appStore", ["addEmployee"]),
+    async addEmployee() {
+      const role = identifyAccountTypeFromString(this.form.role);
+      console.log(role);
+      try {
+        const response = await axios.post(
+          "http://creshr.svr.cyphercrescent.com:44386/api/Employee",
+          {
+            ...this.form,
+            role,
+          }
+        );
+        // window.location.reload();
+        console.log(response.data);
+        return response;
+      } catch (err) {
+        console.log(err.message);
+      }
+    },
     handleAddEmployee() {
       schema
         .validate(this.form, { abortEarly: false })

@@ -167,31 +167,31 @@
       </div>
 
       <dashboard-bottom-buttons-nav
-        :backRoute="{name: ROUTES.bio}"
-        :nextRoute="{name: ROUTES.employmentHistory}"
+        :backRoute="{ name: ROUTES.bio }"
+        :nextRoute="{ name: ROUTES.employmentHistory }"
       />
     </form>
   </div>
 </template>
 
 <script>
-import TextInput from '@/components/TextInput.vue'
-import DashboardBottomButtonsNav from '@/components/DashboardBottomButtonsNav.vue'
-import { mapState } from 'vuex'
-import { ROUTES } from '@/global/routes' 
+import TextInput from "@/components/TextInput.vue";
+import DashboardBottomButtonsNav from "@/components/DashboardBottomButtonsNav.vue";
+import { mapState } from "vuex";
+import { ROUTES } from "@/global/routes";
 
 export default {
-  name: 'Job',
-  components: { TextInput, DashboardBottomButtonsNav,  },
+  name: "Job",
+  components: { TextInput, DashboardBottomButtonsNav },
   computed: {
-    ...mapState('appStore', ['userInfo']),
+    ...mapState("appStore", ["userInfo"]),
   },
   data() {
     return {
-      ROUTES
-    }
-  }
-}
+      ROUTES,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -239,7 +239,7 @@ form .sections-container section {
   font-size: 0.875rem;
   border: 1px solid #cad6e4;
   border-radius: 5px;
-  font-family: 'Lato', Helvetica, sans-serif;
+  font-family: "Lato", Helvetica, sans-serif;
 }
 
 .job-container .radio-btns-wrapper {

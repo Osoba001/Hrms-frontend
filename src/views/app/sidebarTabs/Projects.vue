@@ -13,6 +13,7 @@
     </div>
 
     <section class="projects-container" v-if="!isLoading">
+      <h4 v-if="!isLoading && !projects.length">You don't have any Projects</h4>
       <Project
         v-for="project in projects"
         :key="project.id"
@@ -32,6 +33,9 @@
     </div>
 
     <section class="personal-projects" v-if="!isLoading">
+      <h4 v-if="!isLoading && !personalProjects.length">
+        You don't have any Personal Projects
+      </h4>
       <Project
         v-for="project in personalProjects"
         :key="project.id"
@@ -106,10 +110,11 @@
 import Project from "@/components/Project.vue";
 import ModalBackdrop from "@/components/ModalBackdrop.vue";
 import TextInput from "@/components/TextInput.vue";
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 import ManagerAddProjectModal from "@/components/modals/ManagerAddProjectModal.vue";
 import Loader from "@/components/Loader.vue";
 import { ACCOUNT_TYPES } from "@/global/accountTypes";
+import axios from "axios";
 
 export default {
   name: "Projects",
@@ -140,7 +145,6 @@ export default {
     Loader,
   },
   methods: {
-    ...mapActions("appStore", ["addPersonalProjects"]),
     toggleAddPersonalProjectsModal() {
       this.showAddPersonalProjectsModal = !this.showAddPersonalProjectsModal;
     },
@@ -148,18 +152,58 @@ export default {
       this.showManagerAddProjectsModal = !this.showManagerAddProjectsModal;
     },
     async handlePersonalProjectSubmit() {
-      await this.addPersonalProjects(this.form.personalProject);
+      const data = {
+        employeeId: this.user.id,
+        name: this.form.personalProject.title,
+        link: this.form.personalProject.liveLink,
+        status: 0,
+        description: this.form.personalProject.description,
+      };
+      console.log(data);
+      try {
+        const response = await axios.post(
+          "http://creshr.svr.cyphercrescent.com:44386/api/EmployeeProject",
+          {
+            ...data,
+          }
+        );
+        console.log(response);
+        // window.location.reload();
+        return response;
+      } catch (err) {
+        alert("Failed to add project", err.message);
+        console.log("Error", err.message);
+      }
+    },
+    async fetchProjects() {
+      try {
+        const response = await axios.get(
+          "http://creshr.svr.cyphercrescent.com:44386/api/CompanyProject"
+        );
+        return response.data;
+      } catch (err) {
+        console.log(err.message);
+      }
+    },
+    async fetchPersonalProjects() {
+      try {
+        const response = await axios.get(
+          `http://creshr.svr.cyphercrescent.com:44386/api/EmployeeProject/byemployeeid?employeeId=${this.user.id}`
+        );
+        console.log(response);
+        return response.data;
+      } catch (err) {
+        console.log(err.message);
+      }
     },
   },
   async mounted() {
     this.isLoading = true;
-    setTimeout(async () => {
-      this.projects = this.user.companyProjects;
-      this.personalProjects = this.user.employeeProjects;
-      //   this.projects = await this.fetchProjects()
-      //   this.personalProjects = await this.fetchPersonalProjects()
-      this.isLoading = false;
-    }, 1000);
+    this.projects = this.user.companyProjects;
+    //   this.personalProjects = this.user.employeeProjects;
+    // this.projects = await this.fetchProjects();
+    this.personalProjects = await this.fetchPersonalProjects();
+    this.isLoading = false;
   },
   computed: {
     ...mapState("appStore", ["user"]),

@@ -1,7 +1,7 @@
 import axios from "axios";
 import VueJwtDecode from "vue-jwt-decode";
 import router from "@/router";
-import { identifyAccountType, identifyAccountTypeFromString } from "@/utils";
+import { identifyAccountType } from "@/utils";
 
 const state = {
   user: null,
@@ -120,6 +120,8 @@ const actions = {
           "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
         ];
 
+      console.log(decoded, userId);
+
       const response = await axios.get(
         `http://creshr.svr.cyphercrescent.com:44386/api/Employee/byId?id=${userId}`
       );
@@ -136,7 +138,7 @@ const actions = {
       });
       router.replace("/");
     } catch (e) {
-      console.log(e.message);
+      console.log(e);
       commit("SET_TOKEN", null);
       commit("SET_USER", null);
     }
@@ -146,16 +148,7 @@ const actions = {
     commit("SET_TOKEN", null);
     commit("SET_USER", null);
   },
-  async fetchEmployees() {
-    try {
-      const response = await axios.get(
-        "http://creshr.svr.cyphercrescent.com:44386/api/Employee"
-      );
-      return response.data;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
+
   async fetchProjects() {
     try {
       const response = await axios.get("/projects");
@@ -163,80 +156,6 @@ const actions = {
     } catch (err) {
       console.log(err.message);
     }
-  },
-  async fetchPersonalProjects({ state }) {
-    try {
-      const response = await axios.get(
-        `http://creshr.svr.cyphercrescent.com:44386/api/EmployeeProject?employeeId=${state.user.id}`
-      );
-      return response.data;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
-  async addPersonalProjects({ state }, formData) {
-    const data = {
-      employeeId: state.user.id,
-      name: formData.title,
-      link: formData.liveLink,
-      status: 0,
-      description: "",
-    };
-    try {
-      const response = await axios.post(
-        "http://creshr.svr.cyphercrescent.com:44386/api/EmployeeProject",
-        {
-          ...data,
-        }
-      );
-      window.location.reload();
-      return response;
-    } catch (err) {
-      console.log("Error", err.message);
-    }
-  },
-  async fetchLeaveData() {
-    try {
-      const response = await axios.get("/leave");
-      return response.data;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
-  async addEmployee(_, formData) {
-    const role = identifyAccountTypeFromString(formData.role);
-    console.log(role);
-    try {
-      const response = await axios.post(
-        "http://creshr.svr.cyphercrescent.com:44386/api/Employee",
-        {
-          ...formData,
-          role,
-        }
-      );
-      //   window.location.reload();
-      console.log(response.data);
-      return response;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
-  addEmployees({ state }) {
-    state.importedEmails.forEach(async (data) => {
-      try {
-        // Temporary
-        await axios.post("/employees", {
-          email: data,
-          role: "staff",
-          status: "inactive",
-          dateHired: new Date(),
-        });
-        state.importedEmails = [];
-        window.location.reload();
-      } catch (err) {
-        console.log(err.message);
-      }
-    });
   },
 };
 

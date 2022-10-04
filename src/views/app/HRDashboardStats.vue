@@ -146,133 +146,133 @@ export default {
       projects: [
         {
           id: 1,
-          title: 'SEPAL 3.0',
-          status: 'ongoing',
+          title: "SEPAL 3.0",
+          status: "ongoing",
         },
         {
           id: 2,
-          title: 'Nodal Analysis',
-          status: 'not started',
+          title: "Nodal Analysis",
+          status: "not started",
         },
         {
           id: 3,
-          title: 'BFS Economics',
-          status: 'ongoing',
+          title: "BFS Economics",
+          status: "ongoing",
         },
         {
           id: 4,
-          title: 'EPT',
-          status: 'completed',
+          title: "EPT",
+          status: "completed",
         },
         {
           id: 5,
-          title: 'SMBS',
-          status: 'cancelled',
+          title: "SMBS",
+          status: "cancelled",
         },
         {
           id: 6,
-          title: 'WIMS',
-          status: 'ongoing',
+          title: "WIMS",
+          status: "ongoing",
         },
       ],
       roles: {
         labels: [
-          'Staff',
-          'Intern',
-          'Manager',
-          'Contract',
-          'Team Lead',
-          'General Manager',
-          'Director',
+          "Staff",
+          "Intern",
+          "Manager",
+          "Contract",
+          "Team Lead",
+          "General Manager",
+          "Director",
         ],
         datasets: [
           {
-            label: 'Distribution by Roles',
-            backgroundColor: 'rgb(66, 116, 195)',
+            label: "Distribution by Roles",
+            backgroundColor: "rgb(66, 116, 195)",
             data: [51, 13, 8, 6, 20, 4, 1],
           },
         ],
       },
       ageData: {
-        labels: ['0-21', '21-25', '26-30', '31-40', '41-50', '51-60', '61-70'],
+        labels: ["0-21", "21-25", "26-30", "31-40", "41-50", "51-60", "61-70"],
         datasets: [
           {
             data: [9, 17, 22, 20, 31, 27, 3],
             backgroundColor: [
-              'rgb(158, 71, 11)',
-              'rgb(66, 116, 195)',
-              '#FFCE56',
-              'rgb(163, 166, 164)',
-              'rgb(60, 59, 60)',
-              'rgb(88, 156, 214)',
-              'rgb(147, 208, 77)',
+              "rgb(158, 71, 11)",
+              "rgb(66, 116, 195)",
+              "#FFCE56",
+              "rgb(163, 166, 164)",
+              "rgb(60, 59, 60)",
+              "rgb(88, 156, 214)",
+              "rgb(147, 208, 77)",
             ],
             hoverBackgroundColor: [
-              'rgb(158, 71, 11, 0.9)',
-              'rgb(66, 116, 195, 0.9)',
-              'rgb(148, 50, 31, 0.9)',
-              'rgb(163, 166, 164, 0.9)',
-              'rgb(60, 59, 60, 0.9)',
-              'rgb(88, 156, 214, 0.9)',
-              'rgb(147, 208, 77, 0.9)',
+              "rgb(158, 71, 11, 0.9)",
+              "rgb(66, 116, 195, 0.9)",
+              "rgb(148, 50, 31, 0.9)",
+              "rgb(163, 166, 164, 0.9)",
+              "rgb(60, 59, 60, 0.9)",
+              "rgb(88, 156, 214, 0.9)",
+              "rgb(147, 208, 77, 0.9)",
             ],
           },
         ],
       },
       locationData: {
-        labels: ['Port Harcourt', 'Benin', 'Lagos', 'Warri'],
+        labels: ["Port Harcourt", "Benin", "Lagos", "Warri"],
         datasets: [
           {
             data: [80, 15, 10, 7],
             backgroundColor: [
-              'rgb(66, 116, 195)',
-              'rgb(60, 59, 60)',
-              'rgb(88, 156, 214)',
-              'rgb(147, 208, 77)',
+              "rgb(66, 116, 195)",
+              "rgb(60, 59, 60)",
+              "rgb(88, 156, 214)",
+              "rgb(147, 208, 77)",
             ],
             hoverBackgroundColor: [
-              'rgb(66, 116, 195, 0.9)',
-              'rgb(60, 59, 60, 0.9)',
-              'rgb(88, 156, 214, 0.9)',
-              'rgb(147, 208, 77, 0.9)',
+              "rgb(66, 116, 195, 0.9)",
+              "rgb(60, 59, 60, 0.9)",
+              "rgb(88, 156, 214, 0.9)",
+              "rgb(147, 208, 77, 0.9)",
             ],
           },
         ],
       },
       worktypeData: {
-        labels: ['On-site', 'Remote', 'Hybrid'],
+        labels: ["On-site", "Remote", "Hybrid"],
         datasets: [
           {
             data: [53, 45, 39],
             backgroundColor: [
-              'rgb(66, 116, 195)',
-              '#192041',
-              'rgb(60, 59, 60)',
+              "rgb(66, 116, 195)",
+              "#192041",
+              "rgb(60, 59, 60)",
             ],
             hoverBackgroundColor: [
-              'rgba(66, 116, 195, 0.9)',
-              '#19204195',
-              'rgb(60, 59, 60, 0.9)',
+              "rgba(66, 116, 195, 0.9)",
+              "#19204195",
+              "rgb(60, 59, 60, 0.9)",
             ],
           },
         ],
       },
       departmentsData: {
         labels: [
-          'CTO Office',
-          'MD/CEO Office',
-          'Corporate Finance',
-          'Business Development',
-          'Corporate Services',
-          'ETDS',
-          'Integrated Asset Management',
-          'Data Democratisation',
-          'Research and Development',
+          "CTO Office",
+          "MD/CEO Office",
+          "Corporate Finance",
+          "Business Development",
+          "Corporate Services",
+          "ETDS",
+          "Integrated Asset Management",
+          "Data Democratisation",
+          "Research and Development",
         ],
         datasets: [
           {
-            label: 'Distribution by Department',
-            backgroundColor: 'rgb(66, 116, 195)',
+            label: "Distribution by Department",
+            backgroundColor: "rgb(66, 116, 195)",
             data: [28, 48, 40, 19, 86, 27, 90, 134, 35],
           },
         ],
@@ -281,42 +281,42 @@ export default {
         plugins: {
           legend: {
             labels: {
-              color: '#495057',
+              color: "#495057",
             },
           },
         },
       },
       horizontalOptions: {
-        indexAxis: 'y',
+        indexAxis: "y",
         plugins: {
           legend: {
             labels: {
-              color: '#495057',
+              color: "#495057",
             },
           },
         },
         scales: {
           x: {
             ticks: {
-              color: '#495057',
+              color: "#495057",
             },
             grid: {
-              color: '#ebedef',
+              color: "#ebedef",
             },
           },
           y: {
             ticks: {
-              color: '#495057',
+              color: "#495057",
             },
             grid: {
-              color: '#ebedef',
+              color: "#ebedef",
             },
           },
         },
       },
-    }
+    };
   },
-}
+};
 </script>
 
 <style scoped>

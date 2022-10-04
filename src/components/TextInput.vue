@@ -12,13 +12,14 @@
     @blur="$emit('validate')"
     @keypress="$emit('validate')"
     :class="{ error: !!error }"
+    :readonly="readonly"
   />
   <!-- <p class="form-input-hint" v-if="error">{{ error }}</p> -->
 </template>
 
 <script>
 export default {
-  name: 'TextInput',
+  name: "TextInput",
   props: {
     type: {
       type: String,
@@ -28,7 +29,7 @@ export default {
     },
     name: {
       type: String,
-      default: '',
+      default: "",
     },
     label: {
       type: String,
@@ -49,20 +50,28 @@ export default {
     },
     error: {
       type: String,
-      default: '',
+      default: "",
+    },
+    value: {
+      type: String,
+      default: "",
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
     return {
-      inputValue: '',
-    }
+      inputValue: this.value,
+    };
   },
   methods: {
     handleClearInputOnFocus() {
-      if (this.clearOnFocus) this.inputValue = ''
+      if (this.clearOnFocus) this.inputValue = "";
     },
   },
-}
+};
 </script>
 
 <style scoped>
@@ -77,7 +86,7 @@ input {
   font-size: 0.875rem;
   border: 1px solid #cad6e4;
   border-radius: 5px;
-  font-family: 'Lato', Helvetica, sans-serif;
+  font-family: "Lato", Helvetica, sans-serif;
 }
 input:focus {
   outline: none;

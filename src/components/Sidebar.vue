@@ -125,7 +125,7 @@
       </router-link>
 
       <!-- User info -->
-      <router-link :to="{ name: ROUTES.userInfo }">
+      <router-link :to="{ name: ROUTES.bio }">
         <div
           class="item"
           v-if="

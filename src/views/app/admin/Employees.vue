@@ -43,8 +43,9 @@
 <script>
 import EmployeeCard from "@/components/EmployeeCard.vue";
 import AddMultipleEmployees from "@/components/AddMultipleEmployees.vue";
-import { mapActions, mapMutations, mapState } from "vuex";
+import { mapMutations, mapState } from "vuex";
 import Loader from "@/components/Loader.vue";
+import axios from "axios";
 
 export default {
   name: "Employees",
@@ -59,8 +60,16 @@ export default {
   },
   methods: {
     ...mapMutations("appStore", ["REMOVE_IMPORTED_EMAILS"]),
-    ...mapActions("appStore", ["fetchEmployees"]),
-    handleSubmit() {},
+    async fetchEmployees() {
+      try {
+        const response = await axios.get(
+          "http://creshr.svr.cyphercrescent.com:44386/api/Employee"
+        );
+        return response.data;
+      } catch (err) {
+        console.log(err.message);
+      }
+    },
     toggleModal(employeeId) {
       if (this.showModal === false) {
         this.employeeToBeEdited = this.employees.find(

@@ -1,6 +1,6 @@
 <template>
   <ModalBackdrop @close="toggleModal">
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="addManagerProject">
       <h2 class="section-title">Create project</h2>
       <div>
         <TextInput label="Project title" placeholder="Project..." />
@@ -59,36 +59,54 @@
 </template>
 
 <script>
-import ModalBackdrop from '@/components/ModalBackdrop.vue'
-import TextInput from '../TextInput.vue'
+import ModalBackdrop from "@/components/ModalBackdrop.vue";
+import axios from "axios";
+import TextInput from "../TextInput.vue";
 
 export default {
-  name: 'ManagerAddProjectModal',
+  name: "ManagerAddProjectModal",
   components: { ModalBackdrop, TextInput },
-  props: ['toggleModal'],
+  props: ["toggleModal"],
   data() {
     return {
       collaborators: [],
-      collaborator: '',
-    }
+      collaborator: "",
+    };
   },
   methods: {
     updateCollaborator(data) {
-      this.collaborator = data
+      this.collaborator = data;
     },
     addToCollaborators() {
       this.collaborators.push({
         id: Math.random(),
         name: this.collaborator,
-      })
+      });
     },
     removeCollaborator(collaboratorId) {
       this.collaborators = this.collaborators.filter(
         (collaborator) => collaborator.id !== collaboratorId
-      )
+      );
+    },
+    async addManagerProject() {
+      const data = {
+        teamLeadId: "675a2a09-e879-4af5-5bb0-08da9c75b1e0",
+        name: "Our new project III",
+        teamMemberIds: ["43f28d19-6caa-473b-5bb1-08da9c75b1e0"],
+      };
+
+      const response = await axios.post(
+        "http://creshr.svr.cyphercrescent.com:44386/api/CompanyProject",
+        {
+          ...data,
+        }
+      );
+
+      console.log(response);
+      return response.data;
     },
   },
-}
+};
 </script>
 
 <style scoped>
