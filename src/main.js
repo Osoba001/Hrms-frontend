@@ -17,17 +17,17 @@ import axios from "axios";
 
 const app = createApp(App);
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "http://creshr.svr.cyphercrescent.com:44386/api";
 
 store
-  .dispatch("appStore/attemptSignIn", localStorage.getItem("accessToken"))
-  .then(() => {
-    app.use(store);
-    app.use(MotionPlugin);
-    app.use(PrimeVue, { ripple: true });
-    app.component("Datepicker", Datepicker);
-    app.component("Chart", Chart);
-    app.component("ProgressBar", ProgressBar);
-    app.directive("ripple", Ripple);
-    app.use(router).mount("#app");
-  });
+	.dispatch("appStore/attemptSignIn", localStorage.getItem("accessToken"))
+	.then(() => {
+		app.use(store);
+		app.use(MotionPlugin);
+		app.use(PrimeVue, { ripple: true });
+		app.component("Datepicker", Datepicker);
+		app.component("Chart", Chart);
+		app.component("ProgressBar", ProgressBar);
+		app.directive("ripple", Ripple);
+		app.use(router).mount("#app");
+	});
