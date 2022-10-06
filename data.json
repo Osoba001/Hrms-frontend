@@ -1,0 +1,498 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "hr@ccl.com.ng",
+      "password": "000000",
+      "accountType": "HR",
+      "name": "Sunday Michael",
+      "userInfoUpdated": false,
+      "image": "https://randomuser.me/api/portraits/thumb/men/15.jpg",
+      "department": "Software Development",
+      "location": "Port Harcourt",
+      "supervisor": "Jane Doe",
+      "workAnniversary": "June 3rd",
+      "timeInCompany": "36 months"
+    },
+    {
+      "id": "2",
+      "email": "staff@ccl.com.ng",
+      "password": "000000",
+      "accountType": "staff",
+      "name": "Isaac Aku",
+      "userInfoUpdated": false,
+      "image": "https://randomuser.me/api/portraits/thumb/men/8.jpg",
+      "department": "Software Development",
+      "location": "Port Harcourt",
+      "supervisor": "Jane Doe",
+      "workAnniversary": "June 3rd",
+      "timeInCompany": "36 months"
+    },
+    {
+      "id": "3",
+      "email": "manager@ccl.com.ng",
+      "password": "000000",
+      "accountType": "manager",
+      "name": "Halima Dangote",
+      "userInfoUpdated": false,
+      "image": "https://randomuser.me/api/portraits/thumb/women/5.jpg",
+      "department": "Software Development",
+      "location": "Port Harcourt",
+      "supervisor": "Jane Doe",
+      "workAnniversary": "June 3rd",
+      "timeInCompany": "36 months"
+    },
+    {
+      "id": "4",
+      "email": "admin@ccl.com.ng",
+      "password": "000000",
+      "accountType": "admin",
+      "name": "John Emmanuel",
+      "userInfoUpdated": false,
+      "image": "https://randomuser.me/api/portraits/thumb/men/10.jpg",
+      "department": "Software Development",
+      "location": "Port Harcourt",
+      "supervisor": "Jane Doe",
+      "workAnniversary": "June 3rd",
+      "timeInCompany": "36 months"
+    }
+  ],
+  "user": {
+    "id": "1",
+    "email": "hr@ccl.com.ng",
+    "password": "000000",
+    "accountType": "admin",
+    "name": "Sunday Michael",
+    "userInfoUpdated": false,
+    "image": "https://randomuser.me/api/portraits/thumb/men/15.jpg",
+    "department": "Software Development",
+    "location": "Port Harcourt",
+    "supervisor": "Jane Doe",
+    "workAnniversary": "June 3rd",
+    "timeInCompany": "36 months"
+  },
+  "employees": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "role": "General Manager",
+      "department": "Development",
+      "image": "https://randomuser.me/api/portraits/thumb/women/8.jpg",
+      "email": "john.doe@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "id": 2,
+      "name": "Antoine Griezmann",
+      "role": "Director",
+      "department": "Design",
+      "image": "https://randomuser.me/api/portraits/thumb/men/75.jpg",
+      "email": "antoine.griezmann@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "id": 3,
+      "name": "John Michael",
+      "role": "Staff",
+      "department": "Development",
+      "image": "https://randomuser.me/api/portraits/thumb/men/71.jpg",
+      "email": "john.michael@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "id": 4,
+      "name": "Isaac Aku",
+      "role": "Corper",
+      "department": "Design",
+      "image": "https://randomuser.me/api/portraits/thumb/men/5.jpg",
+      "email": "isaac.aku@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "id": 5,
+      "name": "Gabriel John",
+      "role": "Intern",
+      "department": "Development",
+      "image": "https://randomuser.me/api/portraits/thumb/women/52.jpg",
+      "email": "gabriel.john@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "id": 6,
+      "name": "Sunday Mike",
+      "role": "General Manager",
+      "department": "Design",
+      "image": "https://randomuser.me/api/portraits/thumb/men/35.jpg",
+      "email": "sunday.mike@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "id": 7,
+      "name": "Victor Chinedu",
+      "role": "Director",
+      "department": "Development",
+      "image": "https://randomuser.me/api/portraits/thumb/men/23.jpg",
+      "email": "victor.chinedu@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "id": 8,
+      "name": "Innocent Samuel",
+      "role": "Staff",
+      "department": "Design",
+      "image": "https://randomuser.me/api/portraits/thumb/women/78.jpg",
+      "email": "innocent.samuel@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "id": 9,
+      "name": "Paul Emmanuel",
+      "role": "Corper",
+      "department": "Development",
+      "image": "https://randomuser.me/api/portraits/thumb/men/36.jpg",
+      "email": "paul.emmanuel@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "id": 10,
+      "name": "Marvelous Jack",
+      "role": "Intern",
+      "department": "Design",
+      "image": "https://randomuser.me/api/portraits/thumb/women/18.jpg",
+      "email": "marvelous.jack@ccl.com.ng",
+      "status": "active",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "email": "michael.faraday@ccl.com.ng",
+      "role": "staff",
+      "id": 11,
+      "status": "inactive",
+      "dateHired": "2022-09-06T12:12:13.440Z"
+    },
+    {
+      "email": "jamessmith@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-06T12:12:13.440Z",
+      "id": 12
+    },
+    {
+      "email": "isaac.afula@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-06T13:50:07.712Z",
+      "id": 13
+    },
+    {
+      "email": "john.stones@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-08T15:06:37.226Z",
+      "id": 14
+    },
+    {
+      "email": "johnson.mike@ccl.com.ng",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-13T13:54:24.114Z",
+      "id": 15
+    },
+    {
+      "email": "faruq@nitda.com",
+      "role": "staff",
+      "status": "inactive",
+      "dateHired": "2022-09-15T21:17:31.072Z",
+      "id": 16
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "SEPAL 3.0",
+      "numberOfPeople": 17,
+      "duration": 4,
+      "status": "ongoing",
+      "collaborators": {
+        "teamLead": "Antoine Griezmann",
+        "otherMembers": [
+          {
+            "id": 1,
+            "name": "Gabriel John"
+          },
+          {
+            "id": 2,
+            "name": "John Michael"
+          },
+          {
+            "id": 3,
+            "name": "Sunday Michael"
+          },
+          {
+            "id": 4,
+            "name": "Marvelous Jack"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "Nodal Analysis",
+      "numberOfPeople": 22,
+      "duration": 4,
+      "status": "not started",
+      "collaborators": {
+        "teamLead": "Antoine Griezmann",
+        "otherMembers": [
+          {
+            "id": 1,
+            "name": "Gabriel John"
+          },
+          {
+            "id": 2,
+            "name": "John Michael"
+          },
+          {
+            "id": 3,
+            "name": "Sunday Michael"
+          },
+          {
+            "id": 4,
+            "name": "Marvelous Jack"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "BFS Economics",
+      "numberOfPeople": 18,
+      "duration": 4,
+      "status": "ongoing",
+      "collaborators": {
+        "teamLead": "Antoine Griezmann",
+        "otherMembers": [
+          {
+            "id": 1,
+            "name": "Gabriel John"
+          },
+          {
+            "id": 2,
+            "name": "John Michael"
+          },
+          {
+            "id": 3,
+            "name": "Sunday Michael"
+          },
+          {
+            "id": 4,
+            "name": "Marvelous Jack"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "EPT",
+      "numberOfPeople": 6,
+      "duration": 4,
+      "status": "completed",
+      "collaborators": {
+        "teamLead": "Antoine Griezmann",
+        "otherMembers": [
+          {
+            "id": 1,
+            "name": "Gabriel John"
+          },
+          {
+            "id": 2,
+            "name": "John Michael"
+          },
+          {
+            "id": 3,
+            "name": "Sunday Michael"
+          },
+          {
+            "id": 4,
+            "name": "Marvelous Jack"
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "SMBS",
+      "numberOfPeople": 10,
+      "duration": 4,
+      "status": "cancelled",
+      "collaborators": {
+        "teamLead": "Antoine Griezmann",
+        "otherMembers": [
+          {
+            "id": 1,
+            "name": "Gabriel John"
+          },
+          {
+            "id": 2,
+            "name": "John Michael"
+          },
+          {
+            "id": 3,
+            "name": "Sunday Michael"
+          },
+          {
+            "id": 4,
+            "name": "Marvelous Jack"
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "WIMS",
+      "numberOfPeople": 7,
+      "duration": 4,
+      "status": "ongoing",
+      "collaborators": {
+        "teamLead": "Antoine Griezmann",
+        "otherMembers": [
+          {
+            "id": 1,
+            "name": "Gabriel John"
+          },
+          {
+            "id": 2,
+            "name": "John Michael"
+          },
+          {
+            "id": 3,
+            "name": "Sunday Michael"
+          },
+          {
+            "id": 4,
+            "name": "Marvelous Jack"
+          }
+        ]
+      }
+    }
+  ],
+  "personalProjects": [
+    {
+      "id": 1,
+      "title": "WIMS",
+      "status": "ongoing",
+      "github": "#",
+      "liveLink": "#",
+      "description": "Voluptates blanditiis numquam magni nostrum odit libero, dignissimos magnam dolorum officia veniam saepe cum eveniet, doloremque tenetur. Blanditiis, repellat."
+    },
+    {
+      "id": 2,
+      "title": "WIMS",
+      "status": "completed",
+      "github": "#",
+      "liveLink": "#",
+      "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur dolor voluptates blanditiis numquam magni nostrum odit libero, dignissimos magnam dolorum officia veniam saepe cum eveniet, doloremque tenetur. Blanditiis, repellat assumenda!"
+    },
+    {
+      "id": 3,
+      "title": "Web API integration",
+      "status": "completed",
+      "github": "#",
+      "liveLink": "#",
+      "description": "Voluptates blanditiis numquam magni nostrum odit libero, dignissimos magnam dolorum officia veniam saepe cum eveniet, doloremque tenetur. Blanditiis, repellat."
+    },
+    {
+      "github": "https://example.com",
+      "liveLink": "https://example.com",
+      "description": "asdasdasdasd",
+      "title": "Test Project",
+      "status": "completed",
+      "id": 4
+    }
+  ],
+  "departments": [
+    {
+      "id": 1,
+      "title": "Corporate Finance",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum eos fugiat quisquam dolorum autem officia dolore architecto, incidunt quibusdam cum cumque dolorem et in quod fuga. Fuga, saepe! Praesentium, consectetur!",
+      "manager": "Mr. James Smith"
+    },
+    {
+      "id": 2,
+      "title": "Business Development",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum eos fugiat quisquam dolorum autem officia dolore architecto, incidunt quibusdam cum cumque dolorem et in quod fuga. Fuga, saepe! Praesentium, consectetur!",
+      "manager": "Mr. Harry Dickson"
+    },
+    {
+      "id": 3,
+      "title": "Corporate Services",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum eos fugiat quisquam dolorum autem officia dolore architecto, incidunt quibusdam cum cumque dolorem et in quod fuga. Fuga, saepe! Praesentium, consectetur!",
+      "manager": "Mr. Benjamin Stone"
+    },
+    {
+      "id": 4,
+      "title": "ETDS",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum eos fugiat quisquam dolorum autem officia dolore architecto, incidunt quibusdam cum cumque dolorem et in quod fuga. Fuga, saepe! Praesentium, consectetur!",
+      "manager": "Mr. Tosin Mike"
+    },
+    {
+      "id": 5,
+      "title": "Integrated Asset Management",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum eos fugiat quisquam dolorum autem officia dolore architecto, incidunt quibusdam cum cumque dolorem et in quod fuga. Fuga, saepe! Praesentium, consectetur!",
+      "manager": "Mrs. Jane Doe"
+    },
+    {
+      "id": 6,
+      "title": "Data Democratisation",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum eos fugiat quisquam dolorum autem officia dolore architecto, incidunt quibusdam cum cumque dolorem et in quod fuga. Fuga, saepe! Praesentium, consectetur!",
+      "manager": "Mr. Emmanuel Jack"
+    },
+    {
+      "id": 7,
+      "title": "Research and Development",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum eos fugiat quisquam dolorum autem officia dolore architecto, incidunt quibusdam cum cumque dolorem et in quod fuga. Fuga, saepe! Praesentium, consectetur!",
+      "manager": "Mr. Michael Jude"
+    }
+  ],
+  "leave": [
+    {
+      "id": 6,
+      "type": "Annual",
+      "availableDays": 17,
+      "totalDays": 24
+    },
+    {
+      "id": 1,
+      "type": "Casual",
+      "availableDays": 2,
+      "totalDays": 5
+    },
+    {
+      "id": 2,
+      "type": "Compassionate",
+      "availableDays": 5,
+      "totalDays": 5
+    },
+    {
+      "id": 3,
+      "type": "Examination",
+      "availableDays": 4,
+      "totalDays": 5
+    },
+    {
+      "id": 4,
+      "type": "Sick",
+      "availableDays": 3,
+      "totalDays": 5
+    }
+  ]
+}

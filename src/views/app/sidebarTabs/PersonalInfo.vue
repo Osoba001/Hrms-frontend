@@ -1,5 +1,5 @@
 <template>
-  <h1>Certifications</h1>
+  <router-view />
 </template>
 
 <script>

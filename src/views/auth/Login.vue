@@ -1,25 +1,37 @@
 <template>
   <AuthLayout>
     <template v-slot:form>
-      <form @submit="handleSubmit">
+      <form @submit.prevent="loginUser">
         <div>
           <h1>Log in</h1>
           <p class="subtitle">Log in to your account</p>
         </div>
 
         <div class="inputs-container">
-          <input
+          <TextInput
             type="email"
-            v-model="email"
             placeholder="Enter your email address"
+            @update-value="updateFormEmail"
+            :required="true"
+            name="email"
+            @validate="validate('email')"
+            :error="errors.email"
           />
-          <input type="password" v-model="password" placeholder="*****" />
+          <TextInput
+            type="password"
+            placeholder="Password"
+            @update-value="updateFormPassword"
+            :required="true"
+            name="password"
+            @validate="validate('password')"
+            :error="errors.password"
+          />
         </div>
 
         <div class="buttons-container">
           <a href="#">Forgot password?</a>
 
-          <button class="submit-button">
+          <button type="submit" class="submit-button">
             Next
             <span class="material-symbols-outlined"> arrow_right_alt </span>
           </button>
@@ -42,8 +54,10 @@
 
         <div class="alt-sign-in">
           <p>
-            Don’t have an account yet?
-            <router-link :to="{ path: '/signup' }">Signup</router-link>
+            Forgot password?
+            <router-link :to="{ name: 'Change Password' }"
+              >Click to reset</router-link
+            >
           </p>
         </div>
       </form>
@@ -52,26 +66,65 @@
 </template>
 
 <script>
-import AuthLayout from '@/components/layout/AuthLayout.vue'
-import GoogleIcon from '@/components/icons/GoogleIcon.vue'
-import LinkedinIcon from '@/components/icons/LinkedinIcon.vue'
+import AuthLayout from "@/components/layout/AuthLayout.vue";
+import GoogleIcon from "@/components/icons/GoogleIcon.vue";
+import LinkedinIcon from "@/components/icons/LinkedinIcon.vue";
+import { mapActions } from "vuex";
+import TextInput from "@/components/TextInput.vue";
+import { object, string } from "yup";
+
+const loginFormSchema = object().shape({
+  email: string().email().required(),
+  password: string().min(2).max(255).required(),
+});
 
 export default {
-  name: 'Login',
-  components: { AuthLayout, GoogleIcon, LinkedinIcon },
+  name: "Login",
+  components: { AuthLayout, GoogleIcon, LinkedinIcon, TextInput },
   data() {
     return {
-      email: '',
-      password: '',
-    }
+      form: {
+        email: "",
+        password: "",
+      },
+      errors: {
+        email: "",
+        password: "",
+      },
+    };
   },
   methods: {
-    handleSubmit(e) {
-      e.preventDefault()
-      if (this.email.trim()) alert(this.email)
+    ...mapActions("appStore", ["signIn"]),
+    updateFormEmail(data) {
+      this.form.email = data;
+    },
+    updateFormPassword(data) {
+      this.form.password = data;
+    },
+    loginUser() {
+      loginFormSchema
+        .validate(this.form, { abortEarly: false })
+        .then(() => {
+          this.signIn(this.form);
+        })
+        .catch((err) => {
+          err.inner.forEach((error) => {
+            this.errors = { ...this.errors, [error.path]: error.message };
+          });
+        });
+    },
+    validate(field) {
+      loginFormSchema
+        .validateAt(field, this.form)
+        .then(() => {
+          this.errors[field] = "";
+        })
+        .catch((err) => {
+          this.errors[err.path] = err.message;
+        });
     },
   },
-}
+};
 </script>
 
 <style></style>
