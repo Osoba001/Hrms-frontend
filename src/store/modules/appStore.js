@@ -1,259 +1,226 @@
-import axios from "axios";
-import VueJwtDecode from "vue-jwt-decode";
-import router from "@/router";
-import { identifyAccountType, identifyAccountTypeFromString } from "@/utils";
+import axios from "axios"
+import VueJwtDecode from "vue-jwt-decode"
+import router from "@/router"
+import { identifyAccountType } from "@/utils"
 
 const state = {
-  user: null,
-  accessToken: null,
-  importedEmails: [],
-  userInfo: {
-    bio: {
-      employee: {
-        surname: "",
-        firstName: "",
-        email: "",
-        phoneNumber: "",
-        residentialAddress: "",
-        stateOfOrigin: "",
-        dateOfBirth: "",
-        dateOfHire: "",
-        gender: "",
-        maritalStatus: "",
-      },
-      nextOfKin: {
-        surname: "",
-        firstName: "",
-        email: "",
-        phoneNumber: "",
-        residentialAddress: "",
-        relationship: "",
-      },
-      inCaseOfEmergency: {
-        surname: "",
-        firstName: "",
-        phoneNumber: "",
-        residentialAddress: "",
-        relationship: "",
-        dateOfBirth: "",
-      },
-      maritalInformation: {
-        name: "",
-        phoneNumber: "",
-        residentialAddress: "",
-        profession: "",
-        dateOfBirth: "",
-        numberOfChildren: "",
-      },
-    },
-    job: {
-      workDetails: {
-        department: "",
-        role: "",
-        workType: "",
-        contractType: "",
-        manager: "",
-        dateOfHire: "",
-        offerLetterStatus: "",
-      },
-      previousRole: {
-        department: "",
-        role: "",
-        reasonForChange: "",
-      },
-    },
-    employmentHistory: [],
-    skills: [],
-  },
-};
+	user: null,
+	accessToken: null,
+	importedEmails: [],
+	userInfo: {
+		bio: {
+			employee: {
+				surname: "",
+				firstName: "",
+				email: "",
+				phoneNumber: "",
+				residentialAddress: "",
+				stateOfOrigin: "",
+				dateOfBirth: "",
+				dateOfHire: "",
+				gender: "",
+				maritalStatus: "",
+			},
+			nextOfKin: {
+				surname: "",
+				firstName: "",
+				email: "",
+				phoneNumber: "",
+				residentialAddress: "",
+				relationship: "",
+			},
+		},
+		job: {
+			workDetails: {
+				department: "",
+				role: "",
+				workType: "",
+				contractType: "",
+				manager: "",
+				dateOfHire: "",
+				offerLetterStatus: "",
+			},
+			previousRole: {
+				department: "",
+				role: "",
+				reasonForChange: "",
+			},
+		},
+		employmentHistory: [],
+		skills: [],
+	},
+}
 
 const mutations = {
-  REMOVE_IMPORTED_EMAILS(state) {
-    state.importedEmails = [];
-  },
-  SET_ACTIVE_DIRECTORY(state, payload) {
-    state.importedEmails = payload;
-  },
-  REMOVE_SELECTED_EMAIL(state, payload) {
-    state.importedEmails = state.importedEmails.filter(
-      (email) => email !== payload
-    );
-  },
-  SET_TOKEN(state, token) {
-    state.accessToken = token;
-  },
-  SET_USER(state, user) {
-    state.user = user;
-  },
-};
+	REMOVE_IMPORTED_EMAILS(state) {
+		state.importedEmails = []
+	},
+	SET_ACTIVE_DIRECTORY(state, payload) {
+		state.importedEmails = payload
+	},
+	REMOVE_SELECTED_EMAIL(state, payload) {
+		state.importedEmails = state.importedEmails.filter(
+			(email) => email !== payload
+		)
+	},
+	SET_TOKEN(state, token) {
+		state.accessToken = token
+	},
+	SET_USER(state, user) {
+		state.user = user
+	},
+	UPDATE_USER_INFO(state, info) {
+		state.userInfo = info
+	},
+}
 
 const actions = {
-  async signIn({ commit, dispatch }, loginDetails) {
-    try {
-      const response = await axios.patch(
-        "http://creshr.svr.cyphercrescent.com:44386/api/Authentication/login",
-        { ...loginDetails }
-      );
+	async signIn({ commit, dispatch }, loginDetails) {
+		try {
+			console.log("Form data", loginDetails)
 
-      const token = response.data;
-      commit("SET_TOKEN", token);
-      return dispatch("attemptSignIn", token);
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  async attemptSignIn({ commit, state }, token) {
-    if (token) {
-      commit("SET_TOKEN", token);
-    }
+			const response = await axios.patch("/Authentication/login", {
+				...loginDetails,
+			})
 
-    if (!state.accessToken) return;
+			const token = response.data
+			commit("SET_TOKEN", token)
+			return dispatch("attemptSignIn", token)
+		} catch (err) {
+			console.log(err)
+		}
+	},
+	async attemptSignIn({ commit, state }, token) {
+		if (token) {
+			commit("SET_TOKEN", token)
+		}
 
-    // Decode token and hit endpoint to get user
-    try {
-      let decoded = VueJwtDecode.decode(token);
-      const userId =
-        decoded[
-          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-        ];
+		if (!state.accessToken) return
 
-      const response = await axios.get(
-        `http://creshr.svr.cyphercrescent.com:44386/api/Employee/byId?id=${userId}`
-      );
+		// Decode token and hit endpoint to get user
+		try {
+			let decoded = VueJwtDecode.decode(token)
 
-      const user = response.data;
+			const userId = decoded.nameid
 
-      // Role from response returns numbers mapped to account types
-      const role = identifyAccountType(user.role);
+			// console.log(decoded, userId);
 
-      commit("SET_USER", {
-        ...user,
-        accountType: role,
-        image: "https://randomuser.me/api/portraits/thumb/men/15.jpg",
-      });
-      router.replace("/");
-    } catch (e) {
-      console.log(e.message);
-      commit("SET_TOKEN", null);
-      commit("SET_USER", null);
-    }
-  },
-  signOut({ commit }) {
-    localStorage.removeItem("accessToken");
-    commit("SET_TOKEN", null);
-    commit("SET_USER", null);
-  },
-  async fetchEmployees() {
-    try {
-      const response = await axios.get(
-        "http://creshr.svr.cyphercrescent.com:44386/api/Employee"
-      );
-      return response.data;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
-  async fetchProjects() {
-    try {
-      const response = await axios.get("/projects");
-      return response.data;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
-  async fetchPersonalProjects() {
-    try {
-      const response = await axios.get("/personalProjects");
-      return response.data;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
-  async addPersonalProjects(_, formData) {
-    try {
-      const response = await axios.post("/personalProjects", {
-        ...formData,
-      });
-      window.location.reload();
-      return response;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
-  async fetchLeaveData() {
-    try {
-      const response = await axios.get("/leave");
-      return response.data;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
-  async getDepartments() {
-    try {
-      const response = await axios.get(
-        "http://creshr.svr.cyphercrescent.com:44386/api/Department"
-      );
-      console.log(response.data);
-      return response.data;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
-  async addEmployee(_, formData) {
-    const role = identifyAccountTypeFromString(formData.role);
-    try {
-      const response = await axios.post(
-        "http://creshr.svr.cyphercrescent.com:44386/api/Employee",
-        {
-          ...formData,
-          role,
-        }
-      );
-      window.location.reload();
-      return response;
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
-  addEmployees({ state }) {
-    state.importedEmails.forEach(async (data) => {
-      // const role = identifyAccountTypeFromString(data.role);
+			const response = await axios.get(`/Employee/byId?id=${userId}`)
 
-      try {
-        // Temporary
-        await axios.post(
-          "http://creshr.svr.cyphercrescent.com:44386/api/Employee",
-          {
-            email: data,
-            role: 6,
-          }
-        );
-        state.importedEmails = [];
-        window.location.reload();
-      } catch (err) {
-        console.log(err.message);
-      }
-    });
-  },
-};
+			const user = response.data
+
+			// Role from response returns numbers mapped to account types
+			const role = identifyAccountType(user.role)
+
+			commit("SET_USER", {
+				...user,
+				accountType: role,
+				image: "https://randomuser.me/api/portraits/thumb/men/15.jpg",
+				dob: new Date(user.dob)
+					.toLocaleDateString()
+					.split("/")
+					.join("-"),
+				dobISO: user.dob,
+				dateEmployed: new Date(user.dateEmployed)
+					.toLocaleDateString()
+					.split("/")
+					.join("-"),
+				dateEmployedISO: user.dateEmployed,
+			})
+			commit("UPDATE_USER_INFO", {
+				bio: {
+					employee: {
+						surname: user.surname,
+						firstName: user.firstName,
+						email: user.email,
+						phoneNumber: user.phoneNo,
+						residentialAddress: user.contactAddress,
+						stateOfOrigin: user.stateOfOrigin,
+						dobISO: user.dob,
+						dateOfBirth: new Date(user.dob)
+							.toLocaleDateString()
+							.split("/")
+							.join("-"),
+						dateOfHire: new Date(user.dateEmployed)
+							.toLocaleDateString()
+							.split("/")
+							.join("-"),
+						gender: user.gender,
+						maritalStatus: user.maritalInfo,
+					},
+					nextOfKin: {
+						surname: user.nextOfKingSurName,
+						firstName: user.nextOfKingFirstName,
+						email: user.nextOfKingEmail,
+						phoneNumber: user.nextOfKingPhoneNo,
+						residentialAddress: user.nextOfKingAddress,
+						relationship: user.relationship,
+					},
+				},
+				job: {
+					workDetails: {
+						department: user.departmentName,
+						role: user.jobRole,
+						workType: user.workType,
+						contractType: user.contractType,
+						manager: user.manager,
+						dateOfHire: new Date(user.dateEmployed)
+							.toLocaleDateString()
+							.split("/")
+							.join("-"),
+						dateOfHireISO: user.dateEmployed,
+						offerLetterStatus: user.recievedOfferLetter,
+						location: user.jobLocation,
+					},
+					previousRole: {
+						department: "",
+						role: "",
+						reasonForChange: "",
+					},
+				},
+				employmentHistory: [],
+				skills: [],
+			})
+			router.replace("/")
+		} catch (e) {
+			console.log(e)
+			commit("SET_TOKEN", null)
+			commit("SET_USER", null)
+		}
+	},
+	signOut({ commit }) {
+		localStorage.removeItem("accessToken")
+		commit("SET_TOKEN", null)
+		commit("SET_USER", null)
+	},
+
+	async fetchProjects() {
+		try {
+			const response = await axios.get("http://localhost:3000/projects")
+			return response.data
+		} catch (err) {
+			console.log(err.message)
+		}
+	},
+}
 
 const getters = {
-  authenticated: (state) => {
-    if (state.user && state.accessToken) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  user: (state) => state.user,
-  userInfo: (state) => state.userInfo,
-  importedEmails: (state) => state.importedEmails,
-};
+	authenticated: (state) => {
+		if (state.user && state.accessToken) {
+			return true
+		} else {
+			return false
+		}
+	},
+	user: (state) => state.user,
+	userInfo: (state) => state.userInfo,
+	importedEmails: (state) => state.importedEmails,
+}
 
 export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions,
-  getters,
-};
+	namespaced: true,
+	state,
+	mutations,
+	actions,
+	getters,
+}

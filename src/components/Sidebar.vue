@@ -6,10 +6,10 @@
           <img v-bind:src="user.image" alt="user" />
         </div>
         <div class="user-detail">
-          <h2 v-if="user.accountType !== ACCOUNT_TYPES.admin">
+          <h2 v-if="user.accountType !== ACCOUNT_TYPES.admin && user.firstName">
             {{ `${user.firstName} ${user.surname}` }}
           </h2>
-          <h2 v-else>Welcome,</h2>
+          <h2 v-else>Welcome</h2>
           <p v-if="user.accountType === ACCOUNT_TYPES.admin">Admin</p>
           <p v-if="user.accountType === ACCOUNT_TYPES.manager">Manager</p>
           <p v-if="user.accountType === ACCOUNT_TYPES.staff">Staff</p>
@@ -125,7 +125,7 @@
       </router-link>
 
       <!-- User info -->
-      <router-link :to="{ name: ROUTES.userInfo }">
+      <router-link :to="{ name: ROUTES.bio }">
         <div
           class="item"
           v-if="
@@ -194,6 +194,7 @@ export default {
     ...mapActions("appStore", ["signOut"]),
     toggleModal() {
       this.showModal = !this.showModal;
+      console.log(this.user);
     },
     handleSignOut() {
       this.signOut().then(() => {
