@@ -16,7 +16,7 @@
 								<option
 									v-for="department in departments"
 									:key="department.id"
-									:value="department.name.toLowerCase()"
+									:value="department.id"
 								>
 									{{ department.name }}
 								</option>
@@ -30,10 +30,13 @@
 								id="job-role"
 								v-model="userInfo.job.workDetails.role"
 							>
-								<option value="software-development">
-									Software Development
-								</option>
-								<option value="ui/ux">UI/UX</option>
+								<option value="0">Petroleum Engineer</option>
+								<option value="1">Software Developer</option>
+								<option value="2">Business Team</option>
+								<option value="3">Technical Sale</option>
+								<option value="4">Corporate Admin</option>
+								<option value="5">Finance</option>
+								<option value="6">Human Resources</option>
 							</select>
 						</div>
 
@@ -45,9 +48,8 @@
 									id="worktype"
 									v-model="userInfo.job.workDetails.workType"
 								>
-									<option value="office">On-site</option>
-									<option value="remote">Remote</option>
-									<option value="office">Hybrid</option>
+									<option value="1">On-site</option>
+									<option value="0">Remote</option>
 								</select>
 							</div>
 
@@ -60,29 +62,13 @@
 										userInfo.job.workDetails.contractType
 									"
 								>
-									<option value="full-time">Full Time</option>
-									<option value="part-time">Part Time</option>
+									<option value="0">Full Time</option>
+									<option value="1">Part Time</option>
 								</select>
 							</div>
 						</div>
 
 						<div class="input-flex">
-							<div class="input">
-								<label for="contract-type">Manager</label>
-								<select
-									name="contract-type"
-									id="contract-type"
-									v-model="userInfo.job.workDetails.manager"
-								>
-									<option value="eno-udonkwo">
-										Eno Udonkwo
-									</option>
-									<option value="emeka-duruzor">
-										Emeka Duruzor
-									</option>
-								</select>
-							</div>
-
 							<div class="input">
 								<TextInput
 									label="Date of hire"
@@ -106,7 +92,7 @@
 										type="radio"
 										id="received"
 										name="offer-letter-status"
-										value="received"
+										:value="true"
 										v-model="
 											userInfo.job.workDetails
 												.offerLetterStatus
@@ -119,7 +105,7 @@
 										type="radio"
 										id="not-received"
 										name="offer-letter-status"
-										value="not-received"
+										:value="false"
 										v-model="
 											userInfo.job.workDetails
 												.offerLetterStatus
@@ -147,12 +133,9 @@
 										userInfo.job.previousRole.department
 									"
 								>
-									<option value="petroleum-consulting">
-										Petroleum consulting
-									</option>
-									<option value="petroleum-consulting">
-										Petroleum consulting
-									</option>
+									<!-- <option value="software-development">
+										Research and Development
+									</option> -->
 								</select>
 							</div>
 
@@ -163,12 +146,17 @@
 									id="previous-job-role"
 									v-model="userInfo.job.previousRole.role"
 								>
-									<option value="petroleum-engineer">
-										Petroleum engineer
+									<option value="0">
+										Petroleum Engineer
 									</option>
-									<option value="petroleum-engineer">
-										Petroleum engineer
+									<option value="1">
+										Software Developer
 									</option>
+									<option value="2">Business Team</option>
+									<option value="3">Technical Sale</option>
+									<option value="4">Corporate Admin</option>
+									<option value="5">Finance</option>
+									<option value="6">Human Resources</option>
 								</select>
 							</div>
 
@@ -190,43 +178,80 @@
 				</section>
 			</div>
 
-			<dashboard-bottom-buttons-nav
-				:backRoute="{ name: ROUTES.bio }"
-				:nextRoute="{ name: ROUTES.employmentHistory }"
-			/>
+			<button type="submit" class="save-btn">Save</button>
 		</form>
 	</div>
 </template>
 
 <script>
-import TextInput from "@/components/TextInput.vue";
-import DashboardBottomButtonsNav from "@/components/DashboardBottomButtonsNav.vue";
-import { mapState } from "vuex";
-import { ROUTES } from "@/global/routes";
-import axios from "axios";
+import TextInput from "@/components/TextInput.vue"
+import { mapState } from "vuex"
+import { ROUTES } from "@/global/routes"
+import axios from "axios"
 
 export default {
 	name: "Job",
-	components: { TextInput, DashboardBottomButtonsNav },
+	components: { TextInput },
 	computed: {
-		...mapState("appStore", ["userInfo"]),
+		...mapState("appStore", ["userInfo", "user"]),
 	},
 	data() {
 		return {
 			ROUTES,
 			departments: null,
-		};
+		}
+	},
+	methods: {
+		async handleSubmit() {
+			console.log(
+				"Work type",
+				this.userInfo.job.workDetails.offerLetterStatus
+			)
+
+			let recievedOfferLetter =
+				this.userInfo.job.workDetails.offerLetterStatus
+
+			try {
+				const postData = {
+					id: this.user.id,
+					confirmedStatus: true,
+					recievedOfferLetter,
+					lastDatePromoted: "2022-10-18T11:24:47.491Z",
+					staffId: "ccl/0/0",
+					contractType: 0,
+					workType: Number(this.userInfo.job.workDetails.workType),
+					jobRole: Number(this.userInfo.job.workDetails.role),
+					jobLocation: 0,
+				}
+
+				await axios.patch("/Employee/update-Job-details", postData)
+
+				if (this.userInfo.job.workDetails.department) {
+					await axios.patch("/Employee/update-employee-department", {
+						employId: this.user.id,
+						departmentId: this.userInfo.job.workDetails.department,
+					})
+				}
+
+				// window.location.reload()
+			} catch (err) {
+				alert(
+					"Failed to add. Please ensure all input fields are valid."
+				)
+				console.log(err)
+			}
+		},
 	},
 	async mounted() {
 		try {
-			const response = await axios.get("/Department");
-			this.departments = response.data;
+			const { data } = await axios.get("/Department")
+			this.departments = data
 		} catch (err) {
-			alert("Failed to fetch departments", err.message);
-			console.log(err.message);
+			alert("Failed to fetch departments", err.message)
+			console.log(err.message)
 		}
 	},
-};
+}
 </script>
 
 <style scoped>
@@ -292,6 +317,23 @@ form .sections-container section {
 }
 .job-container .radio-btn-container label {
 	margin-left: 0.5rem;
+}
+
+.save-btn {
+	padding: 0.7em 1.5em;
+	background-color: #2b9de9;
+	color: #fff;
+	font-weight: 600;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 250ms ease;
+	display: block;
+	margin-block: 2rem;
+	margin-left: auto;
+	margin-right: 1.5rem;
+}
+.save-btn:hover {
+	background-color: #255eb4;
 }
 
 @media (max-width: 890px) {

@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import { ROUTES } from "@/global/routes";
-import NextOfKin from "./components/NextOfKin.vue";
-import PersonalDetails from "./components/PersonalDetails.vue";
-import axios from "axios";
-import { mapState } from "vuex";
+import { ROUTES } from "@/global/routes"
+import NextOfKin from "./components/NextOfKin.vue"
+import PersonalDetails from "./components/PersonalDetails.vue"
+import axios from "axios"
+import { mapState } from "vuex"
 
 export default {
 	name: "Bio",
@@ -29,75 +29,65 @@ export default {
 	data() {
 		return {
 			ROUTES,
-		};
+		}
 	},
 	computed: {
 		...mapState("appStore", ["userInfo", "user"]),
 	},
 	methods: {
 		async handleSubmit() {
-			console.log("User", this.user);
+			console.log(this.userInfo.bio.employee.maritalStatus)
 
-			// "id": "ebe1ff46-7e00-41e5-25aa-08daa2b4799b",
-			// "firstName": "Abubakar",
-			// "surname": "Mana",
-			// "contactAddress": "Oyigbo",
-			// "stateOfOrigin": "Adamawa",
-			// "phoneNo": "09033889352",
-			// "dob": "2002-10-04T08:08:32.756Z",
-			// "nationality": "Nigerian",
-			// "confirmedStatus": true,
-			// "recievedOfferLetter": true,
-			// "nextOfKingFirstName": "Jaafar",
-			// "nextOfKingSurName": "Abbas",
-			// "nextOfKingPhoneNo": "08082813527",
-			// "nextOfKingEmail": "jaafar.abbas@gmail.com",
-			// "dateEmployed": "2009-10-04T08:08:32.756Z",
-			// "nextOfKingAddress": "Gwarimpa",
-			// "lastDatePromoted": "2021-10-04T08:08:32.756Z",
-			// "contractType": 0,
-			// "workType": 0,
-			// "gender": 0,
-			// "jobRole": 0,
-			// "jobLocation": 0,
-			// "relationship": 0,
-			// "managerId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-			// "otherName": "Sadiq",
-			// "departmentId": "0ce262ac-da25-439b-12bc-08da934e02d1",
-			// "staffId": "ccl/1/12"
+			// Convert gender to enum
+			let gender = this.userInfo.bio.employee.gender
+			if (gender === "male ") {
+				gender = 0
+			} else if (gender === "female") {
+				gender = 1
+			}
+
+			// Conver marital info to enum
+			let maritalInfo = this.userInfo.bio.employee.maritalStatus
+			if (!maritalInfo) {
+				maritalInfo = 0
+			}
 
 			try {
 				const data = {
-					// ...this.user,
 					id: this.user.id,
+					dob: this.userInfo.bio.employee.dobISO,
 					firstName: this.userInfo.bio.employee.firstName,
 					surname: this.userInfo.bio.employee.surname,
-					phoneNo: this.userInfo.bio.employee.phoneNumber,
 					contactAddress:
 						this.userInfo.bio.employee.residentialAddress,
 					stateOfOrigin: this.userInfo.bio.employee.stateOfOrigin,
-					dob: new Date(this.userInfo.bio.employee.dateOfBirth),
-					dateEmployed: new Date(
-						this.userInfo.bio.employee.dateOfHire
-					),
-					gender: this.userInfo.bio.employee.gender,
+					phoneNo: this.userInfo.bio.employee.phoneNumber.toString(),
+					nationality: "Nigerian",
+					nextOfKingEmail: this.userInfo.bio.nextOfKin.email,
 					nextOfKingAddress:
 						this.userInfo.bio.nextOfKin.residentialAddress,
-					nextOfKingEmail: this.userInfo.bio.nextOfKin.email,
 					nextOfKingFirstName: this.userInfo.bio.nextOfKin.firstName,
-					nextOfKingPhoneNo: this.userInfo.bio.nextOfKin.phoneNumber,
+					nextOfKingPhoneNo:
+						this.userInfo.bio.nextOfKin.phoneNumber.toString(),
 					nextOfKingSurName: this.userInfo.bio.nextOfKin.surname,
-					nationality: "Nigerian",
-				};
-				console.log(data);
-				const res = await axios.patch("/Employee", data);
-				console.log(res.data);
+					gender: Number(this.userInfo.bio.employee.gender),
+					relationship: 0,
+					maritalInfo: Number(maritalInfo),
+					otherName: " ",
+				}
+
+				const res = await axios.patch("/Employee", data)
+				console.log(res.data)
+				window.location.reload()
 			} catch (err) {
-				console.log(err);
+				console.log(err)
+				alert(
+					"Failed to update. Please ensure all input fields are valid."
+				)
 			}
 		},
 	},
-};
+}
 </script>
 
 <style scoped>
