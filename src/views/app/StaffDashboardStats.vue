@@ -33,7 +33,7 @@
 					</div>
 					<div class="item-info">
 						<h5>Location</h5>
-						<p>{{ user.jobLocation }}</p>
+						<p>{{ jobLocation }}</p>
 					</div>
 				</div>
 				<div class="item">
@@ -64,7 +64,7 @@
 					</div>
 					<div class="item-info">
 						<h5>Time in company</h5>
-						<p>{{ user.timeInCompany }}</p>
+						<p>{{ timeInCompany }} mos</p>
 					</div>
 				</div>
 			</article>
@@ -92,9 +92,9 @@
 				</div>
 			</article>
 
-			<article class="chart-container">
+			<!-- <article class="chart-container">
 				<Chart type="pie" :data="chartData" :options="lightOptions" />
-			</article>
+			</article> -->
 
 			<article class="leave-card-container">
 				<h4 class="title">Available leave days</h4>
@@ -123,12 +123,14 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapActions, mapGetters } from "vuex";
+import axios from "axios"
+import { mapActions, mapGetters } from "vuex"
+import { monthDiff } from "@/utils"
 
 export default {
 	data() {
 		return {
+			monthDiff,
 			projects: [],
 			chartData: {
 				labels: ["A", "B", "C"],
@@ -150,27 +152,52 @@ export default {
 				},
 			},
 			leaveData: [],
-		};
+		}
 	},
 	methods: {
 		...mapActions("appStore", ["fetchProjects"]),
 		async fetchLeaveData() {
 			try {
-				const response = await axios.get("http://localhost:3000/leave");
-				return response.data;
+				const response = await axios.get("http://localhost:3000/leave")
+				return response.data
 			} catch (err) {
-				console.log(err.message);
+				console.log(err.message)
 			}
 		},
 	},
 	computed: {
 		...mapGetters("appStore", ["user"]),
+		jobLocation() {
+			let location = null
+			switch (this.user.jobLocation) {
+				case 0:
+					location = "Port Harcourt"
+					break
+				case 1:
+					location = "Lagos"
+					break
+				case 2:
+					location = "Benin"
+					break
+				case 3:
+					location = "Warri"
+					break
+			}
+			return location
+		},
+		timeInCompany() {
+			const result = this.monthDiff(
+				new Date(this.user.dateEmployedISO),
+				new Date()
+			)
+			return result
+		},
 	},
 	async mounted() {
-		this.projects = await this.fetchProjects();
-		this.leaveData = await this.fetchLeaveData();
+		this.projects = await this.fetchProjects()
+		this.leaveData = await this.fetchLeaveData()
 	},
-};
+}
 </script>
 
 <style scoped>

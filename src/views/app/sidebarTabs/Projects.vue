@@ -14,7 +14,7 @@
 
 		<section class="projects-container" v-if="!isLoading">
 			<h4 v-if="!isLoading && !projects.length">
-				You don't have any Projects
+				You have not been added to any projects
 			</h4>
 			<Project
 				v-for="project in projects"
@@ -169,19 +169,36 @@ export default {
 				!this.showManagerAddProjectsModal;
 		},
 		async handlePersonalProjectSubmit() {
+			let status = null;
+			switch (this.form.personalProject.status) {
+				case "not started":
+					status = 0;
+					break;
+				case "ongoing":
+					status = 1;
+					break;
+				case "cancelled":
+					status = 2;
+					break;
+				case "completed":
+					status = 3;
+					break;
+				default:
+					status = 0;
+			}
+
 			const data = {
 				employeeId: this.user.id,
 				name: this.form.personalProject.title,
 				link: this.form.personalProject.liveLink,
-				status: 0,
 				description: this.form.personalProject.description,
+				status,
 			};
 			try {
 				const response = await axios.post("/EmployeeProject", {
 					...data,
 				});
-				console.log(response);
-				// window.location.reload();
+				window.location.reload();
 				return response;
 			} catch (err) {
 				alert("Failed to add project", err.message);
@@ -201,8 +218,36 @@ export default {
 				const response = await axios.get(
 					`/EmployeeProject/byemployeeid?employeeId=${this.user.id}`
 				);
-				console.log(response);
-				return response.data;
+
+				const data = [...response.data];
+
+				const formattedData = [];
+				data.forEach((item) => {
+					let status = null;
+					switch (item.status) {
+						case 0:
+							status = "not started";
+							break;
+						case 1:
+							status = "ongoing";
+							break;
+						case 2:
+							status = "cancelled";
+							break;
+						case 3:
+							status = "completed";
+							break;
+						default:
+							status = "not started";
+					}
+
+					formattedData.push({ ...item, status });
+				});
+
+				// console.log("Formatted data", formattedData);
+				// console.log("Response data", response.data);
+
+				return formattedData;
 			} catch (err) {
 				console.log(err.message);
 			}

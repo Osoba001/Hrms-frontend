@@ -17,9 +17,9 @@
 		<section class="skills-container">
 			<h2 class="section-title">Skills</h2>
 
-			<div class="skills-wrapper" v-show="userInfo.skills.length">
-				<span v-for="item in skills" :key="item" class="skill">
-					{{ item }}
+			<div class="skills-wrapper" v-show="skills.length">
+				<span v-for="item in skills" :key="item.id" class="skill">
+					{{ item.skillName }}
 				</span>
 			</div>
 
@@ -106,10 +106,26 @@ export default {
 		async onSubmit(e) {
 			if (!this.form.skill || !this.form.proficiency) return;
 
+			let proficiency;
+			if (this.form.proficiency === "beginner") {
+				proficiency = 2;
+			} else if (this.form.proficiency === "intermediate") {
+				proficiency = 5;
+			} else if (this.form.proficiency === "advanced") {
+				proficiency = 10;
+			} else {
+				proficiency = 0;
+			}
+
 			const res = await axios.patch("/Employee/addSkill", {
-				employId: this.user.id,
-				softSkill: [],
-				technicalSkill: this.skills,
+				employeeId: this.user.id,
+				skills: [
+					{
+						skillName: this.form.skill,
+						proficiency,
+						skillType: 1,
+					},
+				],
 			});
 
 			if (res.statusText === "OK") {
@@ -158,9 +174,7 @@ export default {
 				`/Employee/skill?EmployeeId=${this.user.id}`
 			);
 
-			const skills = [...data.softSkill, ...data.technical];
-			console.log("Skills", skills);
-			this.skills = skills;
+			this.skills = data;
 		} catch (err) {
 			console.log(err);
 		}

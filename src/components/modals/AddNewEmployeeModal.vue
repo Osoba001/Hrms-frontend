@@ -64,7 +64,6 @@ export default {
 	methods: {
 		async addEmployee() {
 			const role = identifyAccountTypeFromString(this.form.role);
-			console.log(role);
 			try {
 				const response = await axios.post("/Employee", {
 					...this.form,
