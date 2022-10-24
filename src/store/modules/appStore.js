@@ -77,13 +77,13 @@ const mutations = {
 const actions = {
 	async signIn({ commit, dispatch }, loginDetails) {
 		try {
-			console.log("Form data", loginDetails)
 
 			const response = await axios.patch("/Authentication/login", {
 				...loginDetails,
 			})
 
 			const token = response.data
+
 			commit("SET_TOKEN", token)
 			return dispatch("attemptSignIn", token)
 		} catch (err) {
@@ -194,6 +194,13 @@ const actions = {
 		commit("SET_USER", null)
 	},
 
+	async getUserId() {
+		const accessToken = localStorage.getItem("accessToken")
+		if (!accessToken) return null;
+		let decoded = await VueJwtDecode.decode(accessToken)
+		return decoded.nameid
+	},
+
 	async fetchProjects() {
 		try {
 			const response = await axios.get("http://localhost:3000/projects")
@@ -202,6 +209,25 @@ const actions = {
 			console.log(err.message)
 		}
 	},
+
+	async getAllLeaveTypes() {
+		const response = await axios.get(`/Leave`)
+
+		return response.data;
+	},
+
+	async applyForLeave(_, data) {
+		try {
+			const response = await axios.post("/Leave/apply", { ...data })
+
+			if (response.statusText === "OK"){
+				console.log("Leave application successful!")
+			}
+
+		} catch (err) {
+			console.log(err.message)
+		}
+	}
 }
 
 const getters = {
