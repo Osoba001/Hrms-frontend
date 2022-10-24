@@ -88,6 +88,7 @@ export default {
 	},
 	async mounted() {
 		try {
+			console.log("On mounted")
 			this.isLoading = true;
 			const { data } = await axios.get("/Leave");
 			this.leaveInfo = data;

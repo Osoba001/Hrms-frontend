@@ -2,15 +2,15 @@
   <div class="leave-container">
     <section class="statistics">
       <div class="stat-container">
-        <h1 class="stat">4</h1>
+        <h1 class="stat">24</h1>
         <p class="label">Annual Leave</p>
       </div>
       <div class="stat-container">
-        <h1 class="stat">2</h1>
+        <h1 class="stat">5</h1>
         <p class="label">Sick Leave</p>
       </div>
       <div class="stat-container">
-        <h1 class="stat">1</h1>
+        <h1 class="stat">5</h1>
         <p class="label">Casual Leave</p>
       </div>
     </section>
@@ -42,13 +42,13 @@
           <th>Status</th>
           <th>Period</th>
         </tr>
-        <tr>
-          <td>Jude Chinedu</td>
+        <tr v-for="(leave, index) in leaves" :key="index">
+          <td>{{leave.employeeName}}</td>
           <td>Annual</td>
           <td><span class="leave-status">Ongoing</span></td>
-          <td>11th May - 21th May</td>
+          <td>{{leave.period}}</td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td>Antoine Griezmann</td>
           <td>Casual</td>
           <td><span class="leave-status">Ongoing</span></td>
@@ -95,14 +95,36 @@
           <td><span class="leave-status">Ongoing</span></td>
 
           <td>11th May - 21th May</td>
-        </tr>
+        </tr> -->
       </table>
     </section>
   </div>
 </template>
 
 <script>
-export default {}
+import { mapActions } from 'vuex'
+export default {
+  data(){
+    return {
+      leaves: []
+    }
+  },
+  methods: {
+    ...mapActions("appStore", ["getUserId", "getAllOnGoingLeaves"]),
+
+  },
+  async mounted() {
+    const responseLeaves = await this.getAllOnGoingLeaves();
+
+    this.leaves = responseLeaves.map(l =>  ({
+      employeeName: l.employeeName,
+      leaveType: "Fun",
+      status: "On Going",
+      period: `${(new Date(l.startDate)).toLocaleDateString("en-US")} - ${(new Date(l.endDate)).toLocaleDateString("en-US")}`
+    }))
+    console.log("Mounted", responseLeaves)
+  }
+}
 </script>
 
 <style scoped>

@@ -216,6 +216,12 @@ const actions = {
 		return response.data;
 	},
 
+	async getAllOnGoingLeaves() {
+		const response = await axios.get(`/Leave/onGoingLeave`)
+
+		return response.data;
+	},
+
 	async applyForLeave(_, data) {
 		try {
 			const response = await axios.post("/Leave/apply", { ...data })
