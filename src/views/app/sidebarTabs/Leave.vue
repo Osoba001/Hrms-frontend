@@ -6,13 +6,8 @@
         <div class="inputs-container">
           <div class="input">
             <label for="contract-type">Leave Type</label>
-            <select name="department" id="department">
-              <option value="annual-leave">Annual Leave</option>
-              <option value="sick-leave">Sick leave</option>
-              <option value="casual-leave">Casual leave</option>
-              <option value="examination-leave">Examination leave</option>
-              <option value="compassionate-leave">Compassionate leave</option>
-              <option value="paternity-leave">Paternity leave</option>
+            <select name="department" id="department" v-model="selectedLeaveType">
+              <option v-for="leave in leaveTypes" :value="leave.id" :key="leave.id" >{{leave.name}}</option>
             </select>
           </div>
 
@@ -22,11 +17,11 @@
           </div> -->
           <div class="input">
             <label for="startDate">Start date</label>
-            <input type="date" name="startDate" id="startDate" />
+            <input type="date" name="startDate" v-model="startDate" id="startDate" />
           </div>
           <div class="input">
             <label for="endDate">End date</label>
-            <input type="date" name="endDate" id="endDate" />
+            <input type="date" name="endDate" v-model="endDate" id="endDate" />
           </div>
           <div class="input">
             <label for="handover-colleague">Handover colleague</label>
@@ -34,6 +29,7 @@
               type="text"
               name="handover-colleague"
               id="handover-colleague"
+              v-model="handOverColleague"
             />
           </div>
         </div>
@@ -46,10 +42,11 @@
               id="reason-for-change"
               cols="30"
               rows="10"
+              v-model="handOverMessage"
             ></textarea>
           </div>
 
-          <button class="apply-btn">Apply</button>
+          <button class="apply-btn" @click="onApply">Apply</button>
         </div>
       </div>
     </section>
@@ -57,8 +54,10 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
 // import Datepicker from '@vuepic/vue-datepicker'
 // import '@vuepic/vue-datepicker/dist/main.css'
+//import axios from './axios'
 
 export default {
   name: 'Leave',
@@ -66,8 +65,32 @@ export default {
   data() {
     return {
       date: null,
+      startDate: '',
+      endDate: '',
+      handOverMessage: '',
+      selectedLeaveType: '',
+      handOverColleague: '',
+      leaveTypes: [],
     }
   },
+  methods: {
+    ...mapActions("appStore", ["applyForLeave", "getAllLeaveTypes", "getUserId"]),
+    async onApply() {
+      
+     const userId = await this.getUserId();
+     const leaveBody = {
+      leaveId: this.selectedLeaveType,
+      employeeId: userId,
+      reason: this.handOverMessage,
+      startDate: this.startDate
+     }
+
+     await this.applyForLeave(leaveBody)
+    }
+  },
+  async mounted() {
+    this.leaveTypes = await this.getAllLeaveTypes()
+  }
 }
 </script>
 <style scoped>
