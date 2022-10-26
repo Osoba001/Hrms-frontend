@@ -48,6 +48,8 @@
           <td><span class="leave-status">Ongoing</span></td>
           <td>{{leave.period}}</td>
         </tr>
+
+
         <!-- <tr>
           <td>Antoine Griezmann</td>
           <td>Casual</td>
@@ -96,6 +98,8 @@
 
           <td>11th May - 21th May</td>
         </tr> -->
+
+        
       </table>
     </section>
   </div>
