@@ -1,6 +1,11 @@
 <template>
 	<div class="container">
+		<div class="loader-container" v-if="!hrInfo">
+			<Loader />
+		</div>
+		<div v-else-if="hrInfo?.length === 0">Loading...</div>
 		<section
+			v-else
 			class="grid"
 			v-motion
 			:initial="{
@@ -168,6 +173,7 @@
 
 <script>
 import axios from "axios"
+import Loader from "@/components/Loader.vue"
 
 export default {
 	data() {
@@ -212,6 +218,7 @@ export default {
 			},
 		}
 	},
+	components: { Loader },
 	async mounted() {
 		try {
 			const { data } = await axios.get("/Employee/hrInfo")
@@ -412,6 +419,10 @@ section {
 	margin-bottom: 1rem;
 	gap: 0.7rem;
 }
+.loader-container {
+	height: calc(100vh - 60px);
+}
+
 section.grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
