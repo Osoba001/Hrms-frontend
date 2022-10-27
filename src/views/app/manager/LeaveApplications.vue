@@ -19,7 +19,7 @@
 			Back
 		</button>
 		<section class="employees-detail">
-			<h2 class="title">Pending leave applications</h2>
+			<h2 class="title">Pending Leave </h2>
 
 			<table class="pending-applications">
 				<thead>
@@ -33,19 +33,29 @@
 				<tbody>
 					<tr @click="toggleModal">
 						<td>Antoine Griezmann</td>
-						<td>Casual</td>
+						<td>Casual Leave</td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr @click="toggleModal">
 						<td>Isaac Aku</td>
-						<td>Annual</td>
+						<td>Annual Leave</td>
+						<td>15th Oct - 21th November</td>
+					</tr>
+					<tr @click="toggleModal">
+						<td>Gift Osaz</td>
+						<td>Sick Leave</td>
 						<td>11th May - 21th May</td>
+					</tr>
+					<tr @click="toggleModal">
+						<td>John Gideon</td>
+						<td>Study Leave </td>
+						<td>12th Jan - 21th April</td>
 					</tr>
 				</tbody>
 			</table>
 		</section>
 		<section class="employees-detail">
-			<h2 class="title">Approved leave applications</h2>
+			<h2 class="title">Approved Leave </h2>
 
 			<table>
 				<thead>
@@ -59,13 +69,23 @@
 				<tbody>
 					<tr>
 						<td>Antoine Griezmann</td>
-						<td>Casual</td>
+						<td>Casual Leave </td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr>
 						<td>Isaac Aku</td>
-						<td>Annual</td>
+						<td>Annual Leave </td>
 						<td>11th May - 21th May</td>
+					</tr>
+					<tr>
+						<td>Abeeb Titus</td>
+						<td>Causual Leave </td>
+						<td>11th June - 21th May</td>
+					</tr>
+					<tr>
+						<td>Uche Bimbo</td>
+						<td>Maternity Leave</td>
+						<td>11th Dec - 19thth Jan</td>
 					</tr>
 				</tbody>
 			</table>
@@ -112,7 +132,7 @@ section.employees-detail {
 h2.title {
 	margin-bottom: 1rem;
 	font-size: 1.25rem;
-	color: #ca1310;
+	color: #e50808;
 }
 
 .back-btn {

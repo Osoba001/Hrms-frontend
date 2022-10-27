@@ -12,6 +12,35 @@
 					@validate="validate('email')"
 					:error="errors.email"
 				/>
+
+				<label for="Department">Department</label>
+				<select
+					name="department"
+					id="department"
+					v-model="form.department"
+					@blur="validate('department')"
+					:class="{ error: errors.role }"
+				>
+					<option value="Petroleum Engineer">Petroleum Engineer</option>
+					<option value="TOC Manager">TOC Manager</option>
+					<option value="staff">Staff</option>
+					<option value="ITSS">ITSS</option>
+					<option value="Business Development">Business Development</option>
+					<option value="Human Resource">Human Resource</option>
+					<option value="HR">Human Resource</option>
+					<option value="Research & Development">Research & Development</option>
+					<option value="ETDS">ETDS</option>
+					<option value="Software Development">Software Development</option>
+					<option value="Enterprise Resource Planning">Enterprise Resource Planning</option>
+					<option value="UI/UX">UI/UX</option>
+					<option value="Technical Operations">Technical Operations</option>
+					<option value="CTO's Office">CTO's Office</option>
+					<option value="Integrated Asset Management">Integrated Asset Management</option>
+					<option value="Corporate Finance">Corporate Finance</option>
+					<option value="Corporate Admin">Corporate Admin</option>
+				</select>
+
+
 				<label for="role">Role</label>
 				<select
 					name="role"

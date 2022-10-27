@@ -3,15 +3,17 @@
 	<ModalBackdrop @close="toggleModal">
 		<div class="modal-inner">
 			<div class="wrapper">
-				<p class="message-receiver">From: Samuel Java</p>
+				<p class="message-receiver">From: ADA Java</p>
 				<p class="message-receiver">To: Michael Sunday</p>
 
-				<p class="message">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Placeat animi labore sunt distinctio eius? Odio, expedita.
-					Nesciunt reprehenderit dolores expedita maiores ut
-					architecto? Quia, similique?
+				<thread><p class="message">
+					I am writing to a 4-days official leave running from 11th Oct - 5th Nov. During my absence,
+					as discussed with my Isaac, He will be siting in for me till I return.
+
+					I look forward getting feedback from you.
+					Thank You
 				</p>
+				</thread>
 
 				<div class="btns-container">
 					<button>Approve</button>
