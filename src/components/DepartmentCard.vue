@@ -17,7 +17,7 @@
     </div>
 
     <div class="department-manager">
-      <h3>Manager</h3>
+      <!-- <h3>Manager</h3> -->
       <p>{{ department.hod }}</p>
     </div>
   </article>

@@ -53,7 +53,7 @@ main.auth-wrapper {
   font-family: 'Rokkitt', serif;
   font-weight: 700;
   font-size: 2.25rem;
-  color: #161843;
+  color: #070c63;
 }
 
 .form-container p {

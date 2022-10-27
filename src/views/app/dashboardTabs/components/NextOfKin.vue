@@ -93,7 +93,19 @@
 							value="sibling"
 							:selected="user.relationship === 'sibling'"
 						>
-							Sibling
+							Brother
+						</option>
+						<option
+							value="uncle"
+							:selected="user.relationship === 'uncle'"
+						>
+						Sister
+						</option>
+						<option
+							value="uncle"
+							:selected="user.relationship === 'uncle'"
+						>
+						Sibling
 						</option>
 						<option
 							value="uncle"
