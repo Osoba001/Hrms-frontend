@@ -1,26 +1,27 @@
-import { createWebHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter } from "vue-router"
 
-import Dashboard from "@/views/app/Dashboard.vue";
-import NotFound from "@/views/general/NotFound.vue";
-import Bio from "@/views/app/dashboardTabs/Bio.vue";
-import Job from "@/views/app/dashboardTabs/Job.vue";
-import EmploymentHistory from "@/views/app/dashboardTabs/EmploymentHistory.vue";
-import Certifications from "@/views/app/dashboardTabs/Certifications.vue";
-import Employees from "@/views/app/admin/Employees.vue";
-import Department from "@/views/app/sidebarTabs/Department";
-import Leave from "@/views/app/sidebarTabs/Leave";
-import HRLeave from "@/views/app/hr/HRLeave";
-import TeamMembersLeave from "@/views/app/manager/TeamMembersLeave.vue";
-import PersonalInfo from "@/views/app/sidebarTabs/PersonalInfo";
-import Projects from "@/views/app/sidebarTabs/Projects";
-import StaffDashboardStats from "@/views/app/StaffDashboardStats.vue";
-import HRDashboardStats from "@/views/app/HRDashboardStats.vue";
-import ChangePassword from "@/views/auth/ChangePassword.vue";
-import Login from "@/views/auth/Login.vue";
+import Dashboard from "@/views/app/Dashboard.vue"
+import NotFound from "@/views/general/NotFound.vue"
+import Bio from "@/views/app/dashboardTabs/Bio.vue"
+import Job from "@/views/app/dashboardTabs/Job.vue"
+import EmploymentHistory from "@/views/app/dashboardTabs/EmploymentHistory.vue"
+import Certifications from "@/views/app/dashboardTabs/Certifications.vue"
+import Employees from "@/views/app/admin/Employees.vue"
+import Department from "@/views/app/sidebarTabs/Department"
+import Leave from "@/views/app/sidebarTabs/Leave"
+import HRLeave from "@/views/app/hr/HRLeave"
+import TeamMembersLeave from "@/views/app/manager/TeamMembersLeave.vue"
+import LeaveApplications from "@/views/app/manager/LeaveApplications.vue"
+import PersonalInfo from "@/views/app/sidebarTabs/PersonalInfo"
+import Projects from "@/views/app/sidebarTabs/Projects"
+import StaffDashboardStats from "@/views/app/StaffDashboardStats.vue"
+import HRDashboardStats from "@/views/app/HRDashboardStats.vue"
+import ChangePassword from "@/views/auth/ChangePassword.vue"
+import Login from "@/views/auth/Login.vue"
 
-import store from "@/store";
-import { ACCOUNT_TYPES } from "@/global/accountTypes";
-import { ROUTES } from "@/global/routes";
+import store from "@/store"
+import { ACCOUNT_TYPES } from "@/global/accountTypes"
+import { ROUTES } from "@/global/routes"
 
 const routes = [
 	{
@@ -37,7 +38,7 @@ const routes = [
 		beforeEnter: (to, from, next) => {
 			store.getters["appStore/authenticated"]
 				? next()
-				: next({ name: "Login" });
+				: next({ name: "Login" })
 		},
 		children: [
 			{
@@ -49,14 +50,14 @@ const routes = [
 						store.getters["appStore/user"]?.accountType ===
 						ACCOUNT_TYPES.admin
 					) {
-						next("/employees");
+						next("/employees")
 					} else if (
 						store.getters["appStore/user"]?.accountType ===
 						ACCOUNT_TYPES.HR
 					) {
-						next("/dashboard/human-resources");
+						next("/dashboard/human-resources")
 					} else {
-						next();
+						next()
 					}
 				},
 			},
@@ -68,7 +69,7 @@ const routes = [
 					store.getters["appStore/user"]?.accountType ===
 					ACCOUNT_TYPES.HR
 						? next()
-						: next("/");
+						: next("/")
 				},
 			},
 			{
@@ -81,7 +82,7 @@ const routes = [
 					store.getters["appStore/user"]?.accountType ===
 						ACCOUNT_TYPES.HR
 						? next()
-						: next("/");
+						: next("/")
 				},
 			},
 			{
@@ -94,7 +95,7 @@ const routes = [
 					store.getters["appStore/user"]?.accountType ===
 						ACCOUNT_TYPES.manager
 						? next()
-						: next("/");
+						: next("/")
 				},
 			},
 			{
@@ -108,14 +109,14 @@ const routes = [
 						store.getters["appStore/user"]?.accountType ===
 							ACCOUNT_TYPES.staff
 					) {
-						next();
+						next()
 					} else if (
 						store.getters["appStore/user"]?.accountType ===
 						ACCOUNT_TYPES.HR
 					) {
-						next("/leave/human-resources");
+						next("/leave/human-resources")
 					} else {
-						next("/");
+						next("/")
 					}
 				},
 			},
@@ -127,7 +128,7 @@ const routes = [
 					store.getters["appStore/user"]?.accountType ===
 					ACCOUNT_TYPES.HR
 						? next()
-						: next("/leave");
+						: next("/leave")
 				},
 			},
 			{
@@ -138,7 +139,18 @@ const routes = [
 					store.getters["appStore/user"]?.accountType ===
 					ACCOUNT_TYPES.manager
 						? next()
-						: next("/leave");
+						: next("/leave")
+				},
+			},
+			{
+				path: "/leave/applications",
+				name: ROUTES.managerViewLeaveApplications,
+				component: LeaveApplications,
+				beforeEnter: (to, from, next) => {
+					store.getters["appStore/user"]?.accountType ===
+					ACCOUNT_TYPES.manager
+						? next()
+						: next("/leave")
 				},
 			},
 			{
@@ -156,7 +168,7 @@ const routes = [
 					store.getters["appStore/user"]?.accountType ===
 						ACCOUNT_TYPES.staff
 						? next()
-						: next("/");
+						: next("/")
 				},
 				children: [
 					{ path: "/me/bio", component: Bio, name: ROUTES.bio },
@@ -191,19 +203,19 @@ const routes = [
 		component: NotFound,
 		meta: { title: "404 Page not found" },
 	},
-];
+]
 
 const appRouter = createRouter({
 	history: createWebHistory(),
 	routes: routes,
-});
+})
 
 appRouter.beforeEach((to, from, next) => {
-	document.title = to.meta.title;
-	next();
-});
+	document.title = to.meta.title
+	next()
+})
 
-export default appRouter;
+export default appRouter
 
 // import { ACCOUNT_TYPES } from '@/global/accountTypes'
 // import { ROUTES } from '@/global/routes'
