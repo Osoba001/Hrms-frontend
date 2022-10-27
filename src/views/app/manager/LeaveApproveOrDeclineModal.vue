@@ -65,4 +65,8 @@ button.deny {
 	background-color: #ca1310;
 	margin-left: 0.5rem;
 }
+
+.upload-document {
+	margin-top: 2rem;
+}
 </style>
