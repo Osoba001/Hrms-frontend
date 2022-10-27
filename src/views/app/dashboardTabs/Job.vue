@@ -23,33 +23,36 @@
 							</select>
 						</div>
 
-						<div class="input">
-							<label for="job-role">Job role</label>
-							<select
-								name="job-role"
-								id="job-role"
-								v-model="userInfo.job.workDetails.role"
-							>
-								<option value="0">Petroleum Engineer</option>
-								<option value="1">Software Developer</option>
-								<option value="2">Business Team</option>
-								<option value="3">Technical Sale</option>
-								<option value="4">Corporate Admin</option>
-								<option value="5">Finance</option>
-								<option value="6">Human Resources</option>
-							</select>
+						
+
+							<div class="inputs-container">
+				<div class="input">
+					<TextInput
+						:required="true"
+						label="Job role"
+						placeholder="Enter your job role"
+						@update-value="
+							(data) =>
+								(userInfo.bio.employee.stateOfOrigin = data)
+						"
+						:value="user.stateOfOrigin"
+					/>
+				</div>
+					
 						</div>
 
 						<div class="input-flex">
 							<div class="input">
-								<label for="worktype">Work type</label>
+								<label for="worktype">Job Location</label>
 								<select
 									name="worktype"
 									id="worktype"
 									v-model="userInfo.job.workDetails.workType"
 								>
-									<option value="1">On-site</option>
-									<option value="0">Remote</option>
+									<option value="1">Remote</option>
+									<option value="0">On-site</option>
+									<option value="1">Hybrid</option>
+									<option value="0">WFH</option>
 								</select>
 							</div>
 
@@ -124,41 +127,34 @@
 					<h2 class="section-title">Previous role</h2>
 					<div class="personal-details">
 						<div class="inputs-container">
-							<div class="input">
-								<label for="contract-type">Department</label>
-								<select
-									name="department"
-									id="department"
-									v-model="
-										userInfo.job.previousRole.department
-									"
-								>
-									<!-- <option value="software-development">
-										Research and Development
-									</option> -->
-								</select>
-							</div>
+				<div class="input">
+					<TextInput
+						:required="true"
+						label="Department"
+						placeholder="Department"
+						@update-value="
+							(data) =>
+								(userInfo.bio.employee.stateOfOrigin = data)
+						"
+						:value="user.stateOfOrigin"
+					/>
+				</div>
 
-							<div class="input">
-								<label for="previous-job-role">Job role</label>
-								<select
-									name="previous-job-role"
-									id="previous-job-role"
-									v-model="userInfo.job.previousRole.role"
-								>
-									<option value="0">
-										Petroleum Engineer
-									</option>
-									<option value="1">
-										Software Developer
-									</option>
-									<option value="2">Business Team</option>
-									<option value="3">Technical Sale</option>
-									<option value="4">Corporate Admin</option>
-									<option value="5">Finance</option>
-									<option value="6">Human Resources</option>
-								</select>
-							</div>
+				<div class="inputs-container">
+				<div class="input">
+					<TextInput
+						:required="true"
+						label="Job role"
+						placeholder="Enter your job role"
+						@update-value="
+							(data) =>
+								(userInfo.bio.employee.stateOfOrigin = data)
+						"
+						:value="user.stateOfOrigin"
+					/>
+						</div>
+						</div>
+
 
 							<div class="input">
 								<label for="">Reason for change</label>

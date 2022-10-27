@@ -92,17 +92,30 @@
 			</article>
 
 			<div class="card flex-column location-container">
-				<article class="small-card active-workers-card active">
-					<header>
-						<h2 class="card-title">Active workers</h2>
+				<!-- <article class="small-card active-workers-card active"> -->
+					
+			
+			
+			<article class="card small-card gender-card">
+				<div>
+					<span class="material-symbols-outlined"> face_6 </span>
+					<h3>Male</h3>
+					<p class="number">{{ hrInfo?.totalMale }}</p>
+					<p class="percentage">76.16%</p>
+				</div>
+				<div>
+					<span class="material-symbols-outlined"> face_3 </span>
+					<h3>Female</h3>
+					<p class="number">{{ hrInfo?.totalFemale }}</p>
+					<p class="percentage">76.16%</p>
+				</div>
+			<!-- </article> -->
+			
+			<header>
+				<h2 class="card-title">Active workers</h2>
+			</header>
 
-						<!-- <div class="percentage-container">
-							<span class="material-symbols-outlined green">
-								arrow_drop_up
-							</span>
-							<p>59.22%</p>
-						</div> -->
-					</header>
+
 
 					<div>
 						<span class="material-symbols-outlined icon">
@@ -115,7 +128,7 @@
 
 				<article class="small-card active-workers-card inactive">
 					<header>
-						<h2 class="card-title">Inactive workers</h2>
+						<h2 class="card-title">Service Contract</h2>
 
 						<!-- <div class="percentage-container">
 							<span class="material-symbols-outlined red">
@@ -241,6 +254,11 @@ export default {
 							"rgb(60, 59, 60)",
 							"rgb(88, 156, 214)",
 							"rgb(147, 208, 77)",
+							"rgb(147, 208, 77)",
+							// "rgb(147, 208, 77)",
+							// "rgb(147, 208, 77)",
+							// "rgb(147, 208, 77)",
+							// "rgb(147, 208, 77)",
 						],
 						hoverBackgroundColor: [
 							"rgb(158, 71, 11, 0.9)",
@@ -250,6 +268,11 @@ export default {
 							"rgb(60, 59, 60, 0.9)",
 							"rgb(88, 156, 214, 0.9)",
 							"rgb(147, 208, 77, 0.9)",
+							"rgb(147, 208, 77, 0.9)",
+							// "rgb(147, 208, 77, 0.9)",
+							// "rgb(147, 208, 77, 0.9)",
+							// "rgb(147, 208, 77, 0.9)",
+							// "rgb(147, 208, 77, 0.9)",
 						],
 					},
 				],
@@ -269,15 +292,19 @@ export default {
 
 			return {
 				labels: [
-					"CTO Office",
-					"MD/CEO Office",
+					"CEO's Office",
+					"CTO's Office",
 					"Corporate Finance",
 					"Business Development",
-					"Corporate Services",
-					"ETDS",
-					"Integrated Asset Management",
-					"Data Democratisation",
+					"Enterprise Technology Development Solution",
+					"Integrated Assets Management",
 					"Research and Development",
+					"UI/UX",
+					"Corporate Admin",
+					// "Technical Operations",
+					// "Learning and Development",
+					// "UI/UX"
+
 				],
 				datasets: [
 					{
