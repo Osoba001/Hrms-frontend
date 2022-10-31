@@ -43,6 +43,7 @@
 							id="endDate"
 						/>
 					</div>
+							
 					<div class="input">
 						<label for="handover-colleague"
 							>Handover colleague</label
@@ -54,11 +55,24 @@
 							v-model="handOverColleague"
 						/>
 					</div>
+					<div class="input">
+						<label for="handover-colleague"
+							>Handover colleague email</label
+						>
+						<input
+							type="text"
+							label="Email address"
+							name="handover-colleague"
+							id="handover-colleague"
+							placeholder="Enter your email"
+							
+						/>
+					</div>
 				</div>
 
 				<div class="inputs-container">
 					<div class="input">
-						<label for="">Handover message (Optional)</label>
+						<label for="">HANDOVER MESSAGE</label>
 						<textarea
 							name="reason-for-change"
 							id="reason-for-change"

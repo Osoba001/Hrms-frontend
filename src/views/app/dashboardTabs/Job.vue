@@ -23,8 +23,6 @@
 							</select>
 						</div>
 
-						
-
 							<div class="inputs-container">
 				<div class="input">
 					<TextInput
@@ -66,7 +64,8 @@
 									"
 								>
 									<option value="0">Full Time</option>
-									<option value="1">Part Time</option>
+									<option value="1">Contract</option>
+									<option value="1">Internship</option>
 								</select>
 							</div>
 						</div>

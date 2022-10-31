@@ -161,7 +161,7 @@
 
 			<article class="card chart-container roles-chart">
 				<Chart type="bar" :options="horizontalOptions" :data="roles" />
-				<h2 class="chart-title">Distibution by Roles</h2>
+				<h2 class="chart-title">Distibution by Employment-Types</h2>
 			</article>
 
 			<!-- <article class="chart-container line-chart">
@@ -396,7 +396,7 @@ export default {
 				datasets: [
 					{
 						data,
-						label: "Distribution by Roles",
+						label: "Distribution by Employment-Type",
 						backgroundColor: "rgb(66, 116, 195)",
 					},
 				],

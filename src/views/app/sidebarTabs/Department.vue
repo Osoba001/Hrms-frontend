@@ -11,11 +11,14 @@
 				y: 0,
 			}"
 		>
+		
 			<DepartmentCard
 				v-for="department in departments"
 				:key="department.id"
 				:department="department"
+				
 			/>
+			
 		</section>
 	</div>
 	<div v-else class="loader-container">

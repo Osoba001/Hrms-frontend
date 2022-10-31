@@ -21,9 +21,9 @@
 		<section class="employees-detail">
 			<h2 class="title">Pending Leave </h2>
 
-			<table class="pending-applications">
+			<table>
 				<thead>
-					<tr>
+					<tr @click="toggleModal">
 						<th>Name</th>
 						<th>Leave type</th>
 						<th>Period</th>
@@ -33,30 +33,65 @@
 				<tbody>
 					<tr @click="toggleModal">
 						<td>Antoine Griezmann</td>
-						<td>Casual Leave</td>
+						<td>Casual Leave </td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr @click="toggleModal">
 						<td>Isaac Aku</td>
-						<td>Annual Leave</td>
-						<td>15th Oct - 21th November</td>
-					</tr>
-					<tr @click="toggleModal">
-						<td>Gift Osaz</td>
-						<td>Sick Leave</td>
+						<td>Annual Leave </td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr @click="toggleModal">
-						<td>John Gideon</td>
-						<td>Study Leave </td>
-						<td>12th Jan - 21th April</td>
+						<td>Abeeb Titus</td>
+						<td>Causual Leave </td>
+						<td>11th June - 21th May</td>
+					</tr>
+					<tr @click="toggleModal">
+						<td>Uche Bimbo</td>
+						<td>Maternity Leave</td>
+						<td>11th Dec - 19thth Jan</td>
 					</tr>
 				</tbody>
 			</table>
 		</section>
 		<section class="employees-detail">
 			<h2 class="title">Approved Leave </h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Leave type</th>
+						<th>Period</th>
+					</tr>
+				</thead>
 
+				<tbody>
+					<tr>
+						<td>Antoine Griezmann</td>
+						<td>Casual Leave </td>
+						<td>11th May - 21th May</td>
+					</tr>
+					<tr>
+						<td>Isaac Aku</td>
+						<td>Annual Leave </td>
+						<td>11th May - 21th May</td>
+					</tr>
+					<tr>
+						<td>Abeeb Titus</td>
+						<td>Causual Leave </td>
+						<td>11th June - 21th May</td>
+					</tr>
+					<tr>
+						<td>Uche Bimbo</td>
+						<td>Maternity Leave</td>
+						<td>11th Dec - 19thth Jan</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+		<section class="employees-detail">
+			<h2 class="title">Denied Leave </h2>
 			<table>
 				<thead>
 					<tr>

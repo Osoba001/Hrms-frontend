@@ -22,16 +22,11 @@
 					:class="{ error: errors.role }"
 				>
 					<option value="Petroleum Engineer">Petroleum Engineer</option>
-					<option value="TOC Manager">TOC Manager</option>
-					<option value="staff">Staff</option>
-					<option value="ITSS">ITSS</option>
 					<option value="Business Development">Business Development</option>
-					<option value="Human Resource">Human Resource</option>
-					<option value="HR">Human Resource</option>
 					<option value="Research & Development">Research & Development</option>
 					<option value="ETDS">ETDS</option>
 					<option value="Software Development">Software Development</option>
-					<option value="Enterprise Resource Planning">Enterprise Resource Planning</option>
+					<option value="Enterprise Resource Planning">Enterprise Resource Planning/L&D</option>
 					<option value="UI/UX">UI/UX</option>
 					<option value="Technical Operations">Technical Operations</option>
 					<option value="CTO's Office">CTO's Office</option>
@@ -49,12 +44,13 @@
 					@blur="validate('role')"
 					:class="{ error: errors.role }"
 				>
+					<option value="Director">Director</option>
 					<option value="manager">Manager</option>
-					<option value="director">Director</option>
+					<option value="manager">HRIS Admin</option>
 					<option value="staff">Staff</option>
-					<option value="intern">Intern</option>
-					<option value="corper">Corper</option>
-					<option value="HR">Human Resource</option>
+					<option value="training intern">Training Intern</option>
+					<option value="nysc intern">NYSC Intern</option>
+					
 				</select>
 			</div>
 

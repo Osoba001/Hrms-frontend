@@ -16,7 +16,7 @@ import axios from "axios"
 
 const app = createApp(App)
 
-axios.defaults.baseURL = "https://rightpurplecar35.conveyor.cloud/api"
+axios.defaults.baseURL = "https://goodsagemouse81.conveyor.cloud/api"
 
 store
 	.dispatch("appStore/attemptSignIn", localStorage.getItem("accessToken"))
