@@ -29,10 +29,7 @@
 			</button>
 		</section>
 
-		<dashboard-bottom-buttons-nav
-			:backRoute="{ name: ROUTES.employmentHistory }"
-			:nextRoute="{ name: ROUTES.confirmation }"
-		/>
+		<button type="submit" class="save-btn">Save</button>
 
 		<teleport to=".modals" v-if="showModal">
 			<ModalBackdrop @close="toggleModal">
@@ -72,21 +69,20 @@
 </template>
 
 <script>
-import DashboardBottomButtonsNav from "@/components/DashboardBottomButtonsNav.vue";
-import TextInput from "@/components/TextInput.vue";
-import ModalBackdrop from "@/components/ModalBackdrop.vue";
-import { mapState } from "vuex";
-import { object, string } from "yup";
-import { ROUTES } from "@/global/routes";
-import axios from "axios";
+import TextInput from "@/components/TextInput.vue"
+import ModalBackdrop from "@/components/ModalBackdrop.vue"
+import { mapState } from "vuex"
+import { object, string } from "yup"
+import { ROUTES } from "@/global/routes"
+import axios from "axios"
 
 const schema = object().shape({
 	skill: string().min(1).max(255).required(),
 	proficiency: string().required(),
-});
+})
 
 export default {
-	components: { DashboardBottomButtonsNav, TextInput, ModalBackdrop },
+	components: { TextInput, ModalBackdrop },
 	data() {
 		return {
 			ROUTES,
@@ -100,21 +96,21 @@ export default {
 				skill: "",
 				proficiency: "",
 			},
-		};
+		}
 	},
 	methods: {
 		async onSubmit(e) {
-			if (!this.form.skill || !this.form.proficiency) return;
+			if (!this.form.skill || !this.form.proficiency) return
 
-			let proficiency;
+			let proficiency
 			if (this.form.proficiency === "beginner") {
-				proficiency = 2;
+				proficiency = 2
 			} else if (this.form.proficiency === "intermediate") {
-				proficiency = 5;
+				proficiency = 5
 			} else if (this.form.proficiency === "advanced") {
-				proficiency = 10;
+				proficiency = 10
 			} else {
-				proficiency = 0;
+				proficiency = 0
 			}
 
 			const res = await axios.patch("/Employee/addSkill", {
@@ -126,43 +122,43 @@ export default {
 						skillType: 1,
 					},
 				],
-			});
+			})
 
 			if (res.statusText === "OK") {
-				window.location.reload();
+				window.location.reload()
 			}
 
-			this.form.skill = "";
-			this.form.proficiency = "";
-			e.target.reset();
+			this.form.skill = ""
+			this.form.proficiency = ""
+			e.target.reset()
 		},
 		toggleModal() {
-			this.showModal = !this.showModal;
+			this.showModal = !this.showModal
 		},
 		handleAddSkill(e) {
 			schema
 				.validate(this.form, { abortEarly: false })
 				.then(() => {
-					this.onSubmit(e);
+					this.onSubmit(e)
 				})
 				.catch((err) => {
 					err.inner.forEach((error) => {
 						this.errors = {
 							...this.errors,
 							[error.path]: error.message,
-						};
-					});
-				});
+						}
+					})
+				})
 		},
 		validate(field) {
 			schema
 				.validateAt(field, this.form)
 				.then(() => {
-					this.errors[field] = "";
+					this.errors[field] = ""
 				})
 				.catch((err) => {
-					this.errors[err.path] = err.message;
-				});
+					this.errors[err.path] = err.message
+				})
 		},
 	},
 	computed: {
@@ -172,14 +168,14 @@ export default {
 		try {
 			const { data } = await axios.get(
 				`/Employee/skill?EmployeeId=${this.user.id}`
-			);
+			)
 
-			this.skills = data;
+			this.skills = data
 		} catch (err) {
-			console.log(err);
+			console.log(err)
 		}
 	},
-};
+}
 </script>
 
 <style scoped>
@@ -264,5 +260,22 @@ section.add-certificate {
 
 select.error {
 	border: 1px solid red;
+}
+
+.save-btn {
+	padding: 0.7em 1.5em;
+	background-color: #2b9de9;
+	color: #fff;
+	font-weight: 600;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 250ms ease;
+	display: block;
+	margin-block: 2rem;
+	margin-left: auto;
+	margin-right: 1.5rem;
+}
+.save-btn:hover {
+	background-color: #255eb4;
 }
 </style>

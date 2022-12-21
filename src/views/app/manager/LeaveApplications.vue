@@ -19,13 +19,14 @@
 			Back
 		</button>
 		<section class="employees-detail">
-			<h2 class="title">Pending Leave </h2>
+			<h2 class="title">Pending Leave</h2>
 
 			<table>
 				<thead>
 					<tr @click="toggleModal">
 						<th>Name</th>
 						<th>Leave type</th>
+						<th>No. of days</th>
 						<th>Period</th>
 					</tr>
 				</thead>
@@ -33,35 +34,39 @@
 				<tbody>
 					<tr @click="toggleModal">
 						<td>Antoine Griezmann</td>
-						<td>Casual Leave </td>
+						<td>Casual Leave</td>
+						<td>5</td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr @click="toggleModal">
 						<td>Isaac Aku</td>
-						<td>Annual Leave </td>
+						<td>Annual Leave</td>
+						<td>5</td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr @click="toggleModal">
 						<td>Abeeb Titus</td>
-						<td>Causual Leave </td>
+						<td>Causual Leave</td>
+						<td>5</td>
 						<td>11th June - 21th May</td>
 					</tr>
 					<tr @click="toggleModal">
 						<td>Uche Bimbo</td>
 						<td>Maternity Leave</td>
+						<td>5</td>
 						<td>11th Dec - 19thth Jan</td>
 					</tr>
-					
 				</tbody>
 			</table>
 		</section>
 		<section class="employees-detail">
-			<h2 class="title">Approved Leave </h2>
+			<h2 class="title">Approved Leave</h2>
 			<table>
 				<thead>
 					<tr>
 						<th>Name</th>
 						<th>Leave type</th>
+						<th>No. of days</th>
 						<th>Period</th>
 					</tr>
 				</thead>
@@ -69,22 +74,26 @@
 				<tbody>
 					<tr>
 						<td>Antoine Griezmann</td>
-						<td>Casual Leave </td>
+						<td>Casual Leave</td>
+						<td>5</td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr>
 						<td>Isaac Aku</td>
-						<td>Annual Leave </td>
+						<td>Annual Leave</td>
+						<td>5</td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr>
 						<td>Abeeb Titus</td>
-						<td>Causual Leave </td>
+						<td>Causual Leave</td>
+						<td>5</td>
 						<td>11th June - 21th May</td>
 					</tr>
 					<tr>
 						<td>Uche Bimbo</td>
 						<td>Maternity Leave</td>
+						<td>5</td>
 						<td>11th Dec - 19thth Jan</td>
 					</tr>
 				</tbody>
@@ -98,6 +107,7 @@
 					<tr>
 						<th>Name</th>
 						<th>Leave type</th>
+						<th>No. of days</th>
 						<th>Period</th>
 					</tr>
 				</thead>
@@ -105,22 +115,26 @@
 				<tbody>
 					<tr>
 						<td>Antoine Griezmann</td>
-						<td>Casual Leave </td>
+						<td>Casual Leave</td>
+						<td>5</td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr>
 						<td>Isaac Aku</td>
-						<td>Annual Leave </td>
+						<td>Annual Leave</td>
+						<td>5</td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr>
 						<td>Abeeb Titus</td>
-						<td>Causual Leave </td>
+						<td>Causual Leave</td>
+						<td>5</td>
 						<td>11th June - 21th May</td>
 					</tr>
 					<tr>
 						<td>Uche Bimbo</td>
 						<td>Maternity Leave</td>
+						<td>5</td>
 						<td>11th Dec - 19thth Jan</td>
 					</tr>
 				</tbody>
@@ -128,12 +142,13 @@
 		</section>
 
 		<section class="employees-detail">
-			<h2 class="title">Reject with reasons </h2>
+			<h2 class="title">Reject with reasons</h2>
 			<table>
 				<thead>
 					<tr>
 						<th>Name</th>
 						<th>Leave type</th>
+						<th>No. of days</th>
 						<th>Period</th>
 					</tr>
 				</thead>
@@ -141,22 +156,26 @@
 				<tbody>
 					<tr>
 						<td>Antoine Griezmann</td>
-						<td>Casual Leave </td>
+						<td>Casual Leave</td>
+						<td>5</td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr>
 						<td>Isaac Aku</td>
-						<td>Annual Leave </td>
+						<td>Annual Leave</td>
+						<td>5</td>
 						<td>11th May - 21th May</td>
 					</tr>
 					<tr>
 						<td>Abeeb Titus</td>
-						<td>Causual Leave </td>
+						<td>Causual Leave</td>
+						<td>5</td>
 						<td>11th June - 21th May</td>
 					</tr>
 					<tr>
 						<td>Uche Bimbo</td>
 						<td>Maternity Leave</td>
+						<td>5</td>
 						<td>11th Dec - 19thth Jan</td>
 					</tr>
 				</tbody>

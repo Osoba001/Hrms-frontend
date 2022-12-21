@@ -43,29 +43,35 @@
 							id="endDate"
 						/>
 					</div>
-							
+
 					<div class="input">
 						<label for="handover-colleague"
 							>Handover colleague</label
 						>
-						<input
-							type="text"
+						<select
 							name="handover-colleague"
 							id="handover-colleague"
 							v-model="handOverColleague"
-						/>
+						>
+							<option
+								v-for="colleague in colleagues"
+								:value="colleague.id"
+								:key="colleague.id"
+							>
+								{{ colleague.name }}
+							</option>
+						</select>
 					</div>
 					<div class="input">
 						<label for="handover-colleague"
 							>Handover colleague email</label
 						>
 						<input
-							type="text"
+							type="email"
 							label="Email address"
 							name="handover-colleague"
 							id="handover-colleague"
 							placeholder="Enter your email"
-							
 						/>
 					</div>
 				</div>
@@ -116,6 +122,20 @@ export default {
 			selectedLeaveType: "",
 			handOverColleague: "",
 			leaveTypes: [],
+			colleagues: [
+				{
+					id: "1",
+					name: "Will Smith",
+				},
+				{
+					id: "2",
+					name: "Uche Blessing",
+				},
+				{
+					id: "3",
+					name: "John Doe",
+				},
+			],
 		}
 	},
 	methods: {

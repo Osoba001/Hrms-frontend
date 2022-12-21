@@ -59,11 +59,6 @@
 			</div>
 		</section>
 
-		<dashboard-bottom-buttons-nav
-			:backRoute="{ name: ROUTES.job }"
-			:nextRoute="{ name: ROUTES.certifications }"
-		/>
-
 		<teleport to=".modals" v-if="showModal">
 			<AddEmploymentHistoryModal :toggleModal="toggleModal" />
 		</teleport>
@@ -71,7 +66,6 @@
 </template>
 
 <script>
-import DashboardBottomButtonsNav from "@/components/DashboardBottomButtonsNav.vue"
 import AddEmploymentHistoryModal from "@/components/modals/AddEmploymentHistoryModal.vue"
 import { mapGetters } from "vuex"
 import { monthDiff } from "@/utils"
@@ -79,7 +73,7 @@ import { ROUTES } from "@/global/routes"
 import axios from "axios"
 
 export default {
-	components: { DashboardBottomButtonsNav, AddEmploymentHistoryModal },
+	components: { AddEmploymentHistoryModal },
 	data() {
 		return {
 			ROUTES,
@@ -210,5 +204,22 @@ article.previous-employment {
 	color: #00000099;
 	font-size: 0.875rem;
 	line-height: 1.4rem;
+}
+
+.save-btn {
+	padding: 0.7em 1.5em;
+	background-color: #2b9de9;
+	color: #fff;
+	font-weight: 600;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 250ms ease;
+	display: block;
+	margin-block: 2rem;
+	margin-left: auto;
+	margin-right: 1.5rem;
+}
+.save-btn:hover {
+	background-color: #255eb4;
 }
 </style>

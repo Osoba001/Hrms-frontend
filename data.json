@@ -493,6 +493,12 @@
       "type": "Sick",
       "availableDays": 3,
       "totalDays": 5
+    },
+    {
+      "id": 5,
+      "type": "Maternity",
+      "availableDays": 5,
+      "totalDays": 10
     }
   ]
 }

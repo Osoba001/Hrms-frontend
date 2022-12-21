@@ -6,18 +6,19 @@
 				<p class="message-receiver">From: ADA Java</p>
 				<p class="message-receiver">To: Michael Sunday</p>
 
-				<thread><p class="message">
-					I am writing to a 4-days official leave running from 11th Oct - 5th Nov. During my absence,
-					as discussed with my Isaac, He will be siting in for me till I return.
-
-					I look forward getting feedback from you.
-					Thank You
-				</p>
+				<thread
+					><p class="message">
+						I am writing to a 4-days official leave running from
+						11th Oct - 5th Nov. During my absence, as discussed with
+						my Isaac, He will be siting in for me till I return. I
+						look forward getting feedback from you. Thank You
+					</p>
 				</thread>
 
 				<div class="btns-container">
 					<button>Approve</button>
-					<button class="deny">Deny</button>
+					<button class="modified">Modified for discussion</button>
+					<button class="deny">Reject with reasons</button>
 				</div>
 			</div>
 		</div>
@@ -48,6 +49,9 @@ export default {
 
 .btns-container {
 	margin-top: 2rem;
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
 }
 
 button {
@@ -63,9 +67,12 @@ button:hover {
 	opacity: 0.7;
 }
 
+button.modified {
+	background-color: orange;
+}
+
 button.deny {
 	background-color: #ca1310;
-	margin-left: 0.5rem;
 }
 
 .upload-document {
