@@ -23,20 +23,20 @@
 							</select>
 						</div>
 
-							<div class="inputs-container">
-				<div class="input">
-					<TextInput
-						:required="true"
-						label="Job role"
-						placeholder="Enter your job role"
-						@update-value="
-							(data) =>
-								(userInfo.bio.employee.stateOfOrigin = data)
-						"
-						:value="user.stateOfOrigin"
-					/>
-				</div>
-					
+						<div class="inputs-container">
+							<div class="input">
+								<TextInput
+									:required="true"
+									label="Job role"
+									placeholder="Enter your job role"
+									@update-value="
+										(data) =>
+											(userInfo.bio.employee.stateOfOrigin =
+												data)
+									"
+									:value="user.stateOfOrigin"
+								/>
+							</div>
 						</div>
 
 						<div class="input-flex">
@@ -126,34 +126,35 @@
 					<h2 class="section-title">Previous role</h2>
 					<div class="personal-details">
 						<div class="inputs-container">
-				<div class="input">
-					<TextInput
-						:required="true"
-						label="Department"
-						placeholder="Department"
-						@update-value="
-							(data) =>
-								(userInfo.bio.employee.stateOfOrigin = data)
-						"
-						:value="user.stateOfOrigin"
-					/>
-				</div>
+							<div class="input">
+								<TextInput
+									:required="true"
+									label="Department"
+									placeholder="Department"
+									@update-value="
+										(data) =>
+											(userInfo.bio.employee.stateOfOrigin =
+												data)
+									"
+									:value="user.stateOfOrigin"
+								/>
+							</div>
 
-				<div class="inputs-container">
-				<div class="input">
-					<TextInput
-						:required="true"
-						label="Job role"
-						placeholder="Enter your job role"
-						@update-value="
-							(data) =>
-								(userInfo.bio.employee.stateOfOrigin = data)
-						"
-						:value="user.stateOfOrigin"
-					/>
-						</div>
-						</div>
-
+							<div class="inputs-container">
+								<div class="input">
+									<TextInput
+										:required="true"
+										label="Job role"
+										placeholder="Enter your job role"
+										@update-value="
+											(data) =>
+												(userInfo.bio.employee.stateOfOrigin =
+													data)
+										"
+										:value="user.stateOfOrigin"
+									/>
+								</div>
+							</div>
 
 							<div class="input">
 								<label for="">Reason for change</label>

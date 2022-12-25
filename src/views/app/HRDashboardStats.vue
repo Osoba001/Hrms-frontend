@@ -93,29 +93,25 @@
 
 			<div class="card flex-column location-container">
 				<!-- <article class="small-card active-workers-card active"> -->
-					
-			
-			
-			<article class="card small-card gender-card">
-				<div>
-					<span class="material-symbols-outlined"> face_6 </span>
-					<h3>Male</h3>
-					<p class="number">{{ hrInfo?.totalMale }}</p>
-					<p class="percentage">76.16%</p>
-				</div>
-				<div>
-					<span class="material-symbols-outlined"> face_3 </span>
-					<h3>Female</h3>
-					<p class="number">{{ hrInfo?.totalFemale }}</p>
-					<p class="percentage">76.16%</p>
-				</div>
-			<!-- </article> -->
-			
-			<header>
-				<h2 class="card-title">Active workers</h2>
-			</header>
 
+				<article class="card small-card gender-card">
+					<div>
+						<span class="material-symbols-outlined"> face_6 </span>
+						<h3>Male</h3>
+						<p class="number">{{ hrInfo?.totalMale }}</p>
+						<p class="percentage">76.16%</p>
+					</div>
+					<div>
+						<span class="material-symbols-outlined"> face_3 </span>
+						<h3>Female</h3>
+						<p class="number">{{ hrInfo?.totalFemale }}</p>
+						<p class="percentage">76.16%</p>
+					</div>
+					<!-- </article> -->
 
+					<header>
+						<h2 class="card-title">Active workers</h2>
+					</header>
 
 					<div>
 						<span class="material-symbols-outlined icon">
@@ -304,7 +300,6 @@ export default {
 					// "Technical Operations",
 					// "Learning and Development",
 					// "UI/UX"
-
 				],
 				datasets: [
 					{
