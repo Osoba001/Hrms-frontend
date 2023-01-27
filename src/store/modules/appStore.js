@@ -99,15 +99,9 @@ const actions = {
 
 		// Decode token and hit endpoint to get user
 		try {
-			let decoded = VueJwtDecode.decode(token);
+			let { nameid } = VueJwtDecode.decode(token);
 
-			const userId =
-				decoded[
-					"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-				];
-
-			console.log(decoded, userId);
-
+			const userId = nameid;
 			const response = await axios.get(`/Employee/byId?id=${userId}`);
 
 			const user = response.data;

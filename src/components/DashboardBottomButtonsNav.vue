@@ -11,9 +11,9 @@
 
 <script>
 export default {
-  name: 'DashboardBottomButtonsNav',
-  props: ['backRoute', 'nextRoute'],
-}
+  name: "DashboardBottomButtonsNav",
+  props: ["backRoute", "nextRoute"],
+};
 </script>
 
 <style scoped>
@@ -38,3 +38,4 @@ export default {
   background-color: #255eb4;
 }
 </style>
+ 
